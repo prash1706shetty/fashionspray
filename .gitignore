@@ -1,0 +1,6 @@
+node_modules/
+activity.log
+error.log
+schedulerError.log
+schedulerActivity.log
+.env

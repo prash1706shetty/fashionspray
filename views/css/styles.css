@@ -1,0 +1,533 @@
+.heading
+{
+color:white;
+background:#152935;
+padding-top:15px;
+}
+
+.subhead
+{
+color:white;
+background:#1d3649;
+height:5em;
+}
+
+.blueBackground
+{
+	background-color:#0f62fe;
+}
+
+.no-padding
+{
+	padding:0px;
+}
+.tableHead
+{
+	background:#f4f4f4;
+}
+
+.uc-select
+{
+  padding:0;
+}
+
+.page-select
+{
+  background:#ececec;
+  height:60px;
+}
+
+.footer
+{
+  background:black;
+  margin-top:50px;
+}
+.header-padding
+{
+  padding:15px;
+}
+
+.add-usecase
+{
+  height:250px;
+  background:#ececec;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin:10px;
+}
+.landing-usecase
+{
+  height:300px;
+  background:#ececec;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin:10px;
+}
+.ibm-tabs-content {
+  display: none;
+}
+.display-none{
+  display: none;
+}
+.redColorTxt{
+color: #e71d32 !important;
+}
+
+.word-wrap{
+  word-wrap: break-word;
+}
+.cardFormat h4, .cardFormat h6
+{
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+}
+
+ ul{
+    right: 60px;
+    left: auto;
+}
+.ibm-dropdown-menu a:hover
+{
+	background-color:#7cc7ff;
+	color:black;
+}
+.notificationList
+{
+position:absolute;
+z-index:1;
+}
+
+
+.count {
+  position:absolute;
+  padding: 0px 1px;
+  border-radius: 10%;
+  background-color: red;
+  color: white;
+    top: 140px;
+    right:43.5px;
+}
+.elipsis
+{
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+
+}
+
+.cardFormat h6
+{
+	height:100px;
+}
+
+.btn {
+  border: 1px solid grey;
+   font-size: .875rem;
+    line-height: 23px;
+    width: 160px;
+    padding: 9.5px 1em 8.5px;    
+    border-color: #777677;
+    color: solid grey;
+}
+
+.bodyGradient {
+	width: 100%;
+    height: 100%;	
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top , #d9ecff, #ffffff);
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top , #d9ecff, #ffffff);
+	/* Opera */ 
+	background-image: -o-linear-gradient(top , #d9ecff, #ffffff);
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,     #d9ecff), color-stop(1, #ffffff));
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top , #d9ecff, #ffffff);
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom, #d9ecff 0%, #ffffff 100%);
+}
+
+.loginButton {
+  background-color: #0f62fe;
+  border: none;
+  width: 145px;
+  height: 38px;
+  margin: 0 auto;
+  padding: 0;
+  display: inline-block;
+  line-height: 35px;
+  text-align: left;
+  padding-left:20px;
+  background-color:#0f62fe;
+}
+
+.padding-left {
+  padding-left: 85px;
+}
+
+.login-image {
+  position: relative;
+  top: 15px;
+}
+
+.text-size-color {
+  font-size: 24px;
+  color: #000080;
+  word-spacing:1px;
+}
+
+.welcome-text {
+  color: #000099;
+  word-spacing:1px;
+}
+
+.login-content-text {
+  color: #002266;
+  word-spacing:1px;
+}
+
+.image-position {
+  position: relative;
+  top: 40px;
+}
+
+.image-size {
+  width: 490px;height: 390px;
+}
+
+
+.text-area-error{
+  background: rgba(255,0,0,.2);
+}
+
+.addUsecaseButton {
+  background-color: #0f62fe;
+  border: none;
+  width: 260px;
+  height: 38px;
+  margin: 0 auto;
+  padding: 0;
+  display: inline-block;
+  line-height: 35px;
+  text-align: left;
+  padding-left:20px;
+  background-color:#0f62fe;
+}
+
+.saveDraftButton {  
+  background-color: #0f62fe;  
+  width: 200px;
+  height: 38px;
+  margin: 0 auto;
+  padding: 0;
+  display: inline-block;
+  line-height: 35px;
+  text-align: left;
+  padding-left:20px;
+  background-color:#0f62fe;
+}
+
+.cancelButton {    
+
+  width: 100px;
+  height: 38px;
+  margin: 0 auto;
+  padding: 0;
+  display: inline-block;
+  line-height: 35px;
+  text-align: left;
+  padding-left:20px;  
+}
+
+.overlayButton {
+  background-color: #0f62fe;
+  border: none;
+  width: 120px;
+  height: 38px;
+  margin: 0 auto;
+  padding: 0;
+  display: inline-block;
+  line-height: 35px;
+  text-align: left;
+  padding-left:20px;
+  background-color:#0f62fe;
+}
+.okButton {
+  background-color: #0f62fe;
+  border: none;
+  width: 90px;
+  height: 38px;
+  margin:20px 90px;
+  padding: 0;
+  display: inline-block;
+  line-height: 35px;
+  text-align: center;
+  background-color:#0f62fe;
+}
+.overlayMsg
+{
+	text-align:center;
+}
+.errorText{
+  color: #e71d32;
+}
+
+.display-inline-block{
+  display:inline-block !important;
+}
+
+  .buttonusecaseGeneral {
+    background-color: white;    
+    height: 45px;
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+    line-height: 35px;
+    text-align: left;
+    padding-left:20px;
+    cursor: pointer;
+    color: blue; 
+    border: 2px solid blue;
+  }
+
+  .backgroundColor {
+    background-color: blue; 
+    color: white;
+  }
+
+  .buttonusecase {
+    background-color: white;    
+    height: 45px;
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+    line-height: 35px;
+    cursor: pointer;
+    color: blue; 
+    border: 2px solid blue;
+    width: 280px;
+  }
+
+
+
+  .saveDraftButton {  
+    background-color: #0f62fe;  
+    width: 200px;
+    height: 45px;
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+    line-height: 35px;
+    text-align: left;
+    padding-left:20px;
+    background-color:#0f62fe;
+  }
+
+
+  .buttonCancel {    
+    background-color: white; 
+    border: none;
+    color: black;
+    padding: 13px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .cancelHover:hover {
+    background-color:blue;
+    color: white;
+  }
+
+.display-none{
+  display: none !important;
+}
+.display-block{
+  display: block !important;
+}
+.redBorder
+{
+	border-color: red !important;
+}
+.validationFontSize
+{
+    font-size:0.75rem;
+    color:red;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;  
+}
+
+.tooltip .tooltiptext {
+  display: none;
+  width: 120px;
+  background-color: #404040;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #404040 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  display: block;
+}
+
+.usecaseFieldWidth {
+	width:40em;
+}
+
+.usecaseUrlWidth {
+	width:35em;
+}
+.usecaseCtaWidth {
+	width:20em;
+}
+
+.exitOverlayWidth {
+	width:38em;
+}
+
+.universalNavLeft {
+	padding-left:35px;
+}
+
+.headerLabelFont {
+	font-size: 15px;
+}
+
+.productNameWidth {
+	width:58em;
+}
+
+.fieldWidth {
+	width:38em;
+}
+
+.textFieldWidth {
+	width:25em;
+}
+
+.fieldWidthSmall {
+	width:11.1em;
+}
+
+.floatLeft {
+	float:left;
+}
+
+.fieldPaddingTop {
+  padding-top:5px;
+}
+
+.fieldPaddingTopMax {
+  padding-top:10px;
+}
+.fieldPaddingTags {
+  padding-top:25px;
+}
+
+.paddingTop15 {
+  padding-top:15px;
+}
+.paddingTop20 {
+  padding-top:20px;
+}
+
+.background-white{
+  background:white;
+}
+
+.display-block{
+  display:block !important;
+}
+
+.background-color-textField {
+  background-color: #E8E8E8;
+}
+
+.loadMessagePadding {
+  padding-left:40px;
+  padding-top:20px;
+}
+
+.loadMessageFont {
+  font-size:16px;
+}
+
+.dataLoadError
+{
+    font-size:1rem;
+    color:red;
+}
+
+.overlayTooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.overlayTooltip .overlayTooltiptext {
+  display: none;
+  width: 120px;
+  background-color: #404040;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -15px;
+  left: 110%;
+}
+
+.overlayTooltip .overlayTooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #404040 transparent transparent;
+}
+
+.overlayTooltip:hover .overlayTooltiptext {
+  display: block;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 60px;
+  text-align: left;
+  font-size: 35px;
+  color: white;
+}
+
+.ibm-calendar-link {
+  display: hidden;
+}

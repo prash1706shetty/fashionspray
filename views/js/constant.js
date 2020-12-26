@@ -1,0 +1,11 @@
+const SHOWCASE_DEMO_URL="http://demo-container-phase-2.mybluemix.net/products/{product}/demos/use-cases/";
+const REVIEWER_APPROVE_TEXT = "Are you sure you want to approve this demo?";
+const REVIEWER_CONFIRM_TEXT = "I have reviewed the entire demo content and is ready to send to the publisher for review.";
+const APPROVER_APPROVE_TEXT = "Are you sure you want to approve and publish this demo?";
+const APPROVER_CONFIRM_TEXT = "I have reviewed the entire demo content and approving for publish.";
+const DEFAULT_PRODUCT_ID = '1593414667329';
+const SHOWCASE_DEMO_PROD_URL="http://demo-container-phase-2.mybluemix.net/products/{product}/demos/use-cases/";
+const DATA_LOADING_MESSAGE = "Demo lists are loading, please wait...";
+const DATA_NOT_LOADED = "Not able to load data, please try again later.";
+const LANDING_SAVE_DATA_MESSAGE = "Please save data before clicking Next - Add Usecase Details.";
+const USECASE_SAVE_DATA_MESSAGE = "Please save data before clicking Prev - Main page.";
