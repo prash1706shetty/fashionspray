@@ -7,7 +7,7 @@
   <meta name="robots" content="index, follow" />
   <link rel="shortcut icon" href="https://www.ibm.com/favicon.ico" />
 
-  <title>Fashion Spray</title>
+  <title>QwikDemo Editor</title>
   <!-- Initialize Northstar -->
   <script>
     digitalData = {
@@ -51,22 +51,43 @@
 
 <body id="ibm-com" class="ibm-type">
   <div id="ibm-top" class="ibm-landing-page">
+    <div id="ibm-masthead" role="banner" aria-label="IBM">
+      <div id="ibm-mast-options">
+        <ul role="toolbar" aria-labelledby="ibm-masthead">
+          <li id="ibm-geo" role="presentation">
+            <a href="https://www.ibm.com/planetwide/select/selector.html">United States</a>
+          </li>
+        </ul>
+      </div>
+      <div id="ibm-universal-nav">
+        <div id="ibm-home"><a href="https://www.ibm.com/us-en/">IBM®</a>
+        </div>
+        <div class="ibm-parent-site-name">
+          <div class="dr-masthead-divider"></div><a class="dr-home ibm-type-d ibm-mb-0" href="#"></a>
+        </div>
+        <!-- PARENT SITE NAME -->
+
+        <ul id="ibm-menu-links" role="toolbar" aria-label="Site map">
+          <li><a href="https://www.ibm.com/sitemap/us/en/">Site map</a></li>
+        </ul>
+        <div id="ibm-search-module" role="search" aria-labelledby="ibm-masthead">
+          <form id="ibm-search-form" action="https://www.ibm.com/Search/" method="get">
+            <p>
+              <label for="q"><span class="ibm-access">Search</span></label><input type="text" maxlength="100" value="" name="q" id="q" /><input type="hidden" value="17" name="v" /><input type="hidden" value="utf" name="en" /><input type="hidden"
+                value="en" name="lang" /><input type="hidden" value="us" name="cc" /><input type="submit" id="ibm-search" class="ibm-btn-search" value="Submit" />
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
     <div id="ibm-content-wrapper">
-	
-	
-	
-
-
-<div class="ibm-col-12-12" style="width: 100%;height:100px;border: 1px solid #4CAF50;background-color:grey;">
-<div class="ibm-col-12-6">
- <div style="padding-left:60px;"><a href="/"><img src="./images/logo.png" alt="Fashion Spray" width="50" height="50"></div><div><span style="font-size: 25px;color: black;">Fashion Spray</span></div></a>
- </div>
- <div class="ibm-col-12-6">
- <span id="createDemo"></span>  
- </div>
-	
-	</div>
-      <div class="ibm-col-12-6"> 
+      <div class="ibm-fluid ibm-seamless ibm-fullwidth">
+        <div class="ibm-col-12-12 subhead">
+          <p class="ibm-padding-content" style="font-size:24px">IBM QwikDemo Editor
+            <span id="createDemo"></span></p>
+        </div>
+      </div>
+      <div class="ibm-col-12-6">
           <div id="demoLoadingMessage" class='loadMessagePadding'>
             <p><span class='loadMessageFont'>Demo lists are loading, please wait...</span><span class='ibm-spinner ibm-h4'></span></p>
           </div>

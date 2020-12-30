@@ -433,7 +433,7 @@ white-space: nowrap;
 }
 
 .fieldWidthSmall {
-	width:11.1em;
+	width:11.3em;
 }
 
 .floatLeft {
@@ -531,3 +531,14 @@ header {
 .ibm-calendar-link {
   display: hidden;
 }
+
+.headerFirst {
+  background-color: #808080;   
+  color: white;
+}
+.headerSecond {
+  background-color: #e6e6e6;   
+  color: black;
+}
+
+

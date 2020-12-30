@@ -77,6 +77,33 @@ addCount++;
 }, 100); // check every 100ms
 
   
+
+var data = {
+  "test1":"test1"
+}
+  jQuery.ajax({
+    type: "POST",
+    url: "/caas/getOrderCount",
+    data: JSON.stringify(data),
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + cookieValue
+    },
+    async: false,
+    success: function (result) {
+
+console.log("result->"+JSON.stringify(result));
+
+ 
+
+    },
+    error: function (e) {
+        alert("There was some internal error while updating, Please try again after sometime")
+    }
+});
+
+
+
 });
 
 function loadEditFlow(landingPageData) {
@@ -674,14 +701,45 @@ async function checkIsBImageUploadedByUser(data) {
   };
 }
 
-function saveOrder() {
-  console.log("save->");
+function saveOrder() {  
+
+  var deliveryDate = jQuery('#deliveryDate').val();
+console.log("deliveryDate1->"+deliveryDate);
+
+
+  console.log("deliveryDate2->"+(new Date(deliveryDate)).getTime());
+  var timeStampDate =(new Date(deliveryDate)).getTime();
+  var timeStampDate2 =(new Date(deliveryDate)).getTime()+ ( 5.5 * 60 * 60 * 1000 );
+ 
+console.log("date1->"+new Date (timeStampDate));
+console.log("date2->"+new Date (timeStampDate2));
+
 
   var customerName = jQuery('#customerName').val();
+  var mobileNumber = jQuery('#mobileNumber').val();
+  var customerLocation = jQuery('#customerLocation').val();
+  var customerSource = jQuery('#customerSource').val();
+  var modeOfPayment = jQuery('#modeOfPayment').val();
+  var totalAmount = jQuery('#totalAmount').val();
+  var advanceAmount = jQuery('#advanceAmount').val();  
+  var fabricsFrom = jQuery('#fabricsFrom').val();
+  var dressFor = jQuery("#dressFor option:selected").val();
+  var dressTypeSelect = jQuery("#dressTypeSelect option:selected").val();
+  var orderStatus  = 'new';
 
   var resp;
   var data = {
-    "customerName":customerName
+    "customerName":customerName,
+    "mobileNumber":mobileNumber,
+    "customerLocation":customerLocation,
+    "customerSource":customerSource,
+    "modeOfPayment":modeOfPayment,
+    "totalAmount":totalAmount,
+    "advanceAmount":advanceAmount,
+    "dressFor":dressFor,
+    "dressTypeSelect":dressTypeSelect,
+    "fabricsFrom":fabricsFrom,
+    "orderStatus" : orderStatus
   }
   jQuery.ajax({
       type: "POST",

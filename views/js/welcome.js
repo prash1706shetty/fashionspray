@@ -5,41 +5,54 @@ var catalogsDetail = ""
 
 
 jQuery(document).ready(function ($) {
- 
-  sessionStorage.clear();
-  userPrivilege = loadUserPrivilege();
-  catalogsDetail = fetchCatalogDetails();
-  loggedInUserEmailId = userPrivilege.userEmailId;
-  if (userPrivilege.statusCode == 200) {
-    var caasData = fetchDocumentListByBrief();
-    if (caasData.statusCode == 200) {
-      var masterCaasData = fetchDocListFromMasterByBrief();
-      if (masterCaasData.statusCode == 200) {
-        masterCaasData = JSON.parse(masterCaasData.body);
-        caasData = JSON.parse(caasData.body);
-        masterCaasData.forEach((elem, index) => {
-          caasData.push(elem);
-        });
-        populateWelcomePageData(caasData, userPrivilege);
-      } else {
-        jQuery("#demoLoadingMessage").empty();
-        jQuery("#demoLoadingMessage").append('<span class="dataLoadError">' + DATA_NOT_LOADED + '</span>');
-      }
-    } else {
-      jQuery("#demoLoadingMessage").empty();
-      jQuery("#demoLoadingMessage").append('<span class="dataLoadError">' + DATA_NOT_LOADED + '</span>');
-    }
-  } else {
-    jQuery("#demoLoadingMessage").empty();
-    jQuery("#demoLoadingMessage").append('<span class="dataLoadError">' + DATA_NOT_LOADED + '</span>');
-  }
 
-  jQuery(document).click(function (e) {
-    if (!jQuery(e.target).hasClass('notificationDropdown')) {
-      jQuery('.notificationList').attr('style', 'display:none')
-      return;
+
+console.log("called->");
+var data = {
+  "test1":"test1"
+}
+  jQuery.ajax({
+    type: "POST",
+    url: "/caas/getDocuments",
+    data: JSON.stringify(data),
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + cookieValue
+    },
+    async: false,
+    success: function (result) {
+
+console.log("result->"+result);
+      
+  var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Customer Name</th><th>Mobile Number</th><th>Person</th><th>Dress</th></tr></thead><tbody>";
+  for (row of result.rows) {
+    
+    table = table + '<tr>'+
+    '<td>'+row.value.customerName+'</td>'+
+    '<td>'+row.value.mobileNumber+'</td>'+
+    '<td>'+row.value.dressFor+'</td>'+
+    '<td>'+row.value.dressTypeSelect+'</td>'+
+'</tr>';
+
+  }
+ 
+  table = table + "</tbody></table>";
+  jQuery('#table').prepend(table);
+  jQuery('.display').dataTable();
+  jQuery("#demoLoadingMessage").empty();
+
+
+
+    },
+    error: function (e) {
+        alert("There was some internal error while updating, Please try again after sometime")
     }
-  });
+});
+
+
+
+
+
 });
 
 function populateWelcomePageData(caasData, userAccess) {
@@ -48,7 +61,7 @@ function populateWelcomePageData(caasData, userAccess) {
   var productLength = 0;
   var privilegeArray = userAccess.userPrivileges.rows[0].value;
   var userRole = userAccess.userPrivileges.rows[0].key;
-  var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Product Name </th><th>Created By</th><th>Updated By</th><th>Last Updated On</th><th>Status</th><th>Comments</th> <th>Action</th> </tr></thead><tbody>";
+  var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Product Name </th><th>Created By</th><th>Updated By</th><th>Last Updated On</th><th>Status</th><th>Comments</th> <th>Action</th> </tr></thead><tbody>";
   var createDemoButton = privilegeArray.includes('create') ? '<button type="button" class="ibm-btn-pri"  onclick="window.open(\'/add\',\'_self\')" style="float:right;background-color:#0f62fe;font-size:16px;">Create New Demo &emsp; +</button>' : '';
   jQuery("#createDemo").html(createDemoButton);
   var approveContent = '<label>' + REVIEWER_APPROVE_TEXT + '</label>';
@@ -65,19 +78,37 @@ function populateWelcomePageData(caasData, userAccess) {
     if (elem.document.updatedBy != undefined && (elem.catalog.catalogId == catalogsDetail.publishedCatalogId || (elem.catalog.catalogId == catalogsDetail.draftCatalogId && elem.document.status != 'Published'))) {
       if (userRole != 'author') {
         productLength++;
-        table = table + showProduct(elem, index, privilegeArray, userRole);
+       // table = table + showProduct(elem, index, privilegeArray, userRole);
       } else if (loggedInUserEmailId.toLowerCase() == elem.document.updatedBy.toLowerCase() && elem.document.productId != DEFAULT_PRODUCT_ID) {
         productLength++;
-        table = table + showProduct(elem, index, privilegeArray, userRole);
+       // table = table + showProduct(elem, index, privilegeArray, userRole);
       }
     }
   });
   jQuery(".count").append(productLength);
-  jQuery("#demoLoadingMessage").empty();
+  //jQuery("#demoLoadingMessage").empty();
   jQuery(".prodCount").html('Products(' + productLength + ')');
+  table = table + '<tr>'+
+                    '<td>test Nixon</td>'+
+                    '<td>Edinburgh</td>'+
+                    '<td>61</td>'+
+                    '<td>2011/04/25</td>'+
+					'<td>Edinburgh</td>'+
+                    '<td>61</td>'+
+                    '<td>2011/04/25</td>'+
+                '</tr>'+
+				'<tr>'+
+                    '<td>Tiger Nixon</td>'+
+                    '<td>Edinburgh</td>'+
+                    '<td>61</td>'+
+                    '<td>2011/04/25</td>'+
+					'<td>Edinburgh</td>'+
+                    '<td>61</td>'+
+                    '<td>2011/04/25</td>'+
+                '</tr>';
   table = table + "</tbody></table>";
-  jQuery('#table').prepend(table);
-  jQuery('.display').dataTable();
+  //jQuery('#table').prepend(table);
+ // jQuery('.display').dataTable();
   jQuery('body').click(function (e) {
     if (!jQuery(e.target).hasClass('elipsis')) {
       jQuery('.productAction').attr('style', 'display:none')
