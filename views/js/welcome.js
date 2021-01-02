@@ -31,7 +31,7 @@ console.log("result->"+result);
     '<td>'+row.value.customerName+'</td>'+
     '<td>'+row.value.mobileNumber+'</td>'+
     '<td>'+row.value.dressFor+'</td>'+
-    '<td>'+row.value.dressTypeSelect+'</td>'+
+    '<td>'+row.value.dressType+'</td>'+
 '</tr>';
 
   }

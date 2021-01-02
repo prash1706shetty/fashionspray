@@ -541,4 +541,8 @@ header {
   color: black;
 }
 
+.visibility-hidden{
+  visibility:hidden;
+}
+
 

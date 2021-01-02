@@ -16,100 +16,114 @@ var offeringNameChanged = false;
 var imageValue = "";
 
 jQuery(document).ready(function ($) {
-	
-	//$('.ibm-calendar-link').hide();
-	$( "#dressFor" ).change(function() {		
-		var personType = $('#dressFor').val();
-		$('#dressTypeSelect').removeAttr("disabled");
-		console.log("personType->"+personType);
-		 $('#dressTypeSelect')
-                .find('option')
-                .remove();
-		if(personType == 'women'){
-			$('#dressTypeSelect').append('<option selected value disabled>Select Dress Type</option>')
-			.append('<option value="gown">Gown</option>')
-            .append('<option value="lehanga">Lehanga</option>')
-            .append('<option value="saree">Saree</option>');
-		} else if(personType == 'kids'){
-			$('#dressTypeSelect').append('<option selected value disabled>Select Dress Type</option>')
-			.append('<option value="frock">Frock</option>')
-            .append('<option value="gown">Gown</option>')
-            .append('<option value="lehanga">Lehanga</option>');
-		} else if(personType == 'men'){
-			$('#dressTypeSelect').append('<option selected value disabled>Select Dress Type</option>')
-			.append('<option value="shirt">Shirt</option>')
-            .append('<option value="pant">Pant</option>')
-            .append('<option value="sherwani">Sherwani</option>');
-		}
-});
 
-$( "#fabricsFrom" ).change(function() {
-	var faricsFrom = $('#fabricsFrom').val();
-	if(faricsFrom == 'fs'){
-		$('#addFabrics').removeClass('display-none');
-	} else{
-		$('#addFabrics').addClass('display-none');
-	}
-	
-});
-var addCount = 0;
-$("#Add").on("click", function() { 
-addCount++; 
-                $("#textboxDiv").append('<div><br><input id="fabrics'+addCount+'" type="text"/><br></div>');  
-            });  
-            $("#Remove").on("click", function() {
-				if(addCount != 0){
-					addCount--;
-				}
-				
-                $("#textboxDiv").children().last().remove();  
-            });  
-			
+  //$('.ibm-calendar-link').hide();
+  $("#dressFor").change(function () {
+    var personType = $('#dressFor').val();
+    $('#dressType').removeAttr("disabled");
+    console.log("personType->" + personType);
+    $('#dressType')
+      .find('option')
+      .remove();
+    if (personType == 'Women') {
+      $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
+        .append('<option value="Gown">Gown</option>')
+        .append('<option value="Lehanga">Lehanga</option>')
+        .append('<option value="Saree">Saree</option>');
+    } else if (personType == 'Kids') {
+      $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
+        .append('<option value="Frock">Frock</option>')
+        .append('<option value="Gown">Gown</option>')
+        .append('<option value="Lehanga">Lehanga</option>');
+    } else if (personType == 'Men') {
+      $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
+        .append('<option value="Shirt">Shirt</option>')
+        .append('<option value="Pant">Pant</option>')
+        .append('<option value="Sherwani">Sherwani</option>');
+    } else if (personType == 'selectPerson') {
+      $('#dressType').append('<option selected value="selectType">Select Dress Type</option');
+      $('#dressType').attr('disabled', true);
+    }
+  });
 
- // $('.ibm-calendar-link').hide();
- 
- var existCondition = setInterval(function() {
- if ($('.ibm-calendar-link').length) {
-    console.log("Exists!");
-    clearInterval(existCondition);
-    $('.ibm-calendar-link').hide();
- }
-}, 100); // check every 100ms
+  $("#fabricsFrom").change(function () {
+    var faricsFrom = $('#fabricsFrom').val();
+    if (faricsFrom == 'fs') {
+      $('#addFabrics').removeClass('display-none');
+    } else {
+      $('#addFabrics').addClass('display-none');
+    }
 
-  
+  });
+  var addCount = 0;
+  $("#Add").on("click", function () {
+    addCount++;
+    //$("#textboxDiv").append('<div><br><input id="fabrics' + addCount + '" type="text"/><br></div>');
+    $("#textboxDiv").append('<div class="ibm-padding-top-1"><div style="display: inline-block;"><div class="fieldPaddingTop"><input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value="" placeholder="Enter type of fabric." onfocus="clearRedColor(this)"></div></div><div style="display: inline-block;margin-left:38px;"><div class="fieldPaddingTop"><input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value="" placeholder="Enter advance paid." onfocus="clearRedColor(this)"></div></div> <div style="display: inline-block;margin-left:38px;"><div class="fieldPaddingTop"><input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value="" placeholder="Enter advance paid." onfocus="clearRedColor(this)"></div></div></div>');
+  });
+  $("#Remove").on("click", function () {
+    if (addCount != 0) {
+      addCount--;
+    }
 
-var data = {
-  "test1":"test1"
-}
+    $("#textboxDiv").children().last().remove();
+  });
+
+
+  // $('.ibm-calendar-link').hide();
+
+  var existCondition = setInterval(function () {
+    if ($('.ibm-calendar-link').length) {
+      console.log("Exists!");
+      clearInterval(existCondition);
+      $('.ibm-calendar-link').hide();
+    }
+  }, 100); // check every 100ms
+
+
+
+  var data = {
+    "test1": "test1"
+  }
   jQuery.ajax({
     type: "POST",
     url: "/caas/getOrderCount",
     data: JSON.stringify(data),
     headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + cookieValue
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + cookieValue
     },
     async: false,
     success: function (result) {
-
-console.log("result->"+JSON.stringify(result));
-
- 
-
+      console.log("value->" + JSON.stringify(result));
+      if (result.rows.length != 0) {
+        var totalCount = result.rows[0].value + 1;
+        if (totalCount < 10){
+          totalCount = "0"+totalCount;
+        }        
+        $("#orderNumber").val("fs" + (new Date()).getFullYear().toString().substr(-2) + totalCount);
+      } else {
+        $("#orderNumber").val("fs" + (new Date()).getFullYear().toString().substr(-2) + "01");
+      }
     },
     error: function (e) {
-        alert("There was some internal error while updating, Please try again after sometime")
+      alert("There was some internal error while updating, Please try again after sometime")
     }
-});
+  });
 
 
 
 });
+
+function clearRedColor(focusEvent){  
+  console.log("focusEvent->"+focusEvent.id);
+  jQuery('#'+focusEvent.id).removeClass('redBorder');
+}
 
 function loadEditFlow(landingPageData) {
 
   preLoadData(landingPageData);
-  if(landingPageData.usecaseType == 'single'){
+  if (landingPageData.usecaseType == 'single') {
     singleUseCase();
   }
   loadCards(landingPageData);
@@ -134,8 +148,8 @@ async function loadCards(landingPageData) {
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden >Image alt text: </span> <span class='ibm-small' id='useCaseImgAlTxt" + i + "' hidden>" + landingPageData.useCases[i].useCaseImageAltText + "</span></p>" +
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden >Explore Link Name: </span> <span class='ibm-small' hidden id='useCaseExplLinkName" + i + "' hidden>" + landingPageData.useCases[i].useCaseLinkText + "</span></p>" +
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden>RequestUrlName: </span> <span class='ibm-small' id='requestUrlName" + i + "' hidden>" + ucUrl + "</span></p>" +
-      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a id ='edit" + i + "' class='ibm-edit-link tipso_style' onclick='formOverlayVal(this); IBMCore.common.widget.overlay.show(\"usecaseOverLay\"); return false;' href='' role='button' >Edit UseCase</a></p>"+
-      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a class='ibm-close-link' id ='deleteUC"+i+"' onclick='deleteUC(this);' role='button' >Delete UseCase</a></p></div></div></div>";
+      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a id ='edit" + i + "' class='ibm-edit-link tipso_style' onclick='formOverlayVal(this); IBMCore.common.widget.overlay.show(\"usecaseOverLay\"); return false;' href='' role='button' >Edit UseCase</a></p>" +
+      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a class='ibm-close-link' id ='deleteUC" + i + "' onclick='deleteUC(this);' role='button' >Delete UseCase</a></p></div></div></div>";
     jQuery(".ibm-col-12-3:eq(" + i + ")").attr('style', 'height:auto;').html(cards);
   }
   if (landingPageData.usecaseType == "single") {
@@ -172,8 +186,8 @@ function loadSessionData(landingPageData) {
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden >Image alt text: </span> <span class='ibm-small' id='useCaseImgAlTxt" + i + "' hidden>" + landingPageData.useCases[i].useCaseImageAltText + "</span></p>" +
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden >Explore Link Name: </span> <span class='ibm-small' hidden id='useCaseExplLinkName" + i + "' hidden>" + landingPageData.useCases[i].useCaseLinkText + "</span></p>" +
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden>RequestUrlName: </span> <span class='ibm-small' id='requestUrlName" + i + "' hidden>" + landingPageData.useCases[i].useCaseURL + "</span></p>" +
-      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a id ='edit" + i + "' class='ibm-edit-link tipso_style' onclick='formOverlayVal(this); IBMCore.common.widget.overlay.show(\"usecaseOverLay\"); return false;' href='' role='button' >Edit UseCase</a></p>"+
-      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a class='ibm-close-link' id ='deleteUC"+i+"' onclick='deleteUC(this);' role='button' >Delete UseCase</a></p></div></div></div>";
+      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a id ='edit" + i + "' class='ibm-edit-link tipso_style' onclick='formOverlayVal(this); IBMCore.common.widget.overlay.show(\"usecaseOverLay\"); return false;' href='' role='button' >Edit UseCase</a></p>" +
+      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a class='ibm-close-link' id ='deleteUC" + i + "' onclick='deleteUC(this);' role='button' >Delete UseCase</a></p></div></div></div>";
     jQuery(".ibm-col-12-3:eq(" + i + ")").attr('style', 'height:auto;').html(cards);
   }
 }
@@ -278,12 +292,12 @@ function formOverlayVal(e) {
   jQuery('#overlaySceneP').empty().append(options);
   let usecaseId = e.id.slice(-1);
   jQuery('#overlayImgNm').html("");
-  if (e.id.includes('edit')) {     
-     jQuery('#scenes').val(parseInt(jQuery('#useCaseScene' + usecaseId).html()))     
-     if(jQuery('#useCaseBImg'+usecaseId).attr('src') != undefined && jQuery('#useCaseBImg'+usecaseId).attr('src') != ''){
-       jQuery('#overlayImgNm').html('useCase' + (parseInt(usecaseId) + 1) + '.jpg');         
-       imageValue = jQuery('#useCaseBImg'+usecaseId).attr('src');
-     } 
+  if (e.id.includes('edit')) {
+    jQuery('#scenes').val(parseInt(jQuery('#useCaseScene' + usecaseId).html()))
+    if (jQuery('#useCaseBImg' + usecaseId).attr('src') != undefined && jQuery('#useCaseBImg' + usecaseId).attr('src') != '') {
+      jQuery('#overlayImgNm').html('useCase' + (parseInt(usecaseId) + 1) + '.jpg');
+      imageValue = jQuery('#useCaseBImg' + usecaseId).attr('src');
+    }
   } else {
     jQuery('#scenes').val('');
     isOverlayImageChanged = true;
@@ -339,7 +353,7 @@ function validateLanding() {
     }
   }
   if (jQuery("input[name='useCaseSelect']:checked").val() == 'single') {
-   // validateField("imageAltText");
+    // validateField("imageAltText");
     let ucCount = 0;
     for (var i = 0; i < 4; i++) {
       if ((jQuery('#useCasetitle' + i).length) >= 1) {
@@ -403,8 +417,8 @@ async function overlayVal() {
     if (jQuery("#overlayImage")[0].files.length != 0) {
       image = await renderImage(jQuery("#overlayImage"));
       imageContent = image.image;
-      cards = cards +"<div class='ibm-card__image'></div>";
-    } else if(imageValue != ''){      
+      cards = cards + "<div class='ibm-card__image'></div>";
+    } else if (imageValue != '') {
       imageContent = imageValue;
     }
     if (jQuery("input[name='useCaseSelect']:checked").val() == 'multi' && imageContent != undefined) {
@@ -414,8 +428,8 @@ async function overlayVal() {
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden >Image alt text: </span> <span class='ibm-small' id='useCaseImgAlTxt" + usecaseId + "' hidden></span></p>" +
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden >Explore Link Name: </span> <span class='ibm-small' hidden id='useCaseExplLinkName" + usecaseId + "' hidden></span></p>" +
       "<p hidden><span class='ibm-small ibm-textcolor-gray-30' hidden>RequestUrlName: </span> <span class='ibm-small' id='requestUrlName" + usecaseId + "' hidden></span></p>" +
-      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a id ='edit" + usecaseId + "' class='ibm-edit-link tipso_style' onclick='formOverlayVal(this); IBMCore.common.widget.overlay.show(\"usecaseOverLay\"); return false;' href='' role='button' >Edit UseCase</a></p>"+
-      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a class='ibm-close-link' id ='deleteUC"+usecaseId+"' onclick='deleteUC(this);' role='button' >Delete UseCase</a></p></div></div></div>";
+      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a id ='edit" + usecaseId + "' class='ibm-edit-link tipso_style' onclick='formOverlayVal(this); IBMCore.common.widget.overlay.show(\"usecaseOverLay\"); return false;' href='' role='button' >Edit UseCase</a></p>" +
+      "<p class='ibm-ind-link ibm-icononly ibm-fright pf-pencil white-bg'><a class='ibm-close-link' id ='deleteUC" + usecaseId + "' onclick='deleteUC(this);' role='button' >Delete UseCase</a></p></div></div></div>";
     jQuery(".ibm-col-12-3:eq(" + usecaseId + ")").attr('style', 'height:auto;').html(cards);
     jQuery('#useCasetitle' + usecaseId).html(jQuery("#uc-title").val());
     jQuery('#useCaseDesc' + usecaseId).html(jQuery("#uc-desc").val());
@@ -445,31 +459,38 @@ function saveAsDraft() {
   jQuery('.buttonusecaseGeneral').attr('disabled', true);
 
   setTimeout(async function () {
-    
-    if(offeringNameChanged == true){
-     
-    var offeringNameArray = [];
-    var caasData = fetchDocumentListByBrief();    
-    if (caasData.statusCode == 200) {        
-      var masterCaasData = fetchDocListFromMasterByBrief();      
-      if (masterCaasData.statusCode == 200) {
-        masterCaasData = JSON.parse(masterCaasData.body);
-        caasData = JSON.parse(caasData.body);
-        masterCaasData.forEach((elem, index) => {          
-          offeringNameArray.push(elem.document.offeringName);                    
-        });
-        caasData.forEach((elem, index) => {          
-          offeringNameArray.push(elem.document.offeringName);                    
-        });
 
-        if(offeringNameArray.includes(jQuery('#offerName').val())){          
+    if (offeringNameChanged == true) {
+
+      var offeringNameArray = [];
+      var caasData = fetchDocumentListByBrief();
+      if (caasData.statusCode == 200) {
+        var masterCaasData = fetchDocListFromMasterByBrief();
+        if (masterCaasData.statusCode == 200) {
+          masterCaasData = JSON.parse(masterCaasData.body);
+          caasData = JSON.parse(caasData.body);
+          masterCaasData.forEach((elem, index) => {
+            offeringNameArray.push(elem.document.offeringName);
+          });
+          caasData.forEach((elem, index) => {
+            offeringNameArray.push(elem.document.offeringName);
+          });
+
+          if (offeringNameArray.includes(jQuery('#offerName').val())) {
+            IBMCore.common.widget.overlay.show("confirmationOverlay");
+            jQuery("#overlayMsg").empty().append("Offering name you entered already exists.");
+            jQuery('#loadingIndicator').addClass('display-none');
+            jQuery('.buttonusecaseGeneral').removeAttr('disabled');
+            offeringNameChanged = true;
+            return;
+          }
+        } else {
           IBMCore.common.widget.overlay.show("confirmationOverlay");
-          jQuery("#overlayMsg").empty().append("Offering name you entered already exists.");
+          jQuery("#overlayMsg").empty().append("Not able to save the data, please try again later.");
           jQuery('#loadingIndicator').addClass('display-none');
           jQuery('.buttonusecaseGeneral').removeAttr('disabled');
-          offeringNameChanged = true;
           return;
-        }                
+        }
       } else {
         IBMCore.common.widget.overlay.show("confirmationOverlay");
         jQuery("#overlayMsg").empty().append("Not able to save the data, please try again later.");
@@ -477,14 +498,7 @@ function saveAsDraft() {
         jQuery('.buttonusecaseGeneral').removeAttr('disabled');
         return;
       }
-    } else {
-      IBMCore.common.widget.overlay.show("confirmationOverlay");
-      jQuery("#overlayMsg").empty().append("Not able to save the data, please try again later.");
-      jQuery('#loadingIndicator').addClass('display-none');
-      jQuery('.buttonusecaseGeneral').removeAttr('disabled');
-      return;
     }
-  }
 
     var data = await createDocumentJson();
     let tempData = JSON.parse(JSON.stringify(data));;
@@ -534,9 +548,9 @@ function saveAsDraft() {
 }
 
 function deleteUC(e) {
-	  let ucNumber = parseInt(e.id.charAt(8));
-	  jQuery(e).parent().parent().parent().parent().html('<a href="" id="useCase'+ucNumber+'" onclick="formOverlayVal(this); IBMCore.common.widget.overlay.show(\'usecaseOverLay\'); return false;"><div class="landing-usecase">Add usecase '+parseInt(ucNumber+1)+'+</div></a>');
-	}
+  let ucNumber = parseInt(e.id.charAt(8));
+  jQuery(e).parent().parent().parent().parent().html('<a href="" id="useCase' + ucNumber + '" onclick="formOverlayVal(this); IBMCore.common.widget.overlay.show(\'usecaseOverLay\'); return false;"><div class="landing-usecase">Add usecase ' + parseInt(ucNumber + 1) + '+</div></a>');
+}
 
 async function createSessionData() {
 
@@ -584,10 +598,10 @@ async function createDocumentJson() {
     numberOfusecases = 1;
     imageAltText = '';
   }
-  var createdDate=new Date().getTime();
+  var createdDate = new Date().getTime();
   var createdBy = loggedInUserEmailId.toLowerCase();
-  if(landingPageData!=""){
-    createdDate=landingPageData.createdDate;
+  if (landingPageData != "") {
+    createdDate = landingPageData.createdDate;
     createdBy = landingPageData.createdBy;
   }
   var useCaseArr = [];
@@ -662,9 +676,9 @@ async function createDocumentJson() {
           }
         }
       }
-        useCaseImageAltText = escapeHtml(jQuery('#useCaseImgAlTxt' + count).html());
-        useCaseLinkText = escapeHtml(jQuery('#useCaseExplLinkName' + count).html());
-        useCaseURL = escapeHtml(jQuery('#requestUrlName' + count).html());
+      useCaseImageAltText = escapeHtml(jQuery('#useCaseImgAlTxt' + count).html());
+      useCaseLinkText = escapeHtml(jQuery('#useCaseExplLinkName' + count).html());
+      useCaseURL = escapeHtml(jQuery('#requestUrlName' + count).html());
       var usecase = {
         useCaseTitle: escapeHtml(jQuery('#useCasetitle' + count).html()),
         useCaseDescription: escapeHtml(jQuery('#useCaseDesc' + count).html()),
@@ -701,63 +715,111 @@ async function checkIsBImageUploadedByUser(data) {
   };
 }
 
-function saveOrder() {  
-
-  var deliveryDate = jQuery('#deliveryDate').val();
-console.log("deliveryDate1->"+deliveryDate);
-
-
-  console.log("deliveryDate2->"+(new Date(deliveryDate)).getTime());
-  var timeStampDate =(new Date(deliveryDate)).getTime();
-  var timeStampDate2 =(new Date(deliveryDate)).getTime()+ ( 5.5 * 60 * 60 * 1000 );
- 
-console.log("date1->"+new Date (timeStampDate));
-console.log("date2->"+new Date (timeStampDate2));
-
-
+function saveOrder() {
+  var formValidation = true;
+  var timeStampDate = '';
+  var deliveryDate = jQuery('#deliveryDate').val();  
   var customerName = jQuery('#customerName').val();
+  var orderNumber = jQuery('#orderNumber').val();
   var mobileNumber = jQuery('#mobileNumber').val();
   var customerLocation = jQuery('#customerLocation').val();
   var customerSource = jQuery('#customerSource').val();
   var modeOfPayment = jQuery('#modeOfPayment').val();
   var totalAmount = jQuery('#totalAmount').val();
-  var advanceAmount = jQuery('#advanceAmount').val();  
+  var advanceAmount = jQuery('#advanceAmount').val();
   var fabricsFrom = jQuery('#fabricsFrom').val();
   var dressFor = jQuery("#dressFor option:selected").val();
-  var dressTypeSelect = jQuery("#dressTypeSelect option:selected").val();
-  var orderStatus  = 'new';
+  var dressType = jQuery("#dressTypeSelect option:selected").val();
+  var deliveryTime = jQuery("#deliveryTime option:selected").val();
+  var orderStatus = 'new';
+  if(deliveryDate == ''){
+    jQuery('#deliveryDate').addClass('redBorder');
+   timeStampDate = (new Date(deliveryDate)).getTime();
+    formValidation = false;
+  }
+  if(customerName == ''){
+    jQuery('#customerName').addClass('redBorder');
+    formValidation = false;
+  }
+  if(mobileNumber == ''){
+    jQuery('#mobileNumber').addClass('redBorder');
+    formValidation = false;
+  }
+  if(customerLocation == ''){
+    jQuery('#customerLocation').addClass('redBorder');
+    formValidation = false;
+  }
+  if(customerSource == ''){
+    jQuery('#customerSource').addClass('redBorder');
+    formValidation = false;
+  }
+  if(totalAmount == ''){
+    jQuery('#totalAmount').addClass('redBorder');
+    formValidation = false;
+  }
+  if(advanceAmount == ''){
+    jQuery('#advanceAmount').addClass('redBorder');
+    formValidation = false;
+  }
+  if(modeOfPayment == ''){
+    jQuery('#modeOfPayment').addClass('redBorder');
+    formValidation = false;
+  }  
+  if(deliveryDate == ''){
+    jQuery('#deliveryDate').addClass('redBorder');
+    formValidation = false;
+  }
+  if(dressType == 'selectType'){    
+    formValidation = false;
+  }
+  if(dressFor == 'selectPerson'){    
+    formValidation = false;
+  }
+  if(deliveryTime == 'selectRange'){    
+    formValidation = false;
+  }
 
-  var resp;
+ if(formValidation){
+  jQuery('#loadingIndicator').removeClass('visibility-hidden');
   var data = {
-    "customerName":customerName,
-    "mobileNumber":mobileNumber,
-    "customerLocation":customerLocation,
-    "customerSource":customerSource,
-    "modeOfPayment":modeOfPayment,
-    "totalAmount":totalAmount,
-    "advanceAmount":advanceAmount,
-    "dressFor":dressFor,
-    "dressTypeSelect":dressTypeSelect,
-    "fabricsFrom":fabricsFrom,
-    "orderStatus" : orderStatus
+    "customerName": customerName,
+    "orderNumber":orderNumber,
+    "mobileNumber": mobileNumber,
+    "customerLocation": customerLocation,
+    "customerSource": customerSource,
+    "modeOfPayment": modeOfPayment,
+    "totalAmount": totalAmount,
+    "advanceAmount": advanceAmount,
+    "dressFor": dressFor,
+    "dressType": dressType,
+    "fabricsFrom": fabricsFrom,
+    "deliveryDate":timeStampDate,
+    "deliveryTime":deliveryTime,
+    "orderStatus": orderStatus
   }
   jQuery.ajax({
-      type: "POST",
-      url: "/caas/createDocument",
-      data: JSON.stringify(data),
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + cookieValue
-      },
-      async: false,
-      success: function (result) {
-          resp = result;
-          console.log("success");
-      },
-      error: function (e) {
-          alert("There was some internal error while updating, Please try again after sometime")
-      }
+    type: "POST",
+    url: "/caas/createDocument",
+    data: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + cookieValue
+    },
+    async: false,
+    success: function (result) {      
+      console.log("success");
+      jQuery('#loadingIndicator').addClass('visibility-hidden');
+      IBMCore.common.widget.overlay.show("confirmationOverlay");
+      jQuery("#overlayMsg").empty().append('<span style="color: red;">Data upload is successful</span>');
+    },
+    error: function (e) {
+      alert("There was some internal error while updating, Please try again after sometime")
+    }
   });
+ } else {
+  IBMCore.common.widget.overlay.show("confirmationOverlay");
+  jQuery("#overlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');
+ }
 
 }
 
