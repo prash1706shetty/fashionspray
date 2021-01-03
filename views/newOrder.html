@@ -27,35 +27,18 @@
   <div id="ibm-top" class="ibm-landing-page">
        
     <div class="ibm-col-12-12 headerFirst">
-        <div class=" ibm-col-12-1" style="padding-top:10px;padding-left:70px;">
-            <div>
-                <img src="./images/WATER_MARK-05.png" alt="Italian Trulli" width="60" height="50">
-            </div>
-          </div>
 
-        <div class=" ibm-col-12-6" style="padding-top:20px;">
-    <div>
-      <h2><span style="padding-left:10px;font-size:30px;font-weight: bold;">Fashion Spray</span></h2>
-    </div>
+
+        <div style="padding-top:10px;padding-left:80px;">
+    
+      <h2><span style="font-size:30px;font-weight: bold;">Fashion Spray</span></h2>
+    
   </div>
-  <div class=" ibm-col-12-5" style="padding-top:20px;text-align: right;">
-      <div>
-        <h2><span style="text-align:right;font-weight: bold;">You Dream, We Design</span></h2>
-      </div>
-    </div>
+
 </div>
 
-<div class="ibm-col-12-12 headerSecond" style="padding-top:10px;">
-    <div class=" ibm-col-12-6">
-        <div><span class="ibm-bold" style="padding-left: 70px;float:left;">Order Details : </span></div>
-      </div>
-
-<div class=" ibm-col-12-6" style="text-align: right;">
-  <div>
-    <h2><span style="text-align:right;" class="ibm-textcolor-gray-30">Please fill the each field with proper
-        details</span></h2>
-  </div>
-</div>
+<div class="ibm-col-12-12 headerSecond" style="padding:10px;">    
+        <span class="ibm-bold" style="padding-left: 80px;float:left;">Order Details : </span>
 </div>
 
     
@@ -64,198 +47,173 @@
 
       <form id="landingPageForm" class="ibm-row-form" action="javascript:void(0);">
 
-        <div class=" ibm-col-12-12" style="padding-left:80px;">
-          <div class=" ibm-col-12-5">
-
-
-            <p class="ibm-form-elem-grp">
-              <div for="customerName" class="ibm-textcolor-green-60 tooltip">Customer Name
-                <span class="tooltiptext">Name of the customer who gave order</span>
-                <span class="ibm-required">*</span>
-              </div>
-              <div class="fieldPaddingTop">
-                <input type="text" value="" class="textFieldWidth" id="customerName" name="customerName" maxlength="50"
-                  placeholder="Enter customer full name." onfocus="clearRedColor(this)">
-              </div>
-              <span class=" validationFontSize display-none" id='offerNameError'>Offering
-                Name is required</span>
-            </p>
-
-            <div class="fieldPaddingTop">
-              <div style="width:180px;display: inline-block;">
-                <div for="dressFor" class="ibm-textcolor-green-60 tooltip">Dress For
-                  <span class="tooltiptext">Type of person to whom this dress getting ready</span>
-                </div><span class="ibm-required"> *</span>
-                <div class="fieldPaddingTop">
-                  <select name="dressFor" id="dressFor">
-                    <option selected value="selectPerson">Select Person Type</option>
-                    <option value="Women">Women</option>
-                    <option value="Kids">Kids</option>
-                    <option value="Men">Men</option>
-                  </select>
-                </div>
-              </div>
-              <div style="display: inline-block;margin-left:38px;" id="dressTypeKids">
-                <div for="dressType" class="ibm-textcolor-green-60 tooltip">Dress Type
-                  <span class="tooltiptext">Type of dress selected by customer</span>
-                </div><span class="ibm-required"> *</span>
-
-                <div class="fieldPaddingTop">
-                  <select name="dressType" id="dressType" disabled>
-                    <option selected value="selectType" disabled>Select Dress Type</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            
-              <div style="display: inline-block;">
-                <div for="totalAmount" class="ibm-textcolor-green-60 tooltip">Total Amount
-                  <span class="tooltiptext">Total amount for selected dress</span>
-                  <span class="ibm-required">
-                    *</span>
-                </div>
-                <div class="fieldPaddingTop">
-                  <input type="text" class="fieldWidthSmall" id="totalAmount" name="totalAmount" value=""
-                    placeholder="Enter total amount." onfocus="clearRedColor(this)">
-                </div>
-                <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                  required</span>
-              </div>
-
-              <div style="display: inline-block;margin-left:38px;">
-                <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Advance Paid
-                  <span class="tooltiptext">Total advance paid by customer</span>
-                  <span class="ibm-required">
-                    *</span>
-                </div>
-                <div class="fieldPaddingTop">
-                  <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value=""
-                    placeholder="Enter advance paid." onfocus="clearRedColor(this)">
-                </div>
-                <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                  required</span>
-              </div>
-
-              
-
-              <div style="display: inline-block;">
-                  <div for="deliveryDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery Date
-                    <span class="tooltiptext">The date customer wants to deliver the dress.</span>
-                    <span class="ibm-required">
-                      *</span>
+          <div class=" ibm-col-12-12" style="padding-left:80px;">
+              <div class=" ibm-col-12-5">
+                  <p class="ibm-form-elem-grp">
+                      <div for="customerName" class="ibm-textcolor-green-60 tooltip">Customer Name
+                        <span class="tooltiptext">Name of the customer who gave order</span>
+                        <span class="ibm-required">*</span>
+                      </div>
+                      <div class="fieldPaddingTop">
+                        <input type="text" value="" class="textFieldWidth" id="customerName" name="customerName" maxlength="50"
+                          placeholder="Enter customer full name." onfocus="clearRedColor(this)">
+                      </div>
+                      <span class=" validationFontSize display-none" id='offerNameError'>Offering
+                        Name is required</span>
+                    </p>
+                    <div for="orderNumber" class="ibm-textcolor-green-60 ibm-padding-top-0 tooltip">Order Number
+                        <span class="tooltiptext">Order number for the product.</span><span class="ibm-required">
+                          *</span>
+                      </div>
+                      <div class="fieldPaddingTop">
+                        <input type="text" class="textFieldWidth" value="" id="orderNumber" name="orderNumber" disabled maxlength="50"                  >
+                      </div>
+                      <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
+                      <div for="mobileNumber" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Mobile Number
+                          <span class="tooltiptext">Customer 10 digit mobile number</span><span class="ibm-required">
+                            *</span>
+                        </div>
+                        <div class="fieldPaddingTop">
+                          <input type="text" class="textFieldWidth" value="" id="mobileNumber" name="mobileNumber" maxlength="50"
+                            placeholder="Enter customer mobile number" onfocus="clearRedColor(this)">
+                        </div>
+                        <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
+                        <div for="customerLocation" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Location of customer
+                            <span class="tooltiptext">From where customer came to our shop</span><span class="ibm-required">
+                              *</span>
+                          </div>
+                          <div class="fieldPaddingTop">
+                            <input type="text" value="" class="textFieldWidth" id="customerLocation" name="customerLocation"
+                              maxlength="50" placeholder="Enter customer location" onfocus="clearRedColor(this)">
+                          </div>
+                          <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
+                          <div for="customerSource" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer source
+                              <span class="tooltiptext">How customer came to know about our shop</span><span class="ibm-required">
+                                *</span>
+                            </div>  
+                            <div class="fieldPaddingTop">
+                              <input type="text" value="" id="customerSource" name="customerSource" maxlength="50" spellcheck="true"
+                                class="textFieldWidth" placeholder="Enter source of customer" onfocus="clearRedColor(this)">
+                            </div>
+                            <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
+                         
+                    
                   </div>
-                  <div class="fieldPaddingTop">
-                    <input type="text" value="" class="fieldWidthSmall" id="deliveryDate" name="deliveryDate"
-                      spellcheck="true" placeholder="Choose delivery date" data-widget="datepicker"
-                      data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
-                  </div>
-                  <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                    required</span>
-                </div>
-  
-                <div style="display: inline-block;margin-left:38px;" id="dressTypeKids">
-                  <div for="deliveryTime" class="ibm-textcolor-green-60 tooltip">Delivery time
-                    <span class="tooltiptext">Time of the day in which product going to deliver.</span>
-                  </div><span class="ibm-required"> *</span>
-                  <div class="fieldPaddingTop" style="width:200px">
-                    <select name="deliveryTime" id="deliveryTime">
-                      <option selected value="selectRange">Select Time Range</option>
-                      <option value="10.30-11.30">10.30 - 11.30AM</option>
-                      <option value="11.30-12.30">11.30 - 12.30PM</option>
-                      <option value="12.30-01.30">12.30 - 01.30PM</option>
-                      <option value="01.30-02.30">01.30 - 02.30PM</option>
-                      <option value="02.30-03.30">02.30 - 03.30PM</option>
-                      <option value="03.30-04.30">03.30 - 04.30PM</option>
-                      <option value="04.30-05.30">04.30 - 05.30PM</option>
-                    </select>
-                  </div>
-                </div>
+                  <div class=" ibm-col-12-3"> 
+                      <p class="ibm-form-elem-grp">                
+                      <div for="dressFor" class="ibm-textcolor-green-60 tooltip">Dress For
+                        <span class="tooltiptext">Type of person to whom this dress getting ready</span>
+                      </div><span class="ibm-required"> *</span>
+                      <div class="fieldPaddingTop">
+                        <select name="dressFor" id="dressFor" style="width:180px;">
+                          <option selected value="selectPerson">Select Person Type</option>
+                          <option value="Women">Women</option>
+                          <option value="Kids">Kids</option>
+                          <option value="Men">Men</option>
+                        </select>
+                      </div>    
+                      </p>
+                      <div for="totalAmount" class="ibm-textcolor-green-60 ibm-padding-top-0 tooltip">Total Amount
+                          <span class="tooltiptext">Total amount for selected dress</span>
+                          <span class="ibm-required">
+                            *</span>
+                        </div>
+                        <div class="fieldPaddingTop">
+                          <input type="text" class="fieldWidthSmall" id="totalAmount" name="totalAmount" value=""
+                            placeholder="Enter total amount." onfocus="clearRedColor(this)">
+                        </div>
+                        <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
+                          required</span>
 
-              <div style="display: inline-block;">
-                <div for="modeOfPayment" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Mode of payment
-                  <span class="tooltiptext">In which mode customer paid the amount</span>
-                  <span class="ibm-required">
-                    *</span>
-                </div>
-                <div class="fieldPaddingTop">
-                  <input type="text" class="fieldWidthSmall" id="modeOfPayment" name="modeOfPayment" value=""
-                    placeholder="Enter payment type" onfocus="clearRedColor(this)">
-                </div>
-                <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                  required</span>
+                          <div for="deliveryDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery Date
+                              <span class="tooltiptext">The date customer wants to deliver the dress.</span>
+                              <span class="ibm-required">
+                                *</span>
+                            </div>
+                            <div class="fieldPaddingTop">
+                              <input type="text" value="" class="fieldWidthSmall" id="deliveryDate" name="deliveryDate"
+                                spellcheck="true" placeholder="Choose delivery date" data-widget="datepicker"
+                                data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
+                            </div>
+                            <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
+                              required</span>
+                     
+                              <div for="modeOfPayment" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Payment mode
+                                  <span class="tooltiptext">In which mode customer paid the amount</span>
+                                  <span class="ibm-required">
+                                    *</span>
+                                </div>
+                                <div class="fieldPaddingTop">
+                                  <input type="text" class="fieldWidthSmall" id="modeOfPayment" name="modeOfPayment" value=""
+                                    placeholder="Enter payment type" onfocus="clearRedColor(this)">
+                                </div>
+                                <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
+                                  required</span>
+
+                          
+
               </div>
+              <div class=" ibm-col-12-3">
+                  <p class="ibm-form-elem-grp">
+                  <div id="dressTypeKids">
+                      <div for="dressType" class="ibm-textcolor-green-60 tooltip">Dress Type
+                        <span class="tooltiptext">Type of dress selected by customer</span>
+                      </div><span class="ibm-required"> *</span>
+      
+                      <div class="fieldPaddingTop">
+                        <select name="dressType" id="dressType" disabled style="width:180px;">
+                          <option selected value="selectType" disabled>Select Dress Type</option>
+                        </select>
+                      </div>
+                    </div>
+</p>
+                    <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-0 tooltip">Advance Paid
+                        <span class="tooltiptext">Total advance paid by customer</span>
+                        <span class="ibm-required">
+                          *</span>
+                      </div>
+                      <div class="fieldPaddingTop">
+                        <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value=""
+                          placeholder="Enter advance paid." onfocus="clearRedColor(this)">
+                      </div>
+                      <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
+                        required</span>
 
-              <div style="display: inline-block;margin-left:38px;">
-                <div for="fabricsFrom" class="ibm-textcolor-green-60 tooltip">Fabrics from
-                  <span class="tooltiptext">Who is going to provide fabrics?</span>
-                </div><span class="ibm-required"> *</span>
-                <div class="fieldPaddingTop" style="width:200px">
-                  <select name="fabricsFrom" id="fabricsFrom">
-                    <option selected value>Select Dress Source</option>
-                    <option value="fs">Fashion Spray</option>
-                    <option value="customer">Customer Fabrics</option>
-                  </select>
+                        <div id="dressTypeKids">
+                            <div for="deliveryTime" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery time
+                              <span class="tooltiptext">Time of the day in which product going to deliver.</span>
+                            </div><span class="ibm-required"> *</span>
+                            <div class="fieldPaddingTop">
+                              <select name="deliveryTime" id="deliveryTime" style="width:180px;">
+                                <option selected value="selectRange">Select Time Range</option>
+                                <option value="10.30-11.30">10.30 - 11.30AM</option>
+                                <option value="11.30-12.30">11.30 - 12.30PM</option>
+                                <option value="12.30-01.30">12.30 - 01.30PM</option>
+                                <option value="01.30-02.30">01.30 - 02.30PM</option>
+                                <option value="02.30-03.30">02.30 - 03.30PM</option>
+                                <option value="03.30-04.30">03.30 - 04.30PM</option>
+                                <option value="04.30-05.30">04.30 - 05.30PM</option>
+                              </select>
+                            </div>
+                          </div>
+
+                         
+                              <div for="fabricsFrom" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Fabrics from
+                                <span class="tooltiptext">Who is going to provide fabrics?</span>
+                              </div><span class="ibm-required"> *</span>
+                              <div class="fieldPaddingTop">
+                                <select name="fabricsFrom" id="fabricsFrom" style="width:180px;">
+                                  <option selected value>Select Dress Source</option>
+                                  <option value="fs">Fashion Spray</option>
+                                  <option value="customer">Customer Fabrics</option>
+                                </select>
+                              </div>
+                           
+                          
                 </div>
-              </div>
-
-
-
-        
-        
-
-          
-
-
-
-
           </div>
-          <div class=" ibm-col-12-5">
-            <p class="ibm-form-elem-grp">
+                         
 
-              <div for="orderNumber" class="ibm-textcolor-green-60 ibm-padding-top-0 tooltip">Order Number
-                <span class="tooltiptext">Order number for the product.</span><span class="ibm-required">
-                  *</span>
-              </div>
-              <div class="fieldPaddingTop">
-                <input type="text" class="textFieldWidth" value="" id="orderNumber" name="orderNumber" disabled maxlength="50"                  >
-              </div>
-              <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
-
-
-              <div for="mobileNumber" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Mobile Number
-                <span class="tooltiptext">Customer 10 digit mobile number</span><span class="ibm-required">
-                  *</span>
-              </div>
-              <div class="fieldPaddingTop">
-                <input type="text" class="textFieldWidth" value="" id="mobileNumber" name="mobileNumber" maxlength="50"
-                  placeholder="Enter customer mobile number" onfocus="clearRedColor(this)">
-              </div>
-              <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
-
-              <div for="customerLocation" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Location of customer
-                <span class="tooltiptext">From where customer came to our shop</span><span class="ibm-required">
-                  *</span>
-              </div>
-              <div class="fieldPaddingTop">
-                <input type="text" value="" class="textFieldWidth" id="customerLocation" name="customerLocation"
-                  maxlength="50" placeholder="Enter customer location" onfocus="clearRedColor(this)">
-              </div>
-              <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
-
-              <div for="customerSource" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer source
-                <span class="tooltiptext">How customer came to know about our shop</span><span class="ibm-required">
-                  *</span>
-              </div>
-              <div class="fieldPaddingTop">
-                <input type="text" value="" id="customerSource" name="customerSource" maxlength="50" spellcheck="true"
-                  class="textFieldWidth" placeholder="Enter source of customer" onfocus="clearRedColor(this)">
-              </div>
-              <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
-            </p>
-
-          </div>
-        </div>
 
         <div class=" ibm-col-12-12 ibm-padding-top-1" style="padding-left:70px;padding-right:30px;">
           <div class="ibm-rule ibm-alternate ibm-gray-30">

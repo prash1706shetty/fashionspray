@@ -1,7 +1,7 @@
 version: 1
 applications:
 - path: .
-  name: showcase-editor
-  memory: 512M
+  name: fashionspray
+  memory: 256M
   instances: 1
   buildpack: https://github.com/cloudfoundry/nodejs-buildpack

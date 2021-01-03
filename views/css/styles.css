@@ -433,7 +433,7 @@ white-space: nowrap;
 }
 
 .fieldWidthSmall {
-	width:11.3em;
+	width:12.5em;
 }
 
 .floatLeft {
@@ -536,6 +536,7 @@ header {
   background-color: #808080;   
   color: white;
 }
+
 .headerSecond {
   background-color: #e6e6e6;   
   color: black;

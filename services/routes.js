@@ -35,7 +35,7 @@ router.get('/edit/useCases', function (req, res) {
 });
 
 router.get('/edit', function (req, res) {
-    res.sendFile(reqPath + "/views/" + "newOrder.html");
+    res.sendFile(reqPath + "/views/" + "productList.html");
 });
 
 router.get('/view', function (req, res) {
