@@ -75,7 +75,7 @@
                         </div>
                         <div class="fieldPaddingTop">
                           <input type="text" class="textFieldWidth" value="" id="mobileNumber" name="mobileNumber" maxlength="50"
-                            placeholder="Enter customer mobile number" onfocus="clearRedColor(this)">
+                            placeholder="Enter customer mobile number" onfocus="clearRedColor(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                         </div>
                         <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
                         <div for="customerLocation" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Location of customer
@@ -86,7 +86,7 @@
                             <input type="text" value="" class="textFieldWidth" id="customerLocation" name="customerLocation"
                               maxlength="50" placeholder="Enter customer location" onfocus="clearRedColor(this)">
                           </div>
-                          <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
+                          
                           <div for="customerSource" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer source
                               <span class="tooltiptext">How customer came to know about our shop</span><span class="ibm-required">
                                 *</span>
@@ -95,8 +95,7 @@
                               <input type="text" value="" id="customerSource" name="customerSource" maxlength="50" spellcheck="true"
                                 class="textFieldWidth" placeholder="Enter source of customer" onfocus="clearRedColor(this)">
                             </div>
-                            <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
-                         
+
                     
                   </div>
                   <div class=" ibm-col-12-3"> 
@@ -120,7 +119,7 @@
                         </div>
                         <div class="fieldPaddingTop">
                           <input type="text" class="fieldWidthSmall" id="totalAmount" name="totalAmount" value=""
-                            placeholder="Enter total amount." onfocus="clearRedColor(this)">
+                            placeholder="Enter total amount." onfocus="clearRedColor(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                         </div>
                         <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
                           required</span>
@@ -147,8 +146,21 @@
                                   <input type="text" class="fieldWidthSmall" id="modeOfPayment" name="modeOfPayment" value=""
                                     placeholder="Enter payment type" onfocus="clearRedColor(this)">
                                 </div>
-                                <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                                  required</span>
+
+                                <div for="typeOfCustomer" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer Type
+                                  <span class="tooltiptext">Customer is new or existing?</span>
+                                </div><span class="ibm-required"> *</span>
+                                <div class="fieldPaddingTop">
+                                  <select name="typeOfCustomer" id="typeOfCustomer" style="width:180px;">
+                                    <option selected value="select">Select Customer Type</option>
+                                    <option value="firstVisit">First Visit</option>
+                                    <option value="secondVisit">Second Visit</option>
+                                    <option value="repeated">Repeated</option>
+                                    <option value="wellKnown">Well Known</option>
+                                  </select>
+                                </div>
+                                
+                                
 
                           
 
@@ -174,10 +186,9 @@
                       </div>
                       <div class="fieldPaddingTop">
                         <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value=""
-                          placeholder="Enter advance paid." onfocus="clearRedColor(this)">
+                          placeholder="Enter advance paid." onfocus="clearRedColor(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                       </div>
-                      <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                        required</span>
+                      
 
                         <div id="dressTypeKids">
                             <div for="deliveryTime" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery time
@@ -202,18 +213,43 @@
                                 <span class="tooltiptext">Who is going to provide fabrics?</span>
                               </div><span class="ibm-required"> *</span>
                               <div class="fieldPaddingTop">
-                                <select name="fabricsFrom" id="fabricsFrom" style="width:180px;">
-                                  <option selected value>Select Dress Source</option>
+                                <select name="fabricsFrom" id="fabricsFrom1" style="width:180px;">
+                                  <option selected value="select">Select Dress Source</option>
                                   <option value="fs">Fashion Spray</option>
                                   <option value="customer">Customer Fabrics</option>
+                                </select>
+                              </div>
+
+                              <div for="measureBy" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Measurement By
+                                <span class="tooltiptext">Who took measurement of customer.</span>
+                              </div><span class="ibm-required"> *</span>
+                              <div class="fieldPaddingTop">
+                                <select name="measureBy" id="measureBy" style="width:180px;">
+                                  <option selected value="select">Select Person</option>
+                                  <option value="pruthvishetty">Pruthvi Shetty</option>
+                                  <option value="mastersahil">Master-Sahil</option>
+                                  <option value="disha">Disha</option>
+                                  <option value="tailor">Tailor</option>
                                 </select>
                               </div>
                            
                           
                 </div>
           </div>
-                         
+                       
+          <div class=" ibm-col-12-12" style="padding-left:80px;">
 
+            <div for="orderNote" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Note and description of order.
+              <span class="tooltiptext">Description about order.</span>
+              <span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <textarea value="" rows="4" class="orderNote" id="orderNote" name="orderNote" maxlength="100"></textarea>
+            </div>
+          
+          </div>
+        
 
         <div class=" ibm-col-12-12 ibm-padding-top-1" style="padding-left:70px;padding-right:30px;">
           <div class="ibm-rule ibm-alternate ibm-gray-30">
@@ -294,132 +330,7 @@
           <a href="javascript:;" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit" onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
   </div>
 
-      <!-- Overlay -->
-      <div class="ibm-common-overlay ibm-overlay-alt-two" data-widget="overlay" data-type="alert" id="usecaseOverLay">
-
-        <!-- <form id="overlay" class="ibm-row-form" method="post" action="__REPLACE_ME__"> -->
-        <form id="overlayForm" class="ibm-row-form">
-          <div class="ibm-columns ">
-            <div class="ibm-col-12-12 ">
-              <h1 class="ibm-bold ibm-h4 ibm-textcolor-green-60">Usecase <span id="tileNo"></span><span
-                  class="usecaseTileNo"></span></h1>
-
-              <div for="uc-title" class="ibm-textcolor-green-60 overlayTooltip">Usecase title
-                <span class="overlayTooltiptext">Usecase title, <a style="color:white;"
-                    href="https://github.ibm.com/dwedge/demo-container-planning/blob/master/guidance.md#usecaseTitle"
-                    target="_blank">Read more...</a></span>
-              </div><span class="ibm-required"> *</span>
-              <span class="ibm-textcolor-gray-40 ibm-small"> max 30 characters</span>
-
-              <div>
-                <input type="text" value="" class="exitOverlayWidth" id="uc-title" name="uc-title" maxlength="30"
-                  spellcheck="true">
-              </div>
-              <span class="validationFontSize display-none" id='uc-titleError'>Title is
-                required</span>
-              <p>
-                <div for="uc-desc" class="ibm-textcolor-green-60 tooltip">Usecase description
-                  <span class="tooltiptext">Usecase description, <a style="color:white;"
-                      href="https://github.ibm.com/dwedge/demo-container-planning/blob/master/guidance.md#usecaseDescription"
-                      target="_blank">Read more...</a></span>
-                </div><span class="ibm-required"> *</span>
-                <span class="ibm-textcolor-gray-40 ibm-small"> max 100 characters</span>
-
-                <div>
-                  <textarea rows="4" value="" class="exitOverlayWidth" id="uc-desc" name="uc-desc" maxlength="100"
-                    spellcheck="true"></textarea>
-                </div>
-                <span class="validationFontSize display-none" id='uc-descError'>Description
-                  is required</span>
-              </p>
-
-              <div for="uc-title" class="ibm-textcolor-green-60 tooltip">No of scene(s)
-                <span class="tooltiptext">No of scene(s), <a style="color:white;"
-                    href="https://github.ibm.com/dwedge/demo-container-planning/blob/master/guidance.md#noOfScenes"
-                    target="_blank">Read more...</a></span>
-              </div><span class="ibm-required"> *</span>
-
-              <div id='overlaySceneP'>
-              </div>
-
-              <div class="ibm-form-elem-grp paddingTop15" id='overLayImaP'>
-
-                <div for="overlayImage" class="ibm-textcolor-green-60 tooltip">Usecase image
-                  <span class="tooltiptext">Usecase image, <a style="color:white;"
-                      href="https://github.ibm.com/dwedge/demo-container-planning/blob/master/guidance.md#usecaseImage"
-                      target="_blank">Read more...</a></span>
-                </div><span class="ibm-required"> *</span>
-              </div>
-              <div id='overlayImageBrowseDiv'>
-                <span>
-                  <input id="overlayImage" type="file" data-multiple="false"
-                    onchange="removeError('overLayImageError');" accept="image/*" style="display:none;" /><label
-                    for="overlayImage" class="btn ibm-center">Browse</label><span style="margin-left:10px"
-                    id="overlayImgNm"></span><span style="margin-left:10px" id="overlayImgError"></span>
-                </span>
-                <span class="validationFontSize display-none" id='overlayImageError'>Image
-                  is required</span>
-              </div>
-              <div id='overlayImageAltDiv'>
-                <div for="overlayImageAltText" class="ibm-textcolor-green-60 tooltip">Image alt text
-                  <span class="tooltiptext">Image alt text, <a style="color:white;"
-                      href="https://github.ibm.com/dwedge/demo-container-planning/blob/master/guidance.md#usecaseImageAltText"
-                      target="_blank">Read more...</a></span>
-                </div>
-                <span class="ibm-required"> *</span>
-                <div>
-                  <input type="text" value="" id="overlayImageAlt" name="overlayImageAlt" maxlength="50"
-                    spellcheck="true" style='width:38em'>
-                </div>
-                <span class="validationFontSize display-none " id='overlayImageAltError'>Alt Text is required</span>
-              </div>
-              <div class="ibm-padding-top-1">
-
-                <div for="exploreLink" class="ibm-textcolor-green-60 tooltip">Explore link name
-                  <span class="tooltiptext">Explore link name, <a style="color:white;"
-                      href="https://github.ibm.com/dwedge/demo-container-planning/blob/master/guidance.md#exploreLinkName"
-                      target="_blank">Read more...</a></span>
-                </div><span class="ibm-required"> *</span>
-
-                <div>
-                  <input type="text" value="" id="exploreLink" name="exploreLink" maxlength="25" spellcheck="true"
-                    placeholder="e.g. Learn more / Explore" style='width:38em'>
-                </div>
-                <span class="validationFontSize display-none " id='exploreLinkError'>Explore link name is
-                  required</span>
-              </div>
-              <div class="ibm-padding-top-1">
-
-                <div for="usecaseURL" class="ibm-textcolor-green-60 tooltip">Requested usecase URL name
-                  <span class="tooltiptext">The name that is appended to the product folder, <a style="color:white;"
-                      href="https://github.ibm.com/dwedge/demo-container-planning/blob/master/guidance.md#usecaseUrlName"
-                      target="_blank">Read more...</a></span>
-                </div><span class="ibm-required"> *</span>
-                <div>
-                  <input type="text" value="" id="usecaseURL" name="usecaseURL" maxlength="50" spellcheck="true"
-                    placeholder="e.g. .../usecasename" style='width:38em'>
-                </div>
-                <span class="validationFontSize display-none" id='usecaseURLError'>URL is required</span>
-              </div>
-            </div>
-
-          </div>
-        </form>
-
-        <div class="ibm-fluid">
-          <div class="ibm-col-12-12" align="right">
-            <p class="ibm-btn-row ibm-button-link">
-              <a href="javascript:;" id='overLayCancel'
-                class="ibm-btn-sec ibm-btn-transparent ibm-btn-blue-50 cancelButton" style="margin:10px;"
-                onclick="IBMCore.common.widget.overlay.hide('usecaseOverLay',true);">Cancel</a>
-
-              <a href="javascript:;" id="overlaySave" class="ibm-btn-pri ibm-btn-blue-50 overlayButton blueBackground"
-                type="submit" style="margin:10px;" onclick="overlayVal()">Save</a>
-            </p>
-          </div>
-        </div>
-
-      </div>
+  
     </div>
     <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
       <p id="overlayMsg"></p>

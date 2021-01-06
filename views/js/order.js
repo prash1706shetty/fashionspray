@@ -29,16 +29,19 @@ jQuery(document).ready(function ($) {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
         .append('<option value="Gown">Gown</option>')
         .append('<option value="Lehanga">Lehanga</option>')
+        .append('<option value="Blouse">Blouse</option>')
+        .append('<option value="Salwar">Salwar</option>')
         .append('<option value="Saree">Saree</option>');
     } else if (personType == 'Kids') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
         .append('<option value="Frock">Frock</option>')
         .append('<option value="Gown">Gown</option>')
-        .append('<option value="Lehanga">Lehanga</option>');
+        .append('<option value="Lehanga">Lehanga</option>')
+        .append('<option value="Western Wear">Western Wear</option>');
     } else if (personType == 'Men') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
-        .append('<option value="Shirt">Shirt</option>')
-        .append('<option value="Pant">Pant</option>')
+        .append('<option value="Shirt">Shirt and Pant</option>')
+        .append('<option value="Pant">Western</option>')
         .append('<option value="Sherwani">Sherwani</option>');
     } else if (personType == 'selectPerson') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option');
@@ -728,17 +731,30 @@ function saveOrder() {
   var totalAmount = jQuery('#totalAmount').val();
   var advanceAmount = jQuery('#advanceAmount').val();
   var fabricsFrom = jQuery('#fabricsFrom').val();
+  var orderNote = jQuery('#orderNote').val();
+  var typeOfCustomer = jQuery('#typeOfCustomer option:selected').val();
+  var measureBy = jQuery('#measureBy option:selected').val();
   var dressFor = jQuery("#dressFor option:selected").val();
-  var dressType = jQuery("#dressTypeSelect option:selected").val();
+  var dressType = jQuery("#dressType option:selected").val();
   var deliveryTime = jQuery("#deliveryTime option:selected").val();
-  var orderStatus = 'new';
+  var orderStatus = 'new';  
   if(deliveryDate == ''){
-    jQuery('#deliveryDate').addClass('redBorder');
-   timeStampDate = (new Date(deliveryDate)).getTime();
+    jQuery('#deliveryDate').addClass('redBorder');  
     formValidation = false;
+  } else{
+    timeStampDate = (new Date(deliveryDate)).getTime();
   }
+  
   if(customerName == ''){
     jQuery('#customerName').addClass('redBorder');
+    formValidation = false;
+  }
+  if(orderNumber == ''){
+    jQuery('#orderNumber').addClass('redBorder');
+    formValidation = false;
+  }
+  if(orderNote == ''){
+    jQuery('#orderNote').addClass('redBorder');
     formValidation = false;
   }
   if(mobileNumber == ''){
@@ -751,6 +767,9 @@ function saveOrder() {
   }
   if(customerSource == ''){
     jQuery('#customerSource').addClass('redBorder');
+    formValidation = false;
+  }
+  if(typeOfCustomer == 'select'){    
     formValidation = false;
   }
   if(totalAmount == ''){
@@ -778,6 +797,13 @@ function saveOrder() {
   if(deliveryTime == 'selectRange'){    
     formValidation = false;
   }
+  if(fabricsFrom == 'select'){    
+    formValidation = false;
+  }
+  if(measureBy == 'select'){    
+    formValidation = false;
+  }
+  
 
  if(formValidation){
   jQuery('#loadingIndicator').removeClass('visibility-hidden');
@@ -787,6 +813,7 @@ function saveOrder() {
     "mobileNumber": mobileNumber,
     "customerLocation": customerLocation,
     "customerSource": customerSource,
+    "typeOfCustomer":typeOfCustomer,
     "modeOfPayment": modeOfPayment,
     "totalAmount": totalAmount,
     "advanceAmount": advanceAmount,
@@ -795,6 +822,9 @@ function saveOrder() {
     "fabricsFrom": fabricsFrom,
     "deliveryDate":timeStampDate,
     "deliveryTime":deliveryTime,
+    "measureBy":measureBy,
+    "orderNote":orderNote,
+    "createDate":new Date().getTime(),
     "orderStatus": orderStatus
   }
   jQuery.ajax({

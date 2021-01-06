@@ -23,15 +23,19 @@ var data = {
     success: function (result) {
 
 console.log("result->"+result);
-      
-  var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Customer Name</th><th>Mobile Number</th><th>Person</th><th>Dress</th></tr></thead><tbody>";
+      var deliveryDate = '';
+  var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Customer Name</th><th>Order Number</th><th>Mobile Number</th><th>Person</th><th>Delivery Date & Time</th><th>Fabrics from</th></tr></thead><tbody>";
   for (row of result.rows) {
     
+     deliveryDate = new Date(row.value.deliveryDate);
     table = table + '<tr>'+
     '<td>'+row.value.customerName+'</td>'+
+    '<td>'+row.value.orderNumber+'</td>'+   
     '<td>'+row.value.mobileNumber+'</td>'+
-    '<td>'+row.value.dressFor+'</td>'+
-    '<td>'+row.value.dressType+'</td>'+
+    '<td>'+row.value.dressFor+'-'+row.value.dressType+'</td>'+
+    '<td>'+deliveryDate.getDate() + '/' + (deliveryDate.getMonth()+1) + '/' + deliveryDate.getFullYear()+' : '+row.value.deliveryTime+'</td>'+    
+    '<td>'+row.value.fabricsFrom+'</td>'+
+    
 '</tr>';
 
   }
