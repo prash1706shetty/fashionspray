@@ -5,19 +5,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="index, follow" />
-  <link rel="shortcut icon" href="https://www.ibm.com/favicon.ico" />
+  <title>Fashion Spray</title>
 
-  <title>QwikDemo Editor</title>
-  <!-- Initialize Northstar -->
-  <script>
-    digitalData = {
-      page: {
-        pageInfo: {
-          ibm: {}
-        }
-      }
-    };
-  </script>
   <script src="https://1.www.s81c.com/common/stats/ida_stats.js"></script>
   <link href="https://1.www.s81c.com/common/v18/css/www.css" rel="stylesheet" />
   <link href="https://1.www.s81c.com/common/v19a/css/www.css" rel="stylesheet" />
@@ -33,60 +22,30 @@
   <script src="./js/welcome.js"></script>
   <script src="./js/request.js"></script>
   <link href="./css/styles.css" rel="stylesheet">
-  <!-- Configurable Northstar options -->
-  <script type="text/javascript">
-    IBMCore.common.util.config.set({
-      footer: {
-        type: "alternate",
-        socialLinks: {
-          enabled: false
-        }
-      },
-      masthead: {
-        type: "popup"
-      }
-    });
-  </script>
 </head>
 
 <body id="ibm-com" class="ibm-type">
   <div id="ibm-top" class="ibm-landing-page">
-    <div id="ibm-masthead" role="banner" aria-label="IBM">
-      <div id="ibm-mast-options">
-        <ul role="toolbar" aria-labelledby="ibm-masthead">
-          <li id="ibm-geo" role="presentation">
-            <a href="https://www.ibm.com/planetwide/select/selector.html">United States</a>
-          </li>
-        </ul>
-      </div>
-      <div id="ibm-universal-nav">
-        <div id="ibm-home"><a href="https://www.ibm.com/us-en/">IBM®</a>
-        </div>
-        <div class="ibm-parent-site-name">
-          <div class="dr-masthead-divider"></div><a class="dr-home ibm-type-d ibm-mb-0" href="#"></a>
-        </div>
-        <!-- PARENT SITE NAME -->
+    <div class="ibm-col-12-12 headerFirst">
+      <div style="padding-top:10px;padding-left:80px;">    
+    <h2><span style="font-size:30px;font-weight: bold;">Fashion Spray</span></h2>    
+</div>
 
-        <ul id="ibm-menu-links" role="toolbar" aria-label="Site map">
-          <li><a href="https://www.ibm.com/sitemap/us/en/">Site map</a></li>
-        </ul>
-        <div id="ibm-search-module" role="search" aria-labelledby="ibm-masthead">
-          <form id="ibm-search-form" action="https://www.ibm.com/Search/" method="get">
-            <p>
-              <label for="q"><span class="ibm-access">Search</span></label><input type="text" maxlength="100" value="" name="q" id="q" /><input type="hidden" value="17" name="v" /><input type="hidden" value="utf" name="en" /><input type="hidden"
-                value="en" name="lang" /><input type="hidden" value="us" name="cc" /><input type="submit" id="ibm-search" class="ibm-btn-search" value="Submit" />
-            </p>
-          </form>
-        </div>
-      </div>
+</div>
+
+<div class="ibm-col-12-12 headerSecond" style="padding:10px;">
+  <div class="ibm-col-12-6">    
+      <span class="ibm-bold" style="padding-left: 80px;float:left;">Order table : </span>
     </div>
+    <div class="ibm-col-12-3">    
+      
+  </div>
+  <div class="ibm-col-12-3">    
+    <div><button  onclick="location.href = '/add';" class="createOrder ibm-btn-small" style="width: 150px;" >Create Order</button></div>
+</div>
+</div>
     <div id="ibm-content-wrapper">
-      <div class="ibm-fluid ibm-seamless ibm-fullwidth">
-        <div class="ibm-col-12-12 subhead">
-          <p class="ibm-padding-content" style="font-size:24px">IBM QwikDemo Editor
-            <span id="createDemo"></span></p>
-        </div>
-      </div>
+
       <div class="ibm-col-12-6">
           <div id="demoLoadingMessage" class='loadMessagePadding'>
             <p><span class='loadMessageFont'>Demo lists are loading, please wait...</span><span class='ibm-spinner ibm-h4'></span></p>
@@ -95,56 +54,16 @@
           
         </div>
       </div>
-      <div class="ibm-col-12-6">
-        <div class="ibm-fright" style="padding:20px 40px 20px 0px;">
-          <img class="notificationDropdown display-none" src="/images/notification.svg" onclick="notificationToggle()" width="30" height="30">
-          <div class="count display-none"></div>
-          <ul style='display:none;' class='ibm-dropdown-menu notificationList'>
-          </ul>
-        </div>
 
-      </div>
     </div>
     <div id='table' style="padding:50px"></div>
   </div>
 
 
   
-  <!-- Overlay -->
-  <div id="offerOverlay">
+  
 
-    <div class="ibm-common-overlay ibm-overlay-alt" data-widget="overlay" id="commentOverlay">
-    </div>
-
-    <div class="ibm-common-overlay ibm-overlay-alt" data-widget="overlay" id="deleteOverlay">
-    </div>
-
-    <div class="ibm-common-overlay ibm-overlay-alt" data-widget="overlay" id="rejectOverlay">
-    </div>
-
-    <div class="ibm-common-overlay ibm-overlay-alt" data-widget="overlay" id="approveOverlay">
-    </div>
-  </div>
-    <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
-        <p id="overlayMsg"></p>
-        <a href="javascript:;" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit" onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
-</div>
-
-  <!-- FOOTER_BEGIN -->
-  <footer role="contentinfo" aria-label="IBM">
-    <div id="ibm-footer">
-      <h2 class="ibm-access">Footer links</h2>
-      <ul>
-        <li><a href="https://www.ibm.com/contact/us/en/">Contact</a></li>
-        <li><a href="https://www.ibm.com/privacy/us/en/">Privacy</a></li>
-        <li><a href="https://www.ibm.com/legal/us/en/">Terms of use</a></li>
-        <li>
-          <a href="https://www.ibm.com/accessibility/us/en/">Accessibility</a>
-        </li>
-      </ul>
-    </div>
-  </footer>
-  <!-- FOOTER_END -->
+  
 
 
 </body>

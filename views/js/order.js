@@ -730,7 +730,7 @@ function saveOrder() {
   var modeOfPayment = jQuery('#modeOfPayment').val();
   var totalAmount = jQuery('#totalAmount').val();
   var advanceAmount = jQuery('#advanceAmount').val();
-  var fabricsFrom = jQuery('#fabricsFrom').val();
+  var fabricsFrom = jQuery('#fabricsFrom1 option:selected').val();
   var orderNote = jQuery('#orderNote').val();
   var typeOfCustomer = jQuery('#typeOfCustomer option:selected').val();
   var measureBy = jQuery('#measureBy option:selected').val();
@@ -804,7 +804,7 @@ function saveOrder() {
     formValidation = false;
   }
   
-
+console.log("fabricsFrom->"+fabricsFrom);
  if(formValidation){
   jQuery('#loadingIndicator').removeClass('visibility-hidden');
   var data = {

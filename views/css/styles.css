@@ -550,4 +550,14 @@ header {
 	width:40em;
 }
 
+.createOrder {
+  background-color: white;        
+    margin: 0 auto;
+    padding: 0;
+    line-height: 25px;
+    text-align: center;    
+    cursor: pointer;
+    color: blue; 
+    border: 2px solid blue;
+}
 
