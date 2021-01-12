@@ -20,8 +20,7 @@ jQuery(document).ready(function ($) {
   //$('.ibm-calendar-link').hide();
   $("#dressFor").change(function () {
     var personType = $('#dressFor').val();
-    $('#dressType').removeAttr("disabled");
-    console.log("personType->" + personType);
+    $('#dressType').removeAttr("disabled");    
     $('#dressType')
       .find('option')
       .remove();
@@ -49,6 +48,47 @@ jQuery(document).ready(function ($) {
     }
   });
 
+  $("#occasion").change(function () {
+    var occasion = $('#occasion').val();
+    $('#occasionDateId').addClass('display-none');
+    $('#familyMemberRelationId').addClass('display-none'); 
+    $('input[name="occasionPerson"]').prop('checked', false);   
+    $('#occasionDate').val("");
+    $('#festivalName').val("");    
+    $('#otherOccasionName').val("");
+    $('#familyMemberRelation').val("");
+    $('#otherOccasionId').addClass('display-none');
+    if(occasion == 'Birthday'){
+      $('#occasionOfId').removeClass('display-none');
+      $("#occaionOfTitle").text("Birthday of");
+      $('#festivalNameId').addClass('display-none'); 
+      $("#occasionDateTitle").text("Birthday date");
+      //var selectOption = '<select name="occasionOf" id="occasionOf" style="width:180px;"><option selected value="select">Select relation</option> <option value="customer">Customer</option><option value="familyMember">Family Member</option><option value="other">Other</option></select>';
+      //$('#occasionOfSelect').prepend(selectOption);
+    } else if( occasion == 'Marriage'){
+      $('#occasionOfId').removeClass('display-none');      
+      $("#occaionOfTitle").text("Marriage of");
+      $('#festivalNameId').addClass('display-none'); 
+      $("#occasionDateTitle").text("Marriage date");
+    } else if( occasion == 'Festival'){
+      $('#occasionOfId').addClass('display-none');
+      $('#festivalNameId').removeClass('display-none'); 
+      $('#occasionDateId').removeClass('display-none'); 
+      $("#occasionDateTitle").text("Festival date");
+           
+    }  else if( occasion == 'other'){
+      $('#occasionOfId').addClass('display-none');
+      $('#festivalNameId').addClass('display-none'); 
+      $('#occasionDateId').addClass('display-none');
+      $('#otherOccasionId').removeClass('display-none');       
+           
+    } else {
+      $('#occasionOfId').addClass('display-none');
+      $('#festivalNameId').addClass('display-none');
+    }   
+  });
+
+
   $("#fabricsFrom").change(function () {
     var faricsFrom = $('#fabricsFrom').val();
     if (faricsFrom == 'fs') {
@@ -72,12 +112,18 @@ jQuery(document).ready(function ($) {
     $("#textboxDiv").children().last().remove();
   });
 
+  $('#landingPageForm input[type=text]' ).keyup(function () {  
+    $('#customerName').css('textTransform', 'capitalize');  
+    $('#customerLocation').css('textTransform', 'capitalize');
+    $('#customerSource').css('textTransform', 'capitalize');    
+    $('#modeOfPayment').css('textTransform', 'capitalize');
+}); 
+
 
   // $('.ibm-calendar-link').hide();
 
   var existCondition = setInterval(function () {
-    if ($('.ibm-calendar-link').length) {
-      console.log("Exists!");
+    if ($('.ibm-calendar-link').length) {      
       clearInterval(existCondition);
       $('.ibm-calendar-link').hide();
     }
@@ -97,8 +143,7 @@ jQuery(document).ready(function ($) {
       'Authorization': 'Bearer ' + cookieValue
     },
     async: false,
-    success: function (result) {
-      console.log("value->" + JSON.stringify(result));
+    success: function (result) {      
       if (result.rows.length != 0) {
         var totalCount = result.rows[0].value + 1;
         if (totalCount < 10){
@@ -116,11 +161,28 @@ jQuery(document).ready(function ($) {
 
 
 
+
+
 });
 
-function clearRedColor(focusEvent){  
-  console.log("focusEvent->"+focusEvent.id);
+function clearRedColor(focusEvent){    
   jQuery('#'+focusEvent.id).removeClass('redBorder');
+}
+
+function occasionOf(occasionOf){
+jQuery('#occasionDate').val("");
+jQuery('#familyMemberRelation').val("");
+
+if(occasionOf.id == 'customerOccasion'){
+  jQuery('#occasionDateId').removeClass('display-none');
+  jQuery('#familyMemberRelationId').addClass('display-none');
+}  else if(occasionOf.id == 'familyOccasion'){
+  jQuery('#occasionDateId').removeClass('display-none');
+  jQuery('#familyMemberRelationId').removeClass('display-none');  
+} else {
+  jQuery('#occasionDateId').addClass('display-none');
+  jQuery('#familyMemberRelationId').addClass('display-none'); 
+}
 }
 
 function loadEditFlow(landingPageData) {
@@ -720,8 +782,8 @@ async function checkIsBImageUploadedByUser(data) {
 
 function saveOrder() {
   var formValidation = true;
-  var timeStampDate = '';
-  var deliveryDate = jQuery('#deliveryDate').val();  
+  var timeStampDate = '';  
+  var deliveryDate = jQuery('#deliveryDate').val();   
   var customerName = jQuery('#customerName').val();
   var orderNumber = jQuery('#orderNumber').val();
   var mobileNumber = jQuery('#mobileNumber').val();
@@ -736,8 +798,100 @@ function saveOrder() {
   var measureBy = jQuery('#measureBy option:selected').val();
   var dressFor = jQuery("#dressFor option:selected").val();
   var dressType = jQuery("#dressType option:selected").val();
-  var deliveryTime = jQuery("#deliveryTime option:selected").val();
+  var deliveryTime = jQuery("#deliveryTime option:selected").val();    
   var orderStatus = 'new';  
+
+  var occasion = jQuery("#occasion option:selected").val(); 
+  var occasionData = '';   
+  if(occasion == 'Birthday' || occasion == 'Marriage'){
+    var checkedValue = jQuery('input[name="occasionPerson"]:checked').val();    
+    var occasionDate = '';   
+    if(checkedValue == 'customer'){      
+       occasionDate = jQuery('#occasionDate').val();       
+      if(occasionDate == ''){
+        jQuery('#occasionDate').addClass('redBorder'); 
+        formValidation = false;
+      } else {
+        var occasionDateTimeStamp = (new Date(occasionDate)).getTime();
+        occasionData = {
+          occasion : occasion,
+          occasionof:checkedValue,
+          occasionDate:occasionDateTimeStamp
+        };
+      }      
+    } else if(checkedValue == undefined){      
+      formValidation = false;
+    }else if(checkedValue == 'family'){
+      occasionDate = jQuery('#occasionDate').val();
+      var familyMemberRelation = jQuery('#familyMemberRelation').val();
+            
+      if(occasionDate == ''){
+        jQuery('#occasionDate').addClass('redBorder'); 
+        formValidation = false;
+      } 
+      if(familyMemberRelation == ''){
+        jQuery('#familyMemberRelation').addClass('redBorder'); 
+        formValidation = false;
+      } 
+      
+      if(occasionDate != '' && familyMemberRelation != ''){
+        occasionDateFamilyTimeStamp = (new Date(occasionDate)).getTime();
+        occasionData = {
+          occasion : occasion,
+          occasionof:checkedValue,
+          occasionDate:occasionDateFamilyTimeStamp,
+          familyMemberRelation:familyMemberRelation
+        };
+      } 
+
+      
+    } else if(checkedValue == 'other'){
+
+      occasionData = {
+        occasion : occasion,
+        occasionof:checkedValue
+      };
+
+    }
+  } else if(occasion == 'select'){    
+    formValidation = false;
+  } else if(occasion == 'Festival'){
+    var festivalName = jQuery('#festivalName').val();
+    var occasionDate = jQuery('#occasionDate').val();
+    if(festivalName == ''){
+      jQuery('#festivalName').addClass('redBorder'); 
+      formValidation = false;
+    } 
+    if(occasionDate == ''){
+      jQuery('#occasionDate').addClass('redBorder'); 
+      formValidation = false;
+    } 
+    if(festivalName != '' && occasionDate != ''){
+      var festivalDateFamilyTimeStamp = (new Date(occasionDate)).getTime();
+      occasionData = {
+        occasion : occasion,
+        festivalName:festivalName,
+        festivalDate:festivalDateFamilyTimeStamp
+      };
+    }
+
+  } else if(occasion == 'other'){
+    var otherOccasionName = jQuery('#otherOccasionName').val();    
+    if(otherOccasionName == ''){
+      jQuery('#otherOccasionName').addClass('redBorder'); 
+      formValidation = false;
+    } else{
+    occasionData = {
+      occasion : occasion,
+      otherOccasionName:otherOccasionName
+    };
+  }
+  } else if(occasion == 'Daily Wear'){
+    occasionData = {
+      occasion : occasion
+    };
+  }  
+
   if(deliveryDate == ''){
     jQuery('#deliveryDate').addClass('redBorder');  
     formValidation = false;
@@ -753,10 +907,7 @@ function saveOrder() {
     jQuery('#orderNumber').addClass('redBorder');
     formValidation = false;
   }
-  if(orderNote == ''){
-    jQuery('#orderNote').addClass('redBorder');
-    formValidation = false;
-  }
+  
   if(mobileNumber == ''){
     jQuery('#mobileNumber').addClass('redBorder');
     formValidation = false;
@@ -788,6 +939,8 @@ function saveOrder() {
     jQuery('#deliveryDate').addClass('redBorder');
     formValidation = false;
   }
+ 
+  
   if(dressType == 'selectType'){    
     formValidation = false;
   }
@@ -802,12 +955,16 @@ function saveOrder() {
   }
   if(measureBy == 'select'){    
     formValidation = false;
+  }  
+  if(orderNote == ''){
+    jQuery('#orderNote').addClass('redBorder');
+    formValidation = false;
   }
-  
-console.log("fabricsFrom->"+fabricsFrom);
+
  if(formValidation){
   jQuery('#loadingIndicator').removeClass('visibility-hidden');
   var data = {
+    "_id":orderNumber,
     "customerName": customerName,
     "orderNumber":orderNumber,
     "mobileNumber": mobileNumber,
@@ -820,12 +977,12 @@ console.log("fabricsFrom->"+fabricsFrom);
     "dressFor": dressFor,
     "dressType": dressType,
     "fabricsFrom": fabricsFrom,
-    "deliveryDate":timeStampDate,
+    "deliveryDate":timeStampDate,    
     "deliveryTime":deliveryTime,
     "measureBy":measureBy,
-    "orderNote":orderNote,
-    "createDate":new Date().getTime(),
-    "orderStatus": orderStatus
+    "createDate":new Date().getTime(),   
+    "orderStatus": orderStatus,
+    "occationDetails":occasionData
   }
   jQuery.ajax({
     type: "POST",
@@ -836,19 +993,19 @@ console.log("fabricsFrom->"+fabricsFrom);
       'Authorization': 'Bearer ' + cookieValue
     },
     async: false,
-    success: function (result) {      
-      console.log("success");
+    success: function (result) {            
       jQuery('#loadingIndicator').addClass('visibility-hidden');
       IBMCore.common.widget.overlay.show("confirmationOverlay");
       jQuery("#overlayMsg").empty().append('<span style="color: red;">Data upload is successful</span>');
+      jQuery('saveOrderId').prop('disabled', true);
     },
     error: function (e) {
       alert("There was some internal error while updating, Please try again after sometime")
     }
   });
  } else {
-  IBMCore.common.widget.overlay.show("confirmationOverlay");
-  jQuery("#overlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');
+  IBMCore.common.widget.overlay.show("errorOverlay");
+  jQuery("#errorOverlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');
  }
 
 }

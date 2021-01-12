@@ -286,8 +286,6 @@ white-space: nowrap;
     padding: 0;
     display: inline-block;
     line-height: 35px;
-    text-align: left;
-    padding-left:20px;
     cursor: pointer;
     color: blue; 
     border: 2px solid blue;
@@ -557,7 +555,18 @@ header {
     line-height: 25px;
     text-align: center;    
     cursor: pointer;
+    color: grey; 
+    border: 2px solid grey;
+}
+
+
+.saveOrder {
+  background-color: white;        
+    margin: 0 auto;
+    padding: 0;
+    line-height: 42px;
+    text-align: center;    
+    cursor: pointer;
     color: blue; 
     border: 2px solid blue;
 }
-

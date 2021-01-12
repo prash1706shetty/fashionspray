@@ -188,14 +188,14 @@ async function create(description) {
 	}
 }
 
-function update(id, req) {
+function update(doc) {
 
 	return new Promise((resolve, reject) => {
 		// Retrieve the list (need the rev)
-		findById(id).then((response) => {
+		findById(doc.docId).then((response) => {
 			// Parse the stringified JSON
 			let list = JSON.parse(response.data);
-			list.title = "test";
+			list.orderStatus = doc.status;
 			// Update the document in Cloudant
 			db.insert(list, (err, response) => {
 				if (err) {
@@ -325,7 +325,6 @@ function deleteById(id, rev) {
 }
 
 function insertOrderData(data) {
-console.log("insertOrderData called");
 	return new Promise((resolve, reject) => {
 		db.insert(data, (err, response) => {
 			if (err) {

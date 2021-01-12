@@ -11,7 +11,7 @@ router.use(bodyParser.urlencoded({ limit: 104857600, extended: true }));
 
 let reqPath = path.join(__dirname, '../');
 router.get('/', function (req, res) {
-    res.sendFile(reqPath + "/views/" + "welcomePage.html");
+    res.sendFile(reqPath + "/views/" + "orderList.html");
 });
 
 router.get('/add/', function (req, res) {
@@ -119,7 +119,13 @@ router.post('/caas/getOrderCount', async function (req, res) {
     res.send(orderData);
  });
 
-router.post('/caas/updateDocument', jwt.authenticateJWT, function (req, res) {
+ router.post('/caas/updateDocument', async function (req, res) {
+    console.log("updateDocument called");
+    var orderData = await cloudant.update(req.body);    
+    res.send(orderData);
+ });
+
+router.post('/caas/updateDocument1', jwt.authenticateJWT, function (req, res) {
     var data = events.updateDocument(req.body);
     data.then(function (resp) {
         res.send(resp);
