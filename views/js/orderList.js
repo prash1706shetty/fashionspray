@@ -21,7 +21,7 @@ var data = {
 
       var deliveryDate = '';
       var orderDate = '';
-  var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Customer Name</th><th>Order Number</th><th>Mobile Number</th><th>Person</th><th>Delivery Date & Time</th><th>Action</th></tr></thead><tbody>";
+  var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Customer Name</th><th>Order Number</th><th>Mobile Number</th><th>Person</th><th>Delivery Date</th><th>Action</th></tr></thead><tbody>";
   //for (row of result.rows) {
     result.rows.forEach((row, index) =>{    
      deliveryDate = new Date(row.value.deliveryDate);
@@ -32,10 +32,10 @@ var data = {
     '<td>'+row.value.mobileNumber+'</td>'+
     '<td>'+row.value.dressFor+'-'+row.value.dressType+'</td>'+
     //'<td>'+orderDate.getDate() + '/' + (orderDate.getMonth()+1) + '/' + orderDate.getFullYear()+'</td>'+    
-    '<td>'+deliveryDate.getDate() + '/' + (deliveryDate.getMonth()+1) + '/' + deliveryDate.getFullYear()+' '+row.value.deliveryTime+'</td>'+    
+    '<td>'+deliveryDate.getDate() + '/' + (deliveryDate.getMonth()+1) + '/' + deliveryDate.getFullYear()+'</td>'+    
     
 
-    '<td id="toggle'+index+'" class="elipsis"><img src="/images/overflow-menu--vertical.svg" class="elipsis" style="cursor: pointer;" onclick= "productActionToggle('+index+');  return false;\" width="30" height="30"><div style="position:absolute;z-index:1"><ul id="productAction'+index+'" style="display:none;" class="ibm-dropdown-menu productAction"><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-'+row.value._id+'" onclick="showDeleteOverlay(this);">Delete</a></li></ul></div></td>'+
+    '<td id="toggle'+index+'" class="elipsis"><img src="/images/overflow-menu--vertical.svg" class="elipsis" style="cursor: pointer;" onclick= "productActionToggle('+index+');  return false;\" width="30" height="30"><div style="position:absolute;z-index:1"><ul id="productAction'+index+'" style="display:none;" class="ibm-dropdown-menu productAction"><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-'+row.value._id+'" onclick="showDeleteOverlay(this);">Delete</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-'+row.value._id+'" href="/editorder?on='+row.value.orderNumber+'">Edit</a></li></ul></div></td>'+
 
 
     

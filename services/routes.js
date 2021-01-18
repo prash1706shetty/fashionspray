@@ -22,6 +22,10 @@ router.get('/dashboard/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "dashboard.html");
 });
 
+router.get('/editorder', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "editOrder.html");   
+});
+
 router.get('/orderList/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "orderList.html");
 });
@@ -101,27 +105,28 @@ router.post('/caas/fetchDocContentAll', jwt.authenticateJWT, function (req, res)
 });
 
 router.post('/caas/createDocument', async function (req, res) {
-    console.log("here----->"+JSON.stringify(req.body));
    await cloudant.insertOrderData(req.body);
    res.send('success');
 });
 
 router.post('/caas/getDocuments', async function (req, res) {
-   console.log("getDocuments called");
    var orderData = await cloudant.getOrderData();
-   console.log("orderData->"+JSON.stringify(orderData));
    res.send(orderData);
 });
 
 router.post('/caas/getOrderCount', async function (req, res) {
-    console.log("getOrderCount called");
     var orderData = await cloudant.getOrderCount();    
     res.send(orderData);
  });
 
  router.post('/caas/updateDocument', async function (req, res) {
-    console.log("updateDocument called");
     var orderData = await cloudant.update(req.body);    
+    res.send(orderData);
+ });
+
+
+router.post('/getOrder', async function (req, res) {
+    var orderData = await cloudant.getOrderById(req.body);    
     res.send(orderData);
  });
 

@@ -364,6 +364,28 @@ function getOrderCount() {
 	});
 }
 
+function getOrderById(doc) {
+
+	return new Promise((resolve, reject) => {
+		db.get(doc.docId, (err, document) => {
+			if (err) {
+				if (err.message == 'missing') {
+					logger.warn(`Document id ${id} does not exist.`, 'findById()');
+					resolve({ data: JSON.stringify(err.message), statusCode: 404 });
+				} else if (err.message == 'deleted') {
+					logger.warn(`Document id ${id} does not exist.`, 'findById()');
+					resolve({ data: JSON.stringify(err.message), statusCode: 404 });
+				} else {
+					logger.error('Error occurred: ' + err.message, 'findById()');
+					reject(err);
+				}
+			} else {
+				resolve({ data: document, statusCode: 200 });
+			}
+		});
+	});
+}
+
 module.exports.create = create;
 module.exports.findById = findById;
 module.exports.deleteById = deleteById;
@@ -373,4 +395,5 @@ module.exports.fetchByView = fetchByView;
 module.exports.insertOrderData = insertOrderData;
 module.exports.getOrderData = getOrderData;
 module.exports.getOrderCount = getOrderCount;
+module.exports.getOrderById = getOrderById;
 

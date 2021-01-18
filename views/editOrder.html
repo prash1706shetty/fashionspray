@@ -16,7 +16,7 @@
   <script src="https://1.www.s81c.com/common/v18/js/forms.js"></script>
   <link href="https://1.www.s81c.com/common/v18/css/grid-fluid.css" rel="stylesheet" />
   <script src="./js/common.js"></script>
-  <script src="./js/order.js"></script>
+  <script src="./js/editOrder.js"></script>
   <script src="./js/request.js"></script>
   <script src="./js/constant.js"></script>
   <link href="./css/styles.css" rel="stylesheet">
@@ -106,14 +106,18 @@
                       <div for="dressFor" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Dress for
                         <span class="tooltiptext">2. Type of person to whom this dress getting ready</span>
                       </div><span class="ibm-required"> *</span>
-                      <div class="fieldPaddingTop">
+                      <div id="dressForTextFielddd" class="fieldPaddingTop display-none">
                         <select name="dressFor" id="dressFor" style="width:180px;">
                           <option selected value="selectPerson">Select person type</option>
                           <option value="Women">Women</option>
                           <option value="Kids">Kids</option>
                           <option value="Men">Men</option>
                         </select>
-                      </div>    
+                      </div>  
+                      
+                      <div class="fieldPaddingTop">
+                        <input type="text" value="" class="fieldWidthSmall" id="dressForTextField" name="dressForTextField" maxlength="50">
+                      </div>
                       
                       <div for="totalAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Total amount
                           <span class="tooltiptext">5. Total amount for selected dress</span>
@@ -153,7 +157,7 @@
                                 <div for="typeOfCustomer" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer type
                                   <span class="tooltiptext">14. Customer is new or existing?</span>
                                 </div><span class="ibm-required"> *</span>
-                                <div class="fieldPaddingTop">
+                                <div class="fieldPaddingTop display-none" id="typeOfCustomerTextFielddd">
                                   <select name="typeOfCustomer" id="typeOfCustomer" style="width:180px;">
                                     <option selected value="select">Select customer type</option>
                                     <option value="First Visit">First Visit</option>
@@ -161,6 +165,10 @@
                                     <option value="Repeated">Repeated</option>
                                     <option value="Well known">Well known</option>
                                   </select>
+                                </div>
+
+                                <div class="fieldPaddingTop">
+                                  <input type="text" value="" class="fieldWidthSmall" id="typeOfCustomerTextField" name="typeOfCustomerTextField" maxlength="50">
                                 </div>
 
    
@@ -173,11 +181,15 @@
                         <span class="tooltiptext">3. Type of dress selected by customer</span>
                       </div><span class="ibm-required"> *</span>
       
-                      <div class="fieldPaddingTop">
+                      <div id="dressTypeTextFielddd" class="fieldPaddingTop display-none" >
                         <select name="dressType" id="dressType" disabled style="width:180px;">
                           <option selected value="selectType" disabled>Select dress type</option>
                         </select>
                       </div>
+                      <div class="fieldPaddingTop">
+                        <input type="text" value="" class="fieldWidthSmall" id="dressTypeTextField" name="dressTypeTextField" maxlength="50">
+                      </div>
+                      
                     </div>
 
                     <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Advance paid
@@ -195,7 +207,7 @@
                             <div for="deliveryTime" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery time
                               <span class="tooltiptext">9. Time of the day in which product going to deliver.</span>
                             </div><span class="ibm-required"> *</span>
-                            <div class="fieldPaddingTop">
+                            <div class="fieldPaddingTop display-none" id="deliveryTimeTextFielddd">
                               <select name="deliveryTime" id="deliveryTime" style="width:180px;">
                                 <option selected value="selectRange">Select time range</option>
                                 <option value="10.30-11.30">10.30 - 11.30AM</option>
@@ -207,12 +219,17 @@
                                 <option value="04.30-05.30">04.30 - 05.30PM</option>
                               </select>
                             </div>
+
+                            <div class="fieldPaddingTop">
+                              <input type="text" value="" class="fieldWidthSmall" id="deliveryTimeTextField" name="deliveryTimeTextField" maxlength="50">
+                            </div>
+
                           </div>
                          
                               <div for="fabricsFrom" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Fabrics from
                                 <span class="tooltiptext">12. Who is going to provide fabrics?</span>
                               </div><span class="ibm-required"> *</span>
-                              <div class="fieldPaddingTop">
+                              <div class="fieldPaddingTop display-none" id="fabricsFromTextFielddd">
                                 <select name="fabricsFrom" id="fabricsFrom1" style="width:180px;">
                                   <option selected value="select">Fabrics source</option>
                                   <option value="Fashion Spray">Fashion Spray</option>
@@ -220,10 +237,14 @@
                                 </select>
                               </div>
 
+                              <div class="fieldPaddingTop">
+                                <input type="text" value="" class="fieldWidthSmall" id="fabricsFromTextField" name="fabricsFromTextField" maxlength="50">
+                              </div>
+
                               <div for="measureBy" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Measurement by
                                 <span class="tooltiptext">15. Who took measurement of customer.</span>
                               </div><span class="ibm-required"> *</span>
-                              <div class="fieldPaddingTop">
+                              <div class="fieldPaddingTop display-none" id="measureByTextFielddd">
                                 <select name="measureBy" id="measureBy" style="width:180px;">
                                   <option selected value="select">Select person</option>
                                   <option value="Pruthvi Shetty">Pruthvi Shetty</option>
@@ -231,6 +252,10 @@
                                   <option value="Disha">Disha</option>
                                   <option value="Tailor">Tailor</option>
                                 </select>
+                              </div>
+
+                              <div class="fieldPaddingTop">
+                                <input type="text" value="" class="fieldWidthSmall" id="measureByTextField" name="measureByTextField" maxlength="50">
                               </div>
                              
                             
@@ -244,7 +269,7 @@
               <div for="occasion" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Occasion
                   <span class="tooltiptext">16. For what function customer ordered this product.</span>
                 </div><span class="ibm-required"> *</span>
-                <div class="fieldPaddingTop">
+                <div class="fieldPaddingTop display-none" id="occasionTextFielddd">
                   <select name="occasion" id="occasion" style="width:180px;">
                     <option selected value="select">Select occasion</option>
                     <option value="Birthday">Birthday</option>
@@ -253,6 +278,9 @@
                     <option value="Daily Wear">Daily Wear</option>
                     <option value="other">Other</option>                                    
                   </select>
+                </div>
+                <div class="fieldPaddingTop">
+                  <input type="text" value="" class="fieldWidthSmall" id="occasionTextField" name="occasionTextField" maxlength="50">
                 </div>
               </div>
 
