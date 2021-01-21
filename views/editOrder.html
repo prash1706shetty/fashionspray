@@ -363,7 +363,46 @@
                       </div>
 
           </div>
-                       
+
+          
+    
+          <div class=" ibm-col-12-12" style="padding-left:40px;">
+            <div class=" ibm-col-12-3" >
+            <div for="orderStatus" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Order status
+                <span class="tooltiptext">23. Order status.</span>
+              </div><span class="ibm-required"> *</span>
+              <div class="fieldPaddingTop display-none" id="orderStatusTextFielddd">
+                <select name="orderStatus" id="orderStatus" style="width:180px;">
+                  <option selected value="select">Select status</option>
+                  <option value="New">New</option>
+                  <option value="On process">On process</option>
+                  <option value="Ready to deliver">Ready to deliver</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Rejected">Rejected</option>                                   
+                </select>
+              </div>
+              <div class="fieldPaddingTop">
+                <input type="text" value="" class="fieldWidthSmall" id="orderStatusTextField" name="orderStatusTextField" maxlength="50">
+              </div>
+            </div>
+
+
+            
+                  <div for="orderDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Order date
+                              <span class="tooltiptext">24. The date customer gave order.</span>
+                              <span class="ibm-required">
+                                *</span>
+                            </div>
+                            <div class="fieldPaddingTop">
+                              <input type="text" value="" class="fieldWidthSmall" id="orderDate" name="orderDate"
+                                spellcheck="true" placeholder="Order date" data-widget="datepicker"
+                                data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
+                            </div>
+          </div>
+
+
+          
+
           <div class=" ibm-col-12-12" style="padding-left:50px;">
 
             <div for="orderNote" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Note and description of order.

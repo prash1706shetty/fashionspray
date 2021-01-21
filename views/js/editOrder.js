@@ -1,5 +1,6 @@
 var cookieValue = readCookie();
 var formValidation = true;
+var createDate = '';
 
 jQuery(document).ready(function ($) {
 
@@ -19,7 +20,7 @@ jQuery(document).ready(function ($) {
     },
     async: false,
     success: function (result) {
-      console.log("successs00000000->" + JSON.stringify(result));
+      
       preloadForm(result);
     },
     error: function (e) {
@@ -151,10 +152,11 @@ jQuery(document).ready(function ($) {
       if (inputId.includes("TextField")) {
         $('#' + inputId + 'dd').removeClass('display-none');
         $('#' + inputId).addClass('display-none');
+        $('#' + inputId).val('');
         if (inputId == 'occasionTextField') {
           $('#occasionOfId').addClass('display-none');
           $('#occasionDateId').addClass('display-none');
-          $('#familyMemberRelation').addClass('display-none');
+          $('#familyMemberRelationId').addClass('display-none');
           $('#festivalNameId').addClass('display-none');
           $('#otherOccasionId').addClass('display-none');        
         }
@@ -174,6 +176,7 @@ jQuery(document).ready(function ($) {
 });
 
 function preloadForm(result) {
+  createDate = result.data.createDate;
   jQuery('#customerName').prop('readonly', true);
   jQuery('#customerName').val(result.data.customerName);
 
@@ -195,10 +198,15 @@ function preloadForm(result) {
 
   jQuery('#orderNumber').val(result.data.orderNumber);
 
-  deliveryDate = new Date(result.data.deliveryDate);
+  var deliveryDate = new Date(result.data.deliveryDate);
   jQuery('#deliveryDate').prop('readonly', true);
   jQuery('#deliveryDate').val(deliveryDate.getDate() + '/' + (deliveryDate.getMonth() + 1) + '/' + deliveryDate.getFullYear());
 
+  var orderDate = new Date(result.data.orderDate);
+  jQuery('#orderDate').prop('readonly', true);
+  jQuery('#orderDate').val(orderDate.getDate() + '/' + (orderDate.getMonth() + 1) + '/' + orderDate.getFullYear());
+
+  
   jQuery('#deliveryTimeTextField').prop('readonly', true);
   jQuery('#deliveryTimeTextField').val(result.data.deliveryTime);
 
@@ -210,6 +218,9 @@ function preloadForm(result) {
 
   jQuery('#fabricsFromTextField').prop('readonly', true);
   jQuery('#fabricsFromTextField').val(result.data.fabricsFrom);
+
+  jQuery('#orderStatusTextField').prop('readonly', true);
+  jQuery('#orderStatusTextField').val(result.data.orderStatus);
 
   jQuery('#customerSource').prop('readonly', true);
   jQuery('#customerSource').val(result.data.customerSource);
@@ -225,6 +236,7 @@ function preloadForm(result) {
   var occationDetails = result.data.occationDetails;
 
   if (occationDetails.occasion == 'Birthday' || occationDetails.occasion == 'Marriage') {
+   
     jQuery('#occasionOfId').removeClass('display-none');
     jQuery("#occaionOfTitle").text("Occasion of");
     var checkedValue = occationDetails.occasionof;
@@ -292,9 +304,11 @@ function occasionOf(occasionOf) {
   if (occasionOf.id == 'customerOccasion') {
     jQuery('#occasionDateId').removeClass('display-none');
     jQuery('#familyMemberRelationId').addClass('display-none');
+    jQuery("#occasionDateTitle").text("Occasion date");
   } else if (occasionOf.id == 'familyOccasion') {
     jQuery('#occasionDateId').removeClass('display-none');
     jQuery('#familyMemberRelationId').removeClass('display-none');
+    jQuery("#occasionDateTitle").text("Occasion date");
   } else {
     jQuery('#occasionDateId').addClass('display-none');
     jQuery('#familyMemberRelationId').addClass('display-none');
@@ -315,23 +329,61 @@ function fieldsUpdateRequired(updateChecked) {
 function saveOrder() {
   var formValidation = true;
   var timeStampDate = '';
+  var timeStampOrderDate = '';
   var deliveryDate = jQuery('#deliveryDate').val();
+
+  var orderDate = jQuery('#orderDate').val();
+  
   var customerName = jQuery('#customerName').val();
+
   var orderNumber = jQuery('#orderNumber').val();
+ 
   var mobileNumber = jQuery('#mobileNumber').val();
+ 
   var customerLocation = jQuery('#customerLocation').val();
+
   var customerSource = jQuery('#customerSource').val();
   var modeOfPayment = jQuery('#modeOfPayment').val();
   var totalAmount = jQuery('#totalAmount').val();
+
   var advanceAmount = jQuery('#advanceAmount').val();
-  var fabricsFrom = jQuery('#fabricsFrom1 option:selected').val();
+ 
+  var fabricsFrom = jQuery('#fabricsFromTextField').val();
+  if(fabricsFrom == ''){
+    fabricsFrom = jQuery('#fabricsFrom1 option:selected').val();
+  }
+ 
+  
   var orderNote = jQuery('#orderNote').val();
-  var typeOfCustomer = jQuery('#typeOfCustomer option:selected').val();
-  var measureBy = jQuery('#measureBy option:selected').val();
-  var dressFor = jQuery("#dressFor option:selected").val();
-  var dressType = jQuery("#dressType option:selected").val();
-  var deliveryTime = jQuery("#deliveryTime option:selected").val();
-  var orderStatus = 'new';
+
+  var typeOfCustomer = jQuery('#typeOfCustomerTextField').val();
+  if(typeOfCustomer == ''){
+    typeOfCustomer = jQuery('#typeOfCustomer option:selected').val();
+  }
+
+
+  var measureBy = jQuery('#measureByTextField').val();
+  if(measureBy == ''){
+    measureBy = jQuery('#measureBy option:selected').val();
+  }
+
+  
+  var dressFor = jQuery('#dressForTextField').val();
+  var dressType = jQuery('#dressTypeTextField').val();
+  if(dressFor == ''){
+    dressFor = jQuery("#dressFor option:selected").val();
+    dressType = jQuery("#dressType option:selected").val();
+  }
+
+  var deliveryTime = jQuery('#deliveryTimeTextField').val();
+  if(deliveryTime  == '')
+   deliveryTime = jQuery("#deliveryTime option:selected").val();
+
+   var orderStatus = jQuery('#orderStatusTextField').val();
+   if(orderStatus  == '')
+   orderStatus = jQuery("#orderStatus option:selected").val();
+    
+
   var fieldUpdate = jQuery('input[name="updateRequired"]:checked').val();
   var fieldsNumber = '';
   if (fieldUpdate == 'yes') {
@@ -342,18 +394,34 @@ function saveOrder() {
   } else if (fieldUpdate == undefined) {
     formValidation = false;
   }
-  var occasion = jQuery("#occasion option:selected").val();
+
+  var occasion = jQuery('#occasionTextField').val();
+  if(occasion == ''){
+    occasion = jQuery("#occasion option:selected").val();
+  }
+
   var occasionData = '';
   if (occasion == 'Birthday' || occasion == 'Marriage') {
+    
     var checkedValue = jQuery('input[name="occasionPerson"]:checked').val();
+    
     var occasionDate = '';
     if (checkedValue == 'customer') {
       occasionDate = jQuery('#occasionDate').val();
+      
       if (occasionDate == '') {
         jQuery('#occasionDate').addClass('redBorder');
         formValidation = false;
       } else {
-        var occasionDateTimeStamp = (new Date(occasionDate)).getTime();
+        var occasionDateTimeStamp =  (new Date(occasionDate)).getTime();
+
+        if(occasionDate.includes('/')){
+          var from = occasionDate.split("/");
+          occasionDateTimeStamp = new Date(from[2], from[1] - 1, from[0]).getTime();
+        }
+        
+
+
         occasionData = {
           occasion: occasion,
           occasionof: checkedValue,
@@ -361,11 +429,13 @@ function saveOrder() {
         };
       }
     } else if (checkedValue == undefined) {
+      
       formValidation = false;
     } else if (checkedValue == 'family') {
       occasionDate = jQuery('#occasionDate').val();
+      
       var familyMemberRelation = jQuery('#familyMemberRelation').val();
-
+      
       if (occasionDate == '') {
         jQuery('#occasionDate').addClass('redBorder');
         formValidation = false;
@@ -375,8 +445,14 @@ function saveOrder() {
         formValidation = false;
       }
 
-      if (occasionDate != '' && familyMemberRelation != '') {
-        occasionDateFamilyTimeStamp = (new Date(occasionDate)).getTime();
+      if (occasionDate != '' && familyMemberRelation != '') {  
+        var occasionDateFamilyTimeStamp = (new Date(occasionDate)).getTime();     
+        if(occasionDate.includes('/')){
+          var from = occasionDate.split("/");
+          occasionDateFamilyTimeStamp = new Date(from[2], from[1] - 1, from[0]).getTime();
+        }
+        
+
         occasionData = {
           occasion: occasion,
           occasionof: checkedValue,
@@ -399,6 +475,7 @@ function saveOrder() {
   } else if (occasion == 'Festival') {
     var festivalName = jQuery('#festivalName').val();
     var occasionDate = jQuery('#occasionDate').val();
+
     if (festivalName == '') {
       jQuery('#festivalName').addClass('redBorder');
       formValidation = false;
@@ -408,7 +485,17 @@ function saveOrder() {
       formValidation = false;
     }
     if (festivalName != '' && occasionDate != '') {
-      var festivalDateFamilyTimeStamp = (new Date(occasionDate)).getTime();
+      //var festivalDateFamilyTimeStamp = (new Date(occasionDate)).getTime();
+
+      var festivalDateFamilyTimeStamp = (new Date(occasionDate)).getTime();     
+      if(occasionDate.includes('/')){
+        var from = occasionDate.split("/");
+        festivalDateFamilyTimeStamp = new Date(from[2], from[1] - 1, from[0]).getTime();
+      }
+      
+
+
+
       occasionData = {
         occasion: occasion,
         festivalName: festivalName,
@@ -418,6 +505,7 @@ function saveOrder() {
 
   } else if (occasion == 'other') {
     var otherOccasionName = jQuery('#otherOccasionName').val();
+    
     if (otherOccasionName == '') {
       jQuery('#otherOccasionName').addClass('redBorder');
       formValidation = false;
@@ -437,7 +525,28 @@ function saveOrder() {
     jQuery('#deliveryDate').addClass('redBorder');
     formValidation = false;
   } else {
-    timeStampDate = (new Date(deliveryDate)).getTime();
+  
+    if(deliveryDate.includes('/')){
+      var from = deliveryDate.split("/");
+      timeStampDate = new Date(from[2], from[1] - 1, from[0]).getTime();
+    } else{
+      timeStampDate = (new Date(deliveryDate)).getTime();
+    }    
+   
+  }
+
+  if (orderDate == '') {
+    jQuery('#orderDate').addClass('redBorder');
+    formValidation = false;
+  } else {
+  
+    if(orderDate.includes('/')){
+      var from = orderDate.split("/");
+      timeStampOrderDate = new Date(from[2], from[1] - 1, from[0]).getTime();
+    } else{
+      timeStampOrderDate = (new Date(orderDate)).getTime();
+    }    
+   
   }
 
   if (customerName == '') {
@@ -476,11 +585,6 @@ function saveOrder() {
     jQuery('#modeOfPayment').addClass('redBorder');
     formValidation = false;
   }
-  if (deliveryDate == '') {
-    jQuery('#deliveryDate').addClass('redBorder');
-    formValidation = false;
-  }
-
 
   if (dressType == 'selectType') {
     formValidation = false;
@@ -504,8 +608,8 @@ function saveOrder() {
 
   if (formValidation) {
     jQuery('#loadingIndicator').removeClass('visibility-hidden');
+    console.log("customerName->"+customerName);
     var data = {
-      "_id": orderNumber,
       "customerName": customerName,
       "orderNumber": orderNumber,
       "mobileNumber": mobileNumber,
@@ -519,34 +623,45 @@ function saveOrder() {
       "dressType": dressType,
       "fabricsFrom": fabricsFrom,
       "deliveryDate": timeStampDate,
+      "orderDate": timeStampOrderDate,
       "deliveryTime": deliveryTime,
       "measureBy": measureBy,
-      "createDate": new Date().getTime(),
+      "createDate": createDate,
+      "updatedDate":new Date().getTime(),
       "orderStatus": orderStatus,
       "orderNote": orderNote,
       "isFieldUpdateRequired": fieldUpdate,
       "updateFields": fieldsNumber,
       "occationDetails": occasionData
     }
+
     jQuery.ajax({
       type: "POST",
-      url: "/caas/createDocument",
+      url: "/fs/updateorder",
       data: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + cookieValue
       },
       async: false,
-      success: function (result) {
-        jQuery('#loadingIndicator').addClass('visibility-hidden');
-        IBMCore.common.widget.overlay.show("confirmationOverlay");
-        jQuery("#overlayMsg").empty().append('<span style="color: red;">Data upload is successful</span>');
-        jQuery('saveOrderId').prop('disabled', true);
+      success: function (result) {      
+        if (result.statusCode == 200) {
+         // updateTable();
+         // closeOverlay('deleteOverlay');
+          window.location.replace("/");
+        } else {
+          alert('There was some error while updating data');
+          closeOverlay('deleteOverlay');
+         
+        }
       },
       error: function (e) {
         alert("There was some internal error while updating, Please try again after sometime")
       }
     });
+
+
+
   } else {
     IBMCore.common.widget.overlay.show("errorOverlay");
     jQuery("#errorOverlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');

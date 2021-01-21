@@ -2,65 +2,86 @@ var cookieValue = readCookie();
 var loggedInUserEmailId = "";
 var userPrivilege = ""
 var catalogsDetail = ""
+var orderList = '';
 
 
 jQuery(document).ready(function ($) {
-var data = {
-  "test1":"test1"
-}
+  var data = {
+    "test1": "test1"
+  }
   jQuery.ajax({
     type: "POST",
     url: "/caas/getDocuments",
     data: JSON.stringify(data),
     headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + cookieValue
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + cookieValue
     },
     async: false,
     success: function (result) {
-
+      orderList = result.rows;
       var deliveryDate = '';
       var orderDate = '';
-  var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Customer Name</th><th>Order Number</th><th>Mobile Number</th><th>Person</th><th>Delivery Date</th><th>Action</th></tr></thead><tbody>";
-  //for (row of result.rows) {
-    result.rows.forEach((row, index) =>{    
-     deliveryDate = new Date(row.value.deliveryDate);
-     orderDate = new Date(row.value.createDate);
-    table = table + '<tr>'+
-    '<td>'+row.value.customerName+'</td>'+
-    '<td>'+row.value.orderNumber+'</td>'+   
-    '<td>'+row.value.mobileNumber+'</td>'+
-    '<td>'+row.value.dressFor+'-'+row.value.dressType+'</td>'+
-    //'<td>'+orderDate.getDate() + '/' + (orderDate.getMonth()+1) + '/' + orderDate.getFullYear()+'</td>'+    
-    '<td>'+deliveryDate.getDate() + '/' + (deliveryDate.getMonth()+1) + '/' + deliveryDate.getFullYear()+'</td>'+    
-    
+      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Customer Name</th><th>Order Number</th><th>Mobile No</th><th>Delivery Date</th><th>Status</th><th>Action</th></tr></thead><tbody>";
+      //for (row of result.rows) {
+      result.rows.forEach((row, index) => {
+        deliveryDate = new Date(row.value.deliveryDate);
+        orderDate = new Date(row.value.createDate);
+        var rowBgColor = '';
+        var orderStatusValue = row.value.orderStatus;
+        if (row.value.orderStatus == 'new') {
+          rowBgColor = "background-color:#99ff99";
+          var Difference_In_Time = deliveryDate - new Date().getTime();
+          var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+          if (Difference_In_Days < 2) {
+            rowBgColor = "background-color:#b30000";
+            orderStatusValue = orderStatusValue + ' Risk';
+          } else if (Difference_In_Days < 6) {
+            rowBgColor = "background-color:#ff3333";
+            orderStatusValue = orderStatusValue + ' Critical'
+          }
+        }
 
-    '<td id="toggle'+index+'" class="elipsis"><img src="/images/overflow-menu--vertical.svg" class="elipsis" style="cursor: pointer;" onclick= "productActionToggle('+index+');  return false;\" width="30" height="30"><div style="position:absolute;z-index:1"><ul id="productAction'+index+'" style="display:none;" class="ibm-dropdown-menu productAction"><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-'+row.value._id+'" onclick="showDeleteOverlay(this);">Delete</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-'+row.value._id+'" href="/editorder?on='+row.value.orderNumber+'">Edit</a></li></ul></div></td>'+
+        if (row.value.orderStatus == 'On process') {
+          rowBgColor = "background-color:#ffff66";
+        } else if (row.value.orderStatus == 'Delivered') {
+          rowBgColor = "background-color:#6666ff";
+        } else if (row.value.orderStatus == 'Rejected') {
+          rowBgColor = "background-color:#ff66ff";
+        }
+        table = table + '<tr>' +
+          '<td id ="orderDetails-' + row.value._id + '" onclick="getOrderDetails(this);IBMCore.common.widget.overlay.show(\'overlayOffer\'); return false;">' + row.value.customerName + '</td>' +
+          '<td>' + row.value.orderNumber + '</td>' +
+          '<td>' + row.value.mobileNumber + '</td>' +
+          //'<td>'+orderDate.getDate() + '/' + (orderDate.getMonth()+1) + '/' + orderDate.getFullYear()+'</td>'+    
+          '<td>' + deliveryDate.getDate() + '/' + (deliveryDate.getMonth() + 1) + '/' + deliveryDate.getFullYear() + '</td>' +
+          '<td style=' + rowBgColor + '>' + orderStatusValue + '</td>' +
+          '<td id="toggle' + index + '" class="elipsis"><img src="/images/overflow-menu--vertical.svg" class="elipsis" style="cursor: pointer;" onclick= "productActionToggle(' + index + ');  return false;\" width="30" height="30"><div style="position:absolute;z-index:1"><ul id="productAction' + index + '" style="display:none;" class="ibm-dropdown-menu productAction"><li><a  style="cursor: pointer;text-decoration: none;" id ="editProduct-' + row.value._id + '" href="/editorder?on=' + row.value.orderNumber + '">Edit</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete</a></li></ul></div></td>' +
 
 
-    
-'</tr>';
 
-  });
- 
-  table = table + "</tbody></table>";
-  jQuery('#table').prepend(table);
-  jQuery('.display').dataTable();
-  jQuery("#demoLoadingMessage").empty();
-  jQuery('body').click(function (e) {
-    if (!jQuery(e.target).hasClass('elipsis')) {
-      jQuery('.productAction').attr('style', 'display:none')
-      return;
-    }
-  });
+          '</tr>';
+
+      });
+
+      table = table + "</tbody></table>";
+      jQuery('#table').prepend(table);
+      jQuery('.display').dataTable();
+      jQuery("#demoLoadingMessage").empty();
+      jQuery('body').click(function (e) {
+        if (!jQuery(e.target).hasClass('elipsis')) {
+          jQuery('.productAction').attr('style', 'display:none')
+          return;
+        }
+      });
 
 
 
     },
     error: function (e) {
-        alert("There was some internal error while updating, Please try again after sometime")
+      alert("There was some internal error while updating, Please try again after sometime")
     }
-});
+  });
 
 
 
@@ -91,37 +112,37 @@ function populateWelcomePageData(caasData, userAccess) {
     if (elem.document.updatedBy != undefined && (elem.catalog.catalogId == catalogsDetail.publishedCatalogId || (elem.catalog.catalogId == catalogsDetail.draftCatalogId && elem.document.status != 'Published'))) {
       if (userRole != 'author') {
         productLength++;
-       // table = table + showProduct(elem, index, privilegeArray, userRole);
+        // table = table + showProduct(elem, index, privilegeArray, userRole);
       } else if (loggedInUserEmailId.toLowerCase() == elem.document.updatedBy.toLowerCase() && elem.document.productId != DEFAULT_PRODUCT_ID) {
         productLength++;
-       // table = table + showProduct(elem, index, privilegeArray, userRole);
+        // table = table + showProduct(elem, index, privilegeArray, userRole);
       }
     }
   });
   jQuery(".count").append(productLength);
   //jQuery("#demoLoadingMessage").empty();
   jQuery(".prodCount").html('Products(' + productLength + ')');
-  table = table + '<tr>'+
-                    '<td>test Nixon</td>'+
-                    '<td>Edinburgh</td>'+
-                    '<td>61</td>'+
-                    '<td>2011/04/25</td>'+
-					'<td>Edinburgh</td>'+
-                    '<td>61</td>'+
-                    '<td>2011/04/25</td>'+
-                '</tr>'+
-				'<tr>'+
-                    '<td>Tiger Nixon</td>'+
-                    '<td>Edinburgh</td>'+
-                    '<td>61</td>'+
-                    '<td>2011/04/25</td>'+
-					'<td>Edinburgh</td>'+
-                    '<td>61</td>'+
-                    '<td>2011/04/25</td>'+
-                '</tr>';
+  table = table + '<tr>' +
+    '<td>test Nixon</td>' +
+    '<td>Edinburgh</td>' +
+    '<td>61</td>' +
+    '<td>2011/04/25</td>' +
+    '<td>Edinburgh</td>' +
+    '<td>61</td>' +
+    '<td>2011/04/25</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>Tiger Nixon</td>' +
+    '<td>Edinburgh</td>' +
+    '<td>61</td>' +
+    '<td>2011/04/25</td>' +
+    '<td>Edinburgh</td>' +
+    '<td>61</td>' +
+    '<td>2011/04/25</td>' +
+    '</tr>';
   table = table + "</tbody></table>";
   //jQuery('#table').prepend(table);
- // jQuery('.display').dataTable();
+  // jQuery('.display').dataTable();
   jQuery('body').click(function (e) {
     if (!jQuery(e.target).hasClass('elipsis')) {
       jQuery('.productAction').attr('style', 'display:none')
@@ -135,9 +156,9 @@ function notificationToggle() {
   jQuery('.notificationList').attr('style', 'display:block');
 }
 
-function productActionToggle(id) {  
+function productActionToggle(id) {
   jQuery('.productAction').attr('style', 'display:none')
-  jQuery("#productAction"+id).attr('style', 'display:block');
+  jQuery("#productAction" + id).attr('style', 'display:block');
 }
 
 function showInpBoxToInpPrdIdToEdit() {
@@ -335,6 +356,25 @@ function showDeleteOverlay(e) {
 
 }
 
+function getOrderDetails(e) {
+
+  var odId = e.id.split('orderDetails-')[1];
+  console.log("test->" + JSON.stringify(orderList));
+  orderList.forEach((row, index) => {
+    if (row.value._id == odId) {
+      jQuery('#customerNameDetails').text("Customer name : " + row.value.customerName);      
+      jQuery('#dressForDetails').text("Dress for : " + row.value.dressFor);
+      jQuery('#dressTypeDetails').text("Dress type : " + row.value.dressType);
+      jQuery('#totalAmountDetails').text("Total amount : " + row.value.totalAmount);
+      jQuery('#advanceAmountDetails').text("Advance paid : " + row.value.advanceAmount);
+      jQuery('#fabricsFromDetails').text("Fabrics from : " + row.value.fabricsFrom);
+      jQuery('#customerLocationDetails').text("Location : " + row.value.customerLocation);
+      jQuery('#modeOfPaymentDetails').text("Payment mode : " + row.value.modeOfPayment);
+      jQuery('#measureByDetails').text("Measurement taken by : " + row.value.measureBy);
+    }
+  });
+}
+
 function closeOverlay(name) {
 
   IBMCore.common.widget.overlay.hide(name);
@@ -385,36 +425,36 @@ function approveDemo(e) {
 function deleteDemo(e) {
   var id = escapeSpecialCharacter(e.id);
 
-  jQuery('#' + id).prop('disabled', 'true');  
+  jQuery('#' + id).prop('disabled', 'true');
   jQuery('#cancelOverlayBtn-' + id.split('deletePrdBtn-')[1]).prop('disabled', 'true');
   jQuery("#deleteSpinner").addClass('display-inline-block');
 
   setTimeout(function () {
     let docId = id.split('deletePrdBtn-')[1].replaceAll('\\', '');
     var doc = {
-      docId:docId,
+      docId: docId,
       status: "Deleted"
     }
 
 
     jQuery.ajax({
       type: "POST",
-      url: "/caas/updateDocument",
+      url: "/fs/deleteorder",
       data: JSON.stringify(doc),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + cookieValue
       },
       async: false,
-      success: function (result) {      
+      success: function (result) {
         if (result.statusCode == 200) {
-         // updateTable();
+          // updateTable();
           closeOverlay('deleteOverlay');
           window.location.replace("/");
         } else {
           alert('There was some error while updating data');
           closeOverlay('deleteOverlay');
-         
+
         }
       },
       error: function (e) {

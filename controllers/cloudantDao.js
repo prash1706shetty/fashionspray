@@ -188,16 +188,49 @@ async function create(description) {
 	}
 }
 
-function update(doc) {
+function deleteOrder(doc) {
 
 	return new Promise((resolve, reject) => {
 		// Retrieve the list (need the rev)
 		findById(doc.docId).then((response) => {
 			// Parse the stringified JSON
 			let list = JSON.parse(response.data);
+			//console.log("list->"+list);
+			//console.log("list11->"+JSON.stringify(list));
 			list.orderStatus = doc.status;
 			// Update the document in Cloudant
 			db.insert(list, (err, response) => {
+				if (err) {
+					logger.error('Error occurred: ' + err.message, 'update()');
+					reject(err);
+				} else {
+					resolve({ data: { updatedId: response.id, updatedRevId: response.rev }, statusCode: 200 });
+				}
+			});
+		}).catch((err) => {
+			logger.error('Error occurred: ' + err.message, 'update()');
+			reject(err);
+		});
+	});
+}
+
+function updateOrder(doc) {
+
+	return new Promise((resolve, reject) => {
+		// Retrieve the list (need the rev)
+		findById(doc.orderNumber).then((response) => {
+			// Parse the stringified JSON
+			let list = JSON.parse(response.data);
+			//console.log("list->"+list);
+			//console.log("list11->"+JSON.stringify(list));
+			//console.log("doc->"+JSON.stringify(doc));
+			list.orderStatus = doc.status;	
+			doc['_id'] = doc.orderNumber;		
+			doc['_rev'] = list._rev;
+			//console.log("doc->"+doc);
+			console.log("doc->"+JSON.stringify(doc));
+			// Update the document in Cloudant
+			db.insert(doc, (err, response) => {
 				if (err) {
 					logger.error('Error occurred: ' + err.message, 'update()');
 					reject(err);
@@ -389,7 +422,8 @@ function getOrderById(doc) {
 module.exports.create = create;
 module.exports.findById = findById;
 module.exports.deleteById = deleteById;
-module.exports.update = update;
+module.exports.deleteOrder = deleteOrder;
+module.exports.updateOrder = updateOrder;
 module.exports.findByTitle = findByTitle;
 module.exports.fetchByView = fetchByView;
 module.exports.insertOrderData = insertOrderData;
