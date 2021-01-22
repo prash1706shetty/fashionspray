@@ -186,6 +186,7 @@ if(occasionOf.id == 'customerOccasion'){
 
 
 function saveOrder() {
+  jQuery('saveOrderId').prop('disabled', true);
   var formValidation = true;
   var timeStampDate = '';  
   var deliveryDate = jQuery('#deliveryDate').val();   
@@ -203,8 +204,7 @@ function saveOrder() {
   var measureBy = jQuery('#measureBy option:selected').val();
   var dressFor = jQuery("#dressFor option:selected").val();
   var dressType = jQuery("#dressType option:selected").val();
-  var deliveryTime = jQuery("#deliveryTime option:selected").val();    
-  var orderStatus = 'new';  
+  var deliveryTime = jQuery("#deliveryTime option:selected").val();      
   var fieldUpdate = jQuery('input[name="updateRequired"]:checked').val(); 
   var fieldsNumber = '';
   if(fieldUpdate == 'yes'){
@@ -377,6 +377,7 @@ function saveOrder() {
 
  if(formValidation){
   jQuery('#loadingIndicator').removeClass('visibility-hidden');
+  jQuery('saveOrderId').prop('disabled', true);
   var data = {
     "_id":orderNumber,
     "customerName": customerName,
@@ -397,7 +398,7 @@ function saveOrder() {
     "createDate":new Date().getTime(),
     "updatedDate":new Date().getTime(), 
     "orderDate":new Date().getTime(),  
-    "orderStatus": orderStatus,
+    "orderStatus": "New",
     "orderNote":orderNote,
     "isFieldUpdateRequired":fieldUpdate,
     "updateFields":fieldsNumber,
@@ -415,11 +416,11 @@ function saveOrder() {
     success: function (result) {            
       jQuery('#loadingIndicator').addClass('visibility-hidden');
       IBMCore.common.widget.overlay.show("confirmationOverlay");
-      jQuery("#overlayMsg").empty().append('<span style="color: red;">Data upload is successful</span>');
-      jQuery('saveOrderId').prop('disabled', true);
+      jQuery("#overlayMsg").empty().append('<span style="color: red;">Order data uploaded successfully</span>');
+      //
     },
     error: function (e) {
-      alert("There was some internal error while updating, Please try again after sometime")
+      alert("There was an error while creating order.")
     }
   });
  } else {
