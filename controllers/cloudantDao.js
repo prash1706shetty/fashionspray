@@ -195,8 +195,6 @@ function deleteOrder(doc) {
 		findById(doc.docId).then((response) => {
 			// Parse the stringified JSON
 			let list = JSON.parse(response.data);
-			//console.log("list->"+list);
-			//console.log("list11->"+JSON.stringify(list));
 			list.orderStatus = doc.status;
 			// Update the document in Cloudant
 			db.insert(list, (err, response) => {
@@ -221,14 +219,10 @@ function updateOrder(doc) {
 		findById(doc.orderNumber).then((response) => {
 			// Parse the stringified JSON
 			let list = JSON.parse(response.data);
-			//console.log("list->"+list);
-			//console.log("list11->"+JSON.stringify(list));
-			//console.log("doc->"+JSON.stringify(doc));
+
 			list.orderStatus = doc.status;	
 			doc['_id'] = doc.orderNumber;		
 			doc['_rev'] = list._rev;
-			//console.log("doc->"+doc);
-			console.log("doc->"+JSON.stringify(doc));
 			// Update the document in Cloudant
 			db.insert(doc, (err, response) => {
 				if (err) {

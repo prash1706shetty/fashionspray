@@ -244,7 +244,7 @@ function preloadForm(result) {
     if (checkedValue == 'customer') {
       jQuery("#customerOccasion").prop("checked", true);
       occasionDate = occationDetails.occasionDate;
-      jQuery("#occasionDateTitle").text("Birthday date");
+      jQuery("#occasionDateTitle").text("Occasion date");
       jQuery('#occasionDateId').removeClass('display-none');
       jQuery('#occasionDate').prop('readonly', true);
       var occasionDateTimestamp = new Date(occationDetails.occasionDate);
@@ -252,7 +252,7 @@ function preloadForm(result) {
     } else if (checkedValue == 'family') {
       jQuery("#familyOccasion").prop("checked", true);
       occasionDate = occationDetails.occasionDate;
-      jQuery("#occasionDateTitle").text("Birthday date");
+      jQuery("#occasionDateTitle").text("Occasions date");
       jQuery('#occasionDateId').removeClass('display-none');
       //jQuery('#occasionDate').prop('readonly', true);
       var occasionDateTimestamp = new Date(occationDetails.occasionDate);
@@ -607,8 +607,7 @@ function saveOrder() {
   }
 
   if (formValidation) {
-    jQuery('#loadingIndicator').removeClass('visibility-hidden');
-    console.log("customerName->"+customerName);
+    jQuery('#loadingIndicator').removeClass('visibility-hidden');    
     var data = {
       "customerName": customerName,
       "orderNumber": orderNumber,

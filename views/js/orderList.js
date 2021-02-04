@@ -29,16 +29,16 @@ jQuery(document).ready(function ($) {
         orderDate = new Date(row.value.createDate);
         var rowBgColor = '';
         var orderStatusValue = row.value.orderStatus;
-        if (row.value.orderStatus == 'new') {
+        if (row.value.orderStatus == 'New') {
           rowBgColor = "background-color:#99ff99";
           var Difference_In_Time = deliveryDate - new Date().getTime();
           var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
           if (Difference_In_Days < 2) {
             rowBgColor = "background-color:#b30000";
-            orderStatusValue = orderStatusValue + ' Risk';
+            orderStatusValue = orderStatusValue + ' - Risk';
           } else if (Difference_In_Days < 6) {
             rowBgColor = "background-color:#ff3333";
-            orderStatusValue = orderStatusValue + ' Critical'
+            orderStatusValue = orderStatusValue + ' - Critical'
           }
         }
 
@@ -48,9 +48,11 @@ jQuery(document).ready(function ($) {
           rowBgColor = "background-color:#6666ff";
         } else if (row.value.orderStatus == 'Rejected') {
           rowBgColor = "background-color:#ff66ff";
+        } else if (row.value.orderStatus == 'Ready to deliver') {
+          rowBgColor = "background-color:#ffa31a";
         }
         table = table + '<tr>' +
-          '<td id ="orderDetails-' + row.value._id + '" onclick="getOrderDetails(this);IBMCore.common.widget.overlay.show(\'overlayOffer\'); return false;">' + row.value.customerName + '</td>' +
+          '<td id ="orderDetails-' + row.value._id + '" onclick="getOrderDetails(this);IBMCore.common.widget.overlay.show(\'overlayOrder\'); return false;">' + row.value.customerName + '</td>' +
           '<td>' + row.value.orderNumber + '</td>' +
           '<td>' + row.value.mobileNumber + '</td>' +
           //'<td>'+orderDate.getDate() + '/' + (orderDate.getMonth()+1) + '/' + orderDate.getFullYear()+'</td>'+    
@@ -359,29 +361,57 @@ function showDeleteOverlay(e) {
 function getOrderDetails(e) {
 
   var odId = e.id.split('orderDetails-')[1];
-  console.log("test->" + JSON.stringify(orderList));
+  jQuery('#overlayOrder').html('');
   orderList.forEach((row, index) => {
     if (row.value._id == odId) {
-      jQuery('#customerNameDetails').text("Customer name : " + row.value.customerName);      
-      jQuery('#dressForDetails').text("Dress for : " + row.value.dressFor);
-      jQuery('#dressTypeDetails').text("Dress type : " + row.value.dressType);
-      jQuery('#totalAmountDetails').text("Total amount : " + row.value.totalAmount);
-      jQuery('#advanceAmountDetails').text("Advance paid : " + row.value.advanceAmount);
-      jQuery('#fabricsFromDetails').text("Fabrics from : " + row.value.fabricsFrom);
-      jQuery('#customerLocationDetails').text("Location : " + row.value.customerLocation);
-      jQuery('#modeOfPaymentDetails').text("Payment mode : " + row.value.modeOfPayment);
-      jQuery('#measureByDetails').text("Measurement taken by : " + row.value.measureBy);
+      var orderDate = new Date(row.value.orderDate);
+      var orderOverlayDetails = "<div id='customerNameDetails'><span class='ibm-bold'>Customer name : </span><span>" + row.value.customerName + "</span></div>" +
+        "<div id='dressForDetails'><span class='ibm-bold'>Dress : </span><span>" + row.value.dressFor + " " + row.value.dressType + "</span></div>" +
+        "<div id='totalAmountDetails'><span class='ibm-bold'>Total amount : </span><span>" + row.value.totalAmount + "</span></div>" +
+        "<div id=advanceAmountDetails><span class='ibm-bold'>Advance paid : </span><span>" + row.value.advanceAmount + "</span></div>" +
+        "<div id='modeOfPaymentDetails'><span class='ibm-bold'>Payment mode : </span><span>" + row.value.modeOfPayment + "</span></div>" +
+        "<div id='fabricsFromDetails'><span class='ibm-bold'>Fabrics from : </span><span>" + row.value.fabricsFrom + "</span></div>" +
+        "<div id='customerLocationDetails'><span class='ibm-bold'>Location : </span><span>" + row.value.customerLocation + "</span></div>" +
+        "<div id='measureByDetails'><span class='ibm-bold'>Measurement taken by : </span><span>" + row.value.measureBy + "</span></div>" +
+        "<div id='orderDateDetails'><span class='ibm-bold'>Order given date : </span><span>" + orderDate.getDate() + '/' + (orderDate.getMonth() + 1) + '/' + orderDate.getFullYear() + "</span></div>" +
+        "<div id='orderNoteDetails'><span class='ibm-bold'>More details about order : </span><span>" + row.value.orderNote + "</span></div>";
+
+     
+      var occasionDetailsOverlay = '';
+      if (row.value.occationDetails.occasion == 'Festival') {
+        var festivalDate = new Date(row.value.occationDetails.festivalDate);
+        occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.festivalName + " " + row.value.occationDetails.occasion + " on " + festivalDate.getDate() + '/' + (festivalDate.getMonth() + 1) + '/' + festivalDate.getFullYear() + "</span></div>";
+      } else if (row.value.occationDetails.occasion == 'Marriage' || row.value.occationDetails.occasion == 'Birthday') {
+        var occasionDate = new Date(row.value.occationDetails.occasionDate);
+        if (row.value.occationDetails.occasionof == 'family') {
+          occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + " of " + row.value.occationDetails.familyMemberRelation + " on " + occasionDate.getDate() + '/' + (occasionDate.getMonth() + 1) + '/' + occasionDate.getFullYear() + "</span></div>";
+        } else if (row.value.occationDetails.occasionof == 'other') {
+          occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + " of " + row.value.occationDetails.occasionof + "</span></div>";
+        } else {
+          occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + " of " + row.value.occationDetails.occasionof + " on " + occasionDate.getDate() + '/' + (occasionDate.getMonth() + 1) + '/' + occasionDate.getFullYear() + "</span></div>";
+        }
+      } else if (row.value.occationDetails.occasion == 'other') {
+        occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.otherOccasionName + "</span></div>";
+      } else {
+        occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + "</span></div>";
+      }
+
+      var fieldUpdateBoolean = '';
+      if (row.value.isFieldUpdateRequired == 'yes') {
+        fieldUpdateBoolean = "<div id='isFieldUpdateRequiredDetails' class='ibm-padding-top-r1' style='color: red;''><span class='ibm-bold'>Please update the fields </span><span>" + row.value.updateFields + "</span></div>";
+      }
+
+      var finalOrderOverlayDetails = orderOverlayDetails + occasionDetailsOverlay + fieldUpdateBoolean;
+      jQuery('#overlayOrder').append(finalOrderOverlayDetails);
     }
   });
 }
 
 function closeOverlay(name) {
-
   IBMCore.common.widget.overlay.hide(name);
 }
 
 function rejectDemo(e) {
-
   var id = escapeSpecialCharacter(e.id);
   if (jQuery('#rejectCommentText').val() == "") {
     jQuery('#rejectCommentText').addClass('text-area-error');

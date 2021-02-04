@@ -124,8 +124,7 @@ router.post('/caas/getOrderCount', async function (req, res) {
     res.send(orderData);
  });
 
- router.post('/fs/updateorder', async function (req, res) {
-     console.log("test called->"+req.body.customerName);
+ router.post('/fs/updateorder', async function (req, res) {     
     var orderData = await cloudant.updateOrder(req.body);    
     res.send(orderData);
  });
