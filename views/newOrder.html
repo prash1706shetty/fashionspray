@@ -78,7 +78,7 @@
                         </div>
                         <div class="fieldPaddingTop">
                           <input type="text" class="textFieldWidth" value="" id="mobileNumber" name="mobileNumber" maxlength="50"
-                            placeholder="Enter customer mobile number" onfocus="clearRedColor(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                            placeholder="Enter customer mobile number" onfocus="clearRedColor(this)" onkeyup="checkMobileNumber(this);">
                         </div>
                         <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
                         <div for="customerLocation" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Location of customer
@@ -127,18 +127,17 @@
                         <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
                           required</span>
 
-                          <div for="deliveryDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery date
-                              <span class="tooltiptext">8. The date customer wants to deliver the dress.</span>
-                              <span class="ibm-required">
-                                *</span>
-                            </div>
-                            <div class="fieldPaddingTop">
-                              <input type="text" value="" class="fieldWidthSmall" id="deliveryDate" name="deliveryDate"
-                                spellcheck="true" placeholder="Delivery date" data-widget="datepicker"
-                                data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
-                            </div>
-                            <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                              required</span>
+
+                              <div for="orderDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Order date
+                                <span class="tooltiptext">9. Order given date.</span>
+                                <span class="ibm-required">
+                                  *</span>
+                              </div>
+                              <div class="fieldPaddingTop">
+                                <input type="text" value="" class="fieldWidthSmall" id="orderDate" name="orderDate"
+                                  spellcheck="true" placeholder="Order date" data-widget="datepicker"
+                                  data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
+                              </div>
                      
                               <div for="modeOfPayment" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Payment mode
                                   <span class="tooltiptext">11. In which mode customer paid the amount</span>
@@ -190,24 +189,16 @@
                           placeholder="Enter advance paid." onfocus="clearRedColor(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                       </div>
                       
-
-                        <div id="dressTypeKids">
-                            <div for="deliveryTime" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery time
-                              <span class="tooltiptext">9. Time of the day in which product going to deliver.</span>
-                            </div><span class="ibm-required"> *</span>
-                            <div class="fieldPaddingTop">
-                              <select name="deliveryTime" id="deliveryTime" style="width:180px;">
-                                <option selected value="selectRange">Select time range</option>
-                                <option value="10.30-11.30">10.30 - 11.30AM</option>
-                                <option value="11.30-12.30">11.30 - 12.30PM</option>
-                                <option value="12.30-01.30">12.30 - 01.30PM</option>
-                                <option value="01.30-02.30">01.30 - 02.30PM</option>
-                                <option value="02.30-03.30">02.30 - 03.30PM</option>
-                                <option value="03.30-04.30">03.30 - 04.30PM</option>
-                                <option value="04.30-05.30">04.30 - 05.30PM</option>
-                              </select>
-                            </div>
-                          </div>
+                      <div for="deliveryDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery date
+                        <span class="tooltiptext">8. The date customer wants to deliver the dress.</span>
+                        <span class="ibm-required">
+                          *</span>
+                      </div>
+                      <div class="fieldPaddingTop">
+                        <input type="text" value="" class="fieldWidthSmall" id="deliveryDate" name="deliveryDate"
+                          spellcheck="true" placeholder="Delivery date" data-widget="datepicker"
+                          data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
+                      </div>
                          
                               <div for="fabricsFrom" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Fabrics from
                                 <span class="tooltiptext">12. Who is going to provide fabrics?</span>

@@ -547,6 +547,9 @@ header {
 .orderNote {
 	width:40em;
 }
+.customerRate {
+	width:20em;
+}
 
 .createOrder {
   background-color: white;        

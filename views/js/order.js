@@ -149,6 +149,14 @@ jQuery(document).ready(function ($) {
   });
 
 
+  $("#mobileNumber").blur(function() {
+    var mobileNumber = $("#mobileNumber").val();    
+    if(mobileNumber.length != 10){
+      $('#mobileNumber').addClass('redBorder');
+      alert('Mobile number should be 10 digits.');
+    }
+  });
+  
 
 
 
@@ -156,6 +164,12 @@ jQuery(document).ready(function ($) {
 
 function clearRedColor(focusEvent){    
   jQuery('#'+focusEvent.id).removeClass('redBorder');
+}
+
+function checkMobileNumber(keyUpEvent){  
+  if (/\D/g.test(keyUpEvent.value)){
+  jQuery('#mobileNumber').val(keyUpEvent.value.replace(/\D/g,''));
+  }  
 }
 
 function occasionOf(occasionOf){
@@ -189,6 +203,7 @@ function saveOrder() {
   jQuery('saveOrderId').prop('disabled', true);
   var formValidation = true;
   var timeStampDate = '';  
+  var timeStampOrderDate = '';
   var deliveryDate = jQuery('#deliveryDate').val();   
   var customerName = jQuery('#customerName').val();
   var orderNumber = jQuery('#orderNumber').val();
@@ -203,8 +218,8 @@ function saveOrder() {
   var typeOfCustomer = jQuery('#typeOfCustomer option:selected').val();
   var measureBy = jQuery('#measureBy option:selected').val();
   var dressFor = jQuery("#dressFor option:selected").val();
-  var dressType = jQuery("#dressType option:selected").val();
-  var deliveryTime = jQuery("#deliveryTime option:selected").val();      
+  var dressType = jQuery("#dressType option:selected").val();  
+  var orderDate = jQuery('#orderDate').val();     
   var fieldUpdate = jQuery('input[name="updateRequired"]:checked').val(); 
   var fieldsNumber = '';
   if(fieldUpdate == 'yes'){
@@ -312,6 +327,14 @@ function saveOrder() {
   } else{
     timeStampDate = (new Date(deliveryDate)).getTime();
   }
+
+
+  if(orderDate == ''){
+    jQuery('#orderDate').addClass('redBorder');
+    formValidation = false;
+  } else {
+    timeStampOrderDate = (new Date(orderDate)).getTime();
+  }
   
   if(customerName == ''){
     jQuery('#customerName').addClass('redBorder');
@@ -323,6 +346,9 @@ function saveOrder() {
   }
   
   if(mobileNumber == ''){
+    jQuery('#mobileNumber').addClass('redBorder');
+    formValidation = false;
+  } else if(mobileNumber.length != 10){
     jQuery('#mobileNumber').addClass('redBorder');
     formValidation = false;
   }
@@ -349,10 +375,6 @@ function saveOrder() {
     jQuery('#modeOfPayment').addClass('redBorder');
     formValidation = false;
   }  
-  if(deliveryDate == ''){
-    jQuery('#deliveryDate').addClass('redBorder');
-    formValidation = false;
-  }
  
   
   if(dressType == 'selectType'){    
@@ -361,9 +383,7 @@ function saveOrder() {
   if(dressFor == 'selectPerson'){    
     formValidation = false;
   }
-  if(deliveryTime == 'selectRange'){    
-    formValidation = false;
-  }
+
   if(fabricsFrom == 'select'){    
     formValidation = false;
   }
@@ -392,12 +412,11 @@ function saveOrder() {
     "dressFor": dressFor,
     "dressType": dressType,
     "fabricsFrom": fabricsFrom,
-    "deliveryDate":timeStampDate,    
-    "deliveryTime":deliveryTime,
+    "deliveryDate":timeStampDate,
     "measureBy":measureBy,
     "createDate":new Date().getTime(),
     "updatedDate":new Date().getTime(), 
-    "orderDate":new Date().getTime(),  
+    "orderDate":timeStampOrderDate,  
     "orderStatus": "New",
     "orderNote":orderNote,
     "isFieldUpdateRequired":fieldUpdate,

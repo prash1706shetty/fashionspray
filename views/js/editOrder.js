@@ -39,18 +39,19 @@ jQuery(document).ready(function ($) {
       .remove();
     if (personType == 'Women') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
-        .append('<option value="Gown">Gown</option>')
-        .append('<option value="Lehanga">Lehanga</option>')
-        .append('<option value="Blouse">Blouse</option>')
-        .append('<option value="Blouse and Saree">Blouse & Saree</option>')
-        .append('<option value="Blouse and Embroidery">Blouse & Embroidery</option>')
-        .append('<option value="Salwar">Salwar</option>')
-        .append('<option value="Salwar and kameez">Salwar & kameez</option>')
-        .append('<option value="Western">Western</option>')
-        .append('<option value="Crop top">Crop top</option>')
-        .append('<option value="Long skirt">Long skirt</option>')
-        .append('<option value="Crop top & long skirt">Crop top & long skirt</option>')
-        .append('<option value="Saree">Saree</option>');
+      .append('<option value="Gown">Gown</option>')
+      .append('<option value="Lehanga">Lehanga</option>')
+      .append('<option value="Blouse">Blouse</option>')
+      .append('<option value="Blouse and Embroidery">Blouse & Embroidery</option>')
+      .append('<option value="Blouse and Saree">Blouse & Saree</option>') 
+      .append('<option value="Blouse Saree and Embroidery">Blouse Saree & Embroidery</option>')        
+      .append('<option value="Salwar and kameez">Salwar & kameez</option>')
+      .append('<option value="Kurtha">Kurtha</option>')
+      .append('<option value="Western">Western</option>')
+      .append('<option value="Crop top">Crop top</option>')
+      .append('<option value="Long skirt">Long skirt</option>')
+      .append('<option value="Crop top & long skirt">Crop top & long skirt</option>')
+      .append('<option value="Saree">Saree</option>');
     } else if (personType == 'Kids') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
         .append('<option value="Frock">Frock</option>')
@@ -120,6 +121,17 @@ jQuery(document).ready(function ($) {
     }
 
   });
+
+  $("#orderStatus").change(function () {
+    var orderStatus = $('#orderStatus').val();
+  
+  if(orderStatus == 'Delivered'){
+    $('#rating').removeClass('display-none');
+  } else {
+    $('#rating').addClass('display-none');
+  }
+
+  });
   var addCount = 0;
   $("#Add").on("click", function () {
     addCount++;
@@ -146,7 +158,7 @@ jQuery(document).ready(function ($) {
 
 
   $("form").dblclick(function (e) {
-    var inputId = $(e.target).closest('input').attr('id');
+    var inputId = $(e.target).closest('input').attr('id');   
     if(inputId !=undefined){
       $('#' + inputId).prop('readonly', false);    
       if (inputId.includes("TextField")) {
@@ -168,12 +180,32 @@ jQuery(document).ready(function ($) {
       }
     }
    
-    var textAreaId = $(e.target).closest('textarea').attr('id');    
-    if(textAreaId != undefined){      
+    var textAreaId = $(e.target).closest('textarea').attr('id'); 
+    console.log("id->"+textAreaId);
+    if(textAreaId != undefined && textAreaId == 'orderNote'){      
       $('#orderNote').prop('readonly', false);
+    } else if(textAreaId != undefined && textAreaId == 'customerRateNote'){
+      $('#customerRateNote').prop('readonly', false);
+    } else if(textAreaId != undefined && textAreaId == 'fsRateNote'){
+      $('#fsRateNote').prop('readonly', false);
+    }
+  });
+
+  
+  $("#mobileNumber").blur(function() {
+    var mobileNumber = $("#mobileNumber").val();    
+    if(mobileNumber.length != 10){
+      $('#mobileNumber').addClass('redBorder');
+      alert('Mobile number should be 10 digits.');
     }
   });
 });
+
+function checkMobileNumber(keyUpEvent){  
+  if (/\D/g.test(keyUpEvent.value)){
+  jQuery('#mobileNumber').val(keyUpEvent.value.replace(/\D/g,''));
+  }  
+}
 
 function preloadForm(result) {
   createDate = result.data.createDate;
@@ -206,10 +238,6 @@ function preloadForm(result) {
   jQuery('#orderDate').prop('readonly', true);
   jQuery('#orderDate').val(orderDate.getDate() + '/' + (orderDate.getMonth() + 1) + '/' + orderDate.getFullYear());
 
-  
-  jQuery('#deliveryTimeTextField').prop('readonly', true);
-  jQuery('#deliveryTimeTextField').val(result.data.deliveryTime);
-
   jQuery('#customerLocation').prop('readonly', true);
   jQuery('#customerLocation').val(result.data.customerLocation);
 
@@ -221,6 +249,29 @@ function preloadForm(result) {
 
   jQuery('#orderStatusTextField').prop('readonly', true);
   jQuery('#orderStatusTextField').val(result.data.orderStatus);
+
+  if(result.data.orderStatus == 'Delivered'){
+    jQuery('#rating').removeClass('display-none');
+    jQuery('#customerRatingTextFielddd').addClass('display-none');
+    jQuery('#customerRatingTextFieldDiv').removeClass('display-none');
+
+    jQuery('#fsRatingTextFielddd').addClass('display-none');
+    jQuery('#fsRatingTextFieldDiv').removeClass('display-none');
+    jQuery('#customerRateNote').prop('readonly', true);
+    jQuery('#fsRateNote').prop('readonly', true);
+  }
+
+  jQuery('#customerRatingTextField').prop('readonly', true);
+  jQuery('#customerRatingTextField').val(result.data.customerRating);
+
+  jQuery('#fsRatingTextField').prop('readonly', true);
+  jQuery('#fsRatingTextField').val(result.data.fsRating);
+
+  
+  jQuery('#customerRateNote').val(result.data.customerRateNote);
+
+ 
+  jQuery('#fsRateNote').val(result.data.fsRateNote);
 
   jQuery('#customerSource').prop('readonly', true);
   jQuery('#customerSource').val(result.data.customerSource);
@@ -374,14 +425,40 @@ function saveOrder() {
     dressFor = jQuery("#dressFor option:selected").val();
     dressType = jQuery("#dressType option:selected").val();
   }
-
-  var deliveryTime = jQuery('#deliveryTimeTextField').val();
-  if(deliveryTime  == '')
-   deliveryTime = jQuery("#deliveryTime option:selected").val();
-
    var orderStatus = jQuery('#orderStatusTextField').val();
    if(orderStatus  == '')
    orderStatus = jQuery("#orderStatus option:selected").val();
+
+   var customerRating = '';
+   var fsRating = '';
+   var customerRateNote = '';
+   var fsRatingNote = '';
+   if(orderStatus == 'select'){
+    formValidation = false;
+   } else if(orderStatus == 'Delivered'){
+
+    var customerRating = jQuery('#customerRatingTextField').val();
+    if(customerRating == ''){
+      customerRating = jQuery("#customerRating option:selected").val();
+    }
+    var fsRating = jQuery('#fsRatingTextField').val();
+    if(fsRating == ''){
+      fsRating = jQuery("#fsRating option:selected").val();
+    }
+      
+    customerRateNote = jQuery('#customerRateNote').val();
+    fsRatingNote = jQuery('#fsRateNote').val();
+    console.log("customerRateNote->"+customerRateNote);
+    console.log("fsRatingNote->"+fsRatingNote);
+    console.log("customerRating->"+customerRating);
+    console.log("fsRating->"+fsRating);
+    if(customerRating == 'select' || fsRating == 'select' || customerRateNote == '' || fsRatingNote == '' ){
+      console.log("inside->");
+      formValidation = false;
+    }
+   }
+
+   console.log("formValidation->"+formValidation);
     
 
   var fieldUpdate = jQuery('input[name="updateRequired"]:checked').val();
@@ -558,7 +635,10 @@ function saveOrder() {
     formValidation = false;
   }
 
-  if (mobileNumber == '') {
+  if(mobileNumber == ''){
+    jQuery('#mobileNumber').addClass('redBorder');
+    formValidation = false;
+  } else if(mobileNumber.length != 10){
     jQuery('#mobileNumber').addClass('redBorder');
     formValidation = false;
   }
@@ -592,9 +672,7 @@ function saveOrder() {
   if (dressFor == 'selectPerson') {
     formValidation = false;
   }
-  if (deliveryTime == 'selectRange') {
-    formValidation = false;
-  }
+
   if (fabricsFrom == 'select') {
     formValidation = false;
   }
@@ -623,11 +701,14 @@ function saveOrder() {
       "fabricsFrom": fabricsFrom,
       "deliveryDate": timeStampDate,
       "orderDate": timeStampOrderDate,
-      "deliveryTime": deliveryTime,
       "measureBy": measureBy,
       "createDate": createDate,
       "updatedDate":new Date().getTime(),
       "orderStatus": orderStatus,
+      "customerRating":customerRating,
+      "fsRating":fsRating,
+      "customerRateNote" :customerRateNote,
+      "fsRateNote" :fsRatingNote,
       "orderNote": orderNote,
       "isFieldUpdateRequired": fieldUpdate,
       "updateFields": fieldsNumber,
