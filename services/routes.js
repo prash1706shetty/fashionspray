@@ -30,6 +30,18 @@ router.get('/orderList/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "orderList.html");
 });
 
+router.get('/neworders', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "newOrders.html");
+});
+
+router.get('/delivered', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "delivered.html");
+});
+
+router.get('/mainpage', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "mainPage.html");
+});
+
 router.get('/add/useCases', function (req, res) {
     res.sendFile(reqPath + "/views/" + "useCaseList.html");
 });
@@ -134,6 +146,19 @@ router.post('/getOrder', async function (req, res) {
     var orderData = await cloudant.getOrderById(req.body);    
     res.send(orderData);
  });
+
+ router.post('/fs/getNewOrders', async function (req, res) {
+    var orderData = await cloudant.getNewOrders();
+    res.send(orderData);
+ });
+
+ 
+ router.post('/fs/getDeliveredOrders', async function (req, res) {
+    var orderData = await cloudant.getDeliveredOrders();
+    res.send(orderData);
+ });
+
+
 
 router.post('/caas/updateDocument1', jwt.authenticateJWT, function (req, res) {
     var data = events.updateDocument(req.body);

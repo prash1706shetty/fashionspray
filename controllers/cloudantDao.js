@@ -378,6 +378,32 @@ function getOrderData() {
 	});
 }
 
+function getNewOrders() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'newOrders', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
+function getDeliveredOrders() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'deliveredOrders', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
 function getOrderCount() {
 	return new Promise((resolve, reject) => {
 		db.view('order', 'numberOfOrder', function (err, body) {
@@ -424,4 +450,5 @@ module.exports.insertOrderData = insertOrderData;
 module.exports.getOrderData = getOrderData;
 module.exports.getOrderCount = getOrderCount;
 module.exports.getOrderById = getOrderById;
-
+module.exports.getNewOrders = getNewOrders;
+module.exports.getDeliveredOrders = getDeliveredOrders;
