@@ -457,8 +457,6 @@ function saveOrder() {
       formValidation = false;
     }
    }
-
-   console.log("formValidation->"+formValidation);
     
 
   var fieldUpdate = jQuery('input[name="updateRequired"]:checked').val();

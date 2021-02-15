@@ -391,6 +391,32 @@ function getNewOrders() {
 	});
 }
 
+function getOnProcessOrders() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'onProcess', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
+function getReadyOrders() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'ready', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
 function getDeliveredOrders() {
 	return new Promise((resolve, reject) => {
 		db.view('order', 'deliveredOrders', function (err, body) {
@@ -407,6 +433,33 @@ function getDeliveredOrders() {
 function getOrderCount() {
 	return new Promise((resolve, reject) => {
 		db.view('order', 'numberOfOrder', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
+function getDifferentOrderCounts() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'differentOrderCounts', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
+function getYTTOrders() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'yttOrders', function (err, body) {
+			console.log("here");
 			if (err) {
 				console.error('Error occurred: ' + err.message);
 				reject(err);
@@ -452,3 +505,11 @@ module.exports.getOrderCount = getOrderCount;
 module.exports.getOrderById = getOrderById;
 module.exports.getNewOrders = getNewOrders;
 module.exports.getDeliveredOrders = getDeliveredOrders;
+module.exports.getDifferentOrderCounts = getDifferentOrderCounts;
+module.exports.getOnProcessOrders = getOnProcessOrders;
+module.exports.getReadyOrders = getReadyOrders;
+module.exports.getYTTOrders = getYTTOrders;
+
+
+
+

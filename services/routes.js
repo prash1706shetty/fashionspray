@@ -18,6 +18,10 @@ router.get('/add/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "newOrder.html");
 });
 
+router.get('/dashboardold/', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "dashboardold.html");
+});
+
 router.get('/dashboard/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "dashboard.html");
 });
@@ -34,13 +38,18 @@ router.get('/neworders', function (req, res) {
     res.sendFile(reqPath + "/views/" + "newOrders.html");
 });
 
+router.get('/onprocess', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "onprocess.html");
+});
+
+router.get('/readytodeliver', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "readytodeliver.html");
+});
+
 router.get('/delivered', function (req, res) {
     res.sendFile(reqPath + "/views/" + "delivered.html");
 });
 
-router.get('/mainpage', function (req, res) {
-    res.sendFile(reqPath + "/views/" + "mainPage.html");
-});
 
 router.get('/add/useCases', function (req, res) {
     res.sendFile(reqPath + "/views/" + "useCaseList.html");
@@ -152,9 +161,30 @@ router.post('/getOrder', async function (req, res) {
     res.send(orderData);
  });
 
+ router.post('/fs/getOnProcessOrders', async function (req, res) {
+    var orderData = await cloudant.getOnProcessOrders();
+    res.send(orderData);
+ });
+
+ router.post('/fs/getReadyOrders', async function (req, res) {
+    var orderData = await cloudant.getReadyOrders();
+    res.send(orderData);
+ });
+
  
  router.post('/fs/getDeliveredOrders', async function (req, res) {
     var orderData = await cloudant.getDeliveredOrders();
+    res.send(orderData);
+ });
+
+ router.post('/fs/getDifferentOrderCounts', async function (req, res) {
+    var orderData = await cloudant.getDifferentOrderCounts();    
+    res.send(orderData);
+ });
+
+ router.post('/fs/getYTTOrders', async function (req, res) {
+     console.log("test--");
+    var orderData = await cloudant.getYTTOrders();    
     res.send(orderData);
  });
 

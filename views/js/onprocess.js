@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
   }
   jQuery.ajax({
     type: "POST",
-    url: "/fs/getDeliveredOrders",
+    url: "/fs/getOnProcessOrders",
     data: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json',
@@ -25,10 +25,10 @@ jQuery(document).ready(function ($) {
       var monthNames =["Jan","Feb","Mar","Apr",
                       "May","Jun","Jul","Aug",
                       "Sep", "Oct","Nov","Dec"];
-      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Dress</th><th>Order Date</th><th>Delivery Date</th></tr></thead><tbody>";
+      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Dress</th><th>Order Date</th><th>Delivery Date</th><th>Status</th></tr></thead><tbody>";
       //for (row of result.rows) {
       result.rows.forEach((row, index) => {
-        deliveryDate = new Date(row.value.deliveryDate);
+        deliveryDate = new Date(row.value.deliveryDate);    
         orderDate = new Date(row.value.orderDate);
         var rowBgColor = '';
         var deliveryDateValue = '';
@@ -66,6 +66,7 @@ jQuery(document).ready(function ($) {
         var orderDateYear = orderDate.getFullYear().toString();
         orderDateYear = orderDateYear.substring(orderDateYear.length-2);
 
+
         if(deliveryDate.getDate()< 10){
           deliveryDateValue = '0'+deliveryDate.getDate()  + monthNames[deliveryDate.getMonth()] + ' ' + currentYear;
         } else {
@@ -79,7 +80,6 @@ jQuery(document).ready(function ($) {
           deliveryDateValue = 'Yesterday';
         }
 
-
         if(orderDate.getDate()< 10){
             orderDateValue = '0'+orderDate.getDate()  + monthNames[orderDate.getMonth()] + ' ' + orderDateYear;
           } else {
@@ -92,7 +92,6 @@ jQuery(document).ready(function ($) {
           } else if(orderDate.getDate() == yesterdayDate.getDate() && orderDate.getMonth() == yesterdayDate.getMonth() && orderDate.getYear() == yesterdayDate.getYear()){
             orderDateValue = 'Yesterday';
           }
-
         table = table + '<tr>' +
         '<td>' + row.value.orderNumber + '</td>' +
           '<td id ="orderDetails-' + row.value._id + '" onclick="getOrderDetails(this);IBMCore.common.widget.overlay.show(\'overlayOrder\'); return false;">' + row.value.customerName + '</td>' +
@@ -100,7 +99,7 @@ jQuery(document).ready(function ($) {
           '<td>' + row.value.dressType + '</td>' +
           '<td>' + orderDateValue + '</td>' +
           '<td>' + deliveryDateValue + '</td>' +
-          
+          '<td style=' + rowBgColor + '>' + orderStatusValue + '</td>' +
           '</tr>';
 
       });

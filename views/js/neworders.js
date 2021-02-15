@@ -25,13 +25,14 @@ jQuery(document).ready(function ($) {
       var monthNames =["Jan","Feb","Mar","Apr",
                       "May","Jun","Jul","Aug",
                       "Sep", "Oct","Nov","Dec"];
-      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Dress</th><th>Delivery Date</th></tr></thead><tbody>";
+      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Dress</th><th>Order Date</th><th>Delivery Date</th><th>Status</th></tr></thead><tbody>";
       //for (row of result.rows) {
       result.rows.forEach((row, index) => {
-        deliveryDate = new Date(row.value.deliveryDate);
-        orderDate = new Date(row.value.createDate);
+        deliveryDate = new Date(row.value.deliveryDate);    
+        orderDate = new Date(row.value.orderDate);
         var rowBgColor = '';
         var deliveryDateValue = '';
+        var orderDateValue = '';
         var orderStatusValue = row.value.orderStatus;
         if (row.value.orderStatus == 'New') {
           rowBgColor = "background-color:#99ff99";
@@ -61,6 +62,11 @@ jQuery(document).ready(function ($) {
         yesterdayDate.setDate(yesterdayDate.getDate() - 1);
         var currentYear = deliveryDate.getFullYear().toString();
         currentYear = currentYear.substring(currentYear.length-2);
+
+        var orderDateYear = orderDate.getFullYear().toString();
+        orderDateYear = orderDateYear.substring(orderDateYear.length-2);
+
+
         if(deliveryDate.getDate()< 10){
           deliveryDateValue = '0'+deliveryDate.getDate()  + monthNames[deliveryDate.getMonth()] + ' ' + currentYear;
         } else {
@@ -73,12 +79,27 @@ jQuery(document).ready(function ($) {
         } else if(deliveryDate.getDate() == yesterdayDate.getDate() && deliveryDate.getMonth() == yesterdayDate.getMonth() && deliveryDate.getYear() == yesterdayDate.getYear()){
           deliveryDateValue = 'Yesterday';
         }
+
+        if(orderDate.getDate()< 10){
+            orderDateValue = '0'+orderDate.getDate()  + monthNames[orderDate.getMonth()] + ' ' + orderDateYear;
+          } else {
+            orderDateValue = orderDate.getDate()  + monthNames[orderDate.getMonth()] + ' ' + orderDateYear;
+          }        
+          if(orderDate.getDate() == new Date().getDate() && orderDate.getMonth() == new Date().getMonth() && orderDate.getYear() == new Date().getYear()){
+            orderDateValue = 'Today';
+          } else if(orderDate.getDate() == tomorrowDate.getDate() && orderDate.getMonth() == tomorrowDate.getMonth() && orderDate.getYear() == tomorrowDate.getYear()){
+            orderDateValue = 'Tomorrow';
+          } else if(orderDate.getDate() == yesterdayDate.getDate() && orderDate.getMonth() == yesterdayDate.getMonth() && orderDate.getYear() == yesterdayDate.getYear()){
+            orderDateValue = 'Yesterday';
+          }
         table = table + '<tr>' +
         '<td>' + row.value.orderNumber + '</td>' +
           '<td id ="orderDetails-' + row.value._id + '" onclick="getOrderDetails(this);IBMCore.common.widget.overlay.show(\'overlayOrder\'); return false;">' + row.value.customerName + '</td>' +
           
           '<td>' + row.value.dressType + '</td>' +
+          '<td>' + orderDateValue + '</td>' +
           '<td>' + deliveryDateValue + '</td>' +
+          '<td style=' + rowBgColor + '>' + orderStatusValue + '</td>' +
           '</tr>';
 
       });
