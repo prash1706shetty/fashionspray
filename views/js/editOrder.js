@@ -181,7 +181,6 @@ jQuery(document).ready(function ($) {
     }
    
     var textAreaId = $(e.target).closest('textarea').attr('id'); 
-    console.log("id->"+textAreaId);
     if(textAreaId != undefined && textAreaId == 'orderNote'){      
       $('#orderNote').prop('readonly', false);
     } else if(textAreaId != undefined && textAreaId == 'customerRateNote'){
@@ -448,12 +447,7 @@ function saveOrder() {
       
     customerRateNote = jQuery('#customerRateNote').val();
     fsRatingNote = jQuery('#fsRateNote').val();
-    console.log("customerRateNote->"+customerRateNote);
-    console.log("fsRatingNote->"+fsRatingNote);
-    console.log("customerRating->"+customerRating);
-    console.log("fsRating->"+fsRating);
-    if(customerRating == 'select' || fsRating == 'select' || customerRateNote == '' || fsRatingNote == '' ){
-      console.log("inside->");
+    if(customerRating == 'select' || fsRating == 'select' || customerRateNote == '' || fsRatingNote == '' ){      
       formValidation = false;
     }
    }

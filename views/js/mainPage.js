@@ -44,7 +44,6 @@ jQuery(document).ready(function ($) {
         },
         async: false,
         success: function (result) {      
-          console.log("values->"+result.rows[0].id);
           var yestOrderCount = 0;
           var yestDeliveryCount = 0;
           var todayOrderCount = 0;

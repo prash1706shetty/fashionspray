@@ -16,7 +16,6 @@ jQuery(document).ready(function ($) {
       async: false,
       success: function (result) {
   
-  console.log("result->"+JSON.stringify(result));
 var kidsCount = 0;
 var womenCount = 0;
 var menCount = 0;

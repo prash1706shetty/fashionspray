@@ -1,5 +1,5 @@
-# showcase-editor
-Application add demo products to cloudant.
+# Fashion Spray
+Application.
 
 # env variables required
 

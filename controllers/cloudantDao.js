@@ -458,8 +458,7 @@ function getDifferentOrderCounts() {
 
 function getYTTOrders() {
 	return new Promise((resolve, reject) => {
-		db.view('order', 'yttOrders', function (err, body) {
-			console.log("here");
+		db.view('order', 'yttOrders', function (err, body) {			
 			if (err) {
 				console.error('Error occurred: ' + err.message);
 				reject(err);
