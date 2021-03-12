@@ -28,15 +28,17 @@ jQuery(document).ready(function ($) {
       var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Dress</th><th>Order Date</th><th>Delivery Date</th><th>Status</th></tr></thead><tbody>";
       //for (row of result.rows) {
       result.rows.forEach((row, index) => {
-        deliveryDate = new Date(row.value.deliveryDate);    
-        orderDate = new Date(row.value.orderDate);
+        //deliveryDate = new Date(row.value.deliveryDate);   
+        deliveryDate = new Date(row.value.deliveryDate.year, row.value.deliveryDate.month - 1, row.value.deliveryDate.date); 
+        orderDate =new Date(row.value.orderDate.year, row.value.orderDate.month - 1, row.value.orderDate.date); 
+        //orderDate = new Date(row.value.orderDate);
         var rowBgColor = '';
         var deliveryDateValue = '';
         var orderDateValue = '';
         var orderStatusValue = row.value.orderStatus;
         if (row.value.orderStatus == 'New') {
           rowBgColor = "background-color:#99ff99";
-          var Difference_In_Time = deliveryDate - new Date().getTime();
+          var Difference_In_Time = deliveryDate.getTime() - new Date().getTime();
           var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
           if (Difference_In_Days < 2) {
             rowBgColor = "background-color:#b30000";

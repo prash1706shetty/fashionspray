@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="index, follow" />  
-  <title>Fashion Spray</title>  
+  <meta name="robots" content="index, follow" />
+  <title>Fashion Spray</title>
 
   <script src="https://1.www.s81c.com/common/stats/ida_stats.js"></script>
   <link href="https://1.www.s81c.com/common/v18/css/www.css" rel="stylesheet" />
@@ -25,352 +25,367 @@
 
 <body id="ibm-com" class="ibm-type">
   <div id="ibm-top" class="ibm-landing-page">
-       
+
     <div class="ibm-col-12-12 headerFirst">
-        <div style="padding-top:10px;padding-left:40px;">    
-      <h2><span style="font-size:30px;font-weight: bold;">Fashion Spray</span></h2>    
-  </div>
-</div>
-
-<div class="ibm-col-12-12 headerSecond" style="padding:10px;">
-  <div class="ibm-col-12-6">    
-      <span class="ibm-bold" style="padding-left: 30px;float:left;">Order Details : </span>
+      <div style="padding-top:10px;padding-left:40px;">
+        <h2><span style="font-size:30px;font-weight: bold;">Fashion Spray</span></h2>
+      </div>
     </div>
-    <div class="ibm-col-12-3">    
-      
-  </div>
-  <div class="ibm-col-12-3">    
-    <div><button  onclick="location.href = '/dashboard';" class="createOrder ibm-btn-small" style="width: 150px;" >Go to dashboard</button></div>
-</div>
-</div>
 
-    
+    <div class="ibm-col-12-12 headerSecond" style="padding:10px;">
+      <div class="ibm-col-12-6">
+        <span class="ibm-bold" style="padding-left: 30px;float:left;">Order Details : </span>
+      </div>
+      <div class="ibm-col-12-3">
+
+      </div>
+      <div class="ibm-col-12-3">
+        <div><button onclick="location.href = '/dashboard';" class="createOrder ibm-btn-small" style="width: 150px;">Go
+            to dashboard</button></div>
+      </div>
+    </div>
+
+
     <div id="ibm-content-wrapper">
 
 
       <form id="landingPageForm" class="ibm-row-form" action="javascript:void(0);">
 
-          <div class=" ibm-col-12-12" style="padding-left:40px;">
-              <div class=" ibm-col-12-6">
-                 
-                      <div for="customerName" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer name
-                        <span class="tooltiptext">1. Name of the customer who gave order</span>
-                        <span class="ibm-required">*</span>
-                      </div>
-                      <div class="fieldPaddingTop">
-                        <input type="text" value="" class="textFieldWidth" id="customerName" name="customerName" maxlength="50"
-                          placeholder="Enter customer full name." onfocus="clearRedColor(this)">
-                      </div>
-                      <span class=" validationFontSize display-none" id='offerNameError'>Offering
-                        Name is required</span>
-                    
-                    <div for="orderNumber" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Order number
-                        <span class="tooltiptext">4. Order number for the product.</span><span class="ibm-required">
-                          *</span>
-                      </div>
-                      <div class="fieldPaddingTop">
-                        <input type="text" class="textFieldWidth" value="" id="orderNumber" name="orderNumber" disabled maxlength="50"                  >
-                      </div>
-                      <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
-                      <div for="mobileNumber" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Mobile number
-                          <span class="tooltiptext">7. Customer 10 digit mobile number</span><span class="ibm-required">
-                            *</span>
-                        </div>
-                        <div class="fieldPaddingTop">
-                          <input type="text" class="textFieldWidth" value="" id="mobileNumber" name="mobileNumber" maxlength="50"
-                            placeholder="Enter customer mobile number" onfocus="clearRedColor(this)" onkeyup="checkMobileNumber(this);">
-                        </div>
-                        <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
-                        <div for="customerLocation" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Location of customer
-                            <span class="tooltiptext">10. From where customer came to our shop</span><span class="ibm-required">
-                              *</span>
-                          </div>
-                          <div class="fieldPaddingTop">
-                            <input type="text" value="" class="textFieldWidth" id="customerLocation" name="customerLocation"
-                              maxlength="50" placeholder="Enter customer location" onfocus="clearRedColor(this)">
-                          </div>
-                          
-                          <div for="customerSource" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer source
-                              <span class="tooltiptext">13. How customer came to know about our shop</span><span class="ibm-required">
-                                *</span>
-                            </div>  
-                            <div class="fieldPaddingTop">
-                              <input type="text" value="" id="customerSource" name="customerSource" maxlength="50" spellcheck="true"
-                                class="textFieldWidth" placeholder="Enter source of customer" onfocus="clearRedColor(this)">
-                            </div>
+        <div class=" ibm-col-12-12" style="padding-left:40px;">
+          <div class=" ibm-col-12-6">
 
-                           
-                  </div>
-                  <div class=" ibm-col-12-3"> 
-                                      
-                      <div for="dressFor" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Dress for
-                        <span class="tooltiptext">2. Type of person to whom this dress getting ready</span>
-                      </div><span class="ibm-required"> *</span>
-                      <div class="fieldPaddingTop">
-                        <select name="dressFor" id="dressFor" style="width:180px;">
-                          <option selected value="selectPerson">Select person type</option>
-                          <option value="Women">Women</option>
-                          <option value="Kids">Kids</option>
-                          <option value="Men">Men</option>
-                        </select>
-                      </div>    
-                      
-                      <div for="totalAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Total amount
-                          <span class="tooltiptext">5. Total amount for selected dress</span>
-                          <span class="ibm-required">
-                            *</span>
-                        </div>
-                        <div class="fieldPaddingTop">
-                          <input type="text" class="fieldWidthSmall" id="totalAmount" name="totalAmount" value=""
-                            placeholder="Enter total amount." onfocus="clearRedColor(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
-                        </div>
-                        <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                          required</span>
+            <div for="customerName" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer name
+              <span class="tooltiptext">1. Name of the customer who gave order</span>
+              <span class="ibm-required">*</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" value="" class="textFieldWidth" id="customerName" name="customerName" maxlength="50"
+                placeholder="Enter customer full name." onfocus="clearRedColor(this)">
+            </div>
+            <span class=" validationFontSize display-none" id='offerNameError'>Offering
+              Name is required</span>
 
+            <div for="orderNumber" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Order number
+              <span class="tooltiptext">4. Order number for the product.</span><span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" class="textFieldWidth" value="" id="orderNumber" name="orderNumber" disabled
+                maxlength="50">
+            </div>
+            <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
+            <div for="mobileNumber" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Mobile number
+              <span class="tooltiptext">7. Customer 10 digit mobile number</span><span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" class="textFieldWidth" value="" id="mobileNumber" name="mobileNumber" maxlength="50"
+                placeholder="Enter customer mobile number" onfocus="clearRedColor(this)"
+                onkeyup="checkMobileNumber(this);">
+            </div>
+            <span class="validationFontSize display-none" id='helpTextError'>Help Text is required</span>
+            <div for="customerLocation" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Location of customer
+              <span class="tooltiptext">10. From where customer came to our shop</span><span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" value="" class="textFieldWidth" id="customerLocation" name="customerLocation"
+                maxlength="50" placeholder="Enter customer location" onfocus="clearRedColor(this)">
+            </div>
 
-                              <div for="orderDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Order date
-                                <span class="tooltiptext">9. Order given date.</span>
-                                <span class="ibm-required">
-                                  *</span>
-                              </div>
-                              <div class="fieldPaddingTop">
-                                <input type="text" value="" class="fieldWidthSmall" id="orderDate" name="orderDate"
-                                  spellcheck="true" placeholder="Order date" data-widget="datepicker"
-                                  data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
-                              </div>
-                     
-                              <div for="modeOfPayment" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Payment mode
-                                  <span class="tooltiptext">11. In which mode customer paid the amount</span>
-                                  <span class="ibm-required">
-                                    *</span>
-                                </div>
-                                <div class="fieldPaddingTop">
-                                  <input type="text" class="fieldWidthSmall" id="modeOfPayment" name="modeOfPayment" value=""
-                                    placeholder="Enter payment mode" onfocus="clearRedColor(this)">
-                                </div>
+            <div for="customerSource" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer source
+              <span class="tooltiptext">13. How customer came to know about our shop</span><span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" value="" id="customerSource" name="customerSource" maxlength="50" spellcheck="true"
+                class="textFieldWidth" placeholder="Enter source of customer" onfocus="clearRedColor(this)">
+            </div>
 
-                                <div for="typeOfCustomer" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer type
-                                  <span class="tooltiptext">14. Customer is new or existing?</span>
-                                </div><span class="ibm-required"> *</span>
-                                <div class="fieldPaddingTop">
-                                  <select name="typeOfCustomer" id="typeOfCustomer" style="width:180px;">
-                                    <option selected value="select">Select customer type</option>
-                                    <option value="First Visit">First Visit</option>
-                                    <option value="Second Visit">Second Visit</option>
-                                    <option value="Repeated">Repeated</option>
-                                    <option value="Well known">Well known</option>
-                                  </select>
-                                </div>
-
-   
-                                
-              </div>
-              <div class=" ibm-col-12-3">
-                  
-                  <div id="dressTypeKids">
-                      <div for="dressType" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Dress type
-                        <span class="tooltiptext">3. Type of dress selected by customer</span>
-                      </div><span class="ibm-required"> *</span>
-      
-                      <div class="fieldPaddingTop">
-                        <select name="dressType" id="dressType" disabled style="width:180px;">
-                          <option selected value="selectType" disabled>Select dress type</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Advance paid
-                        <span class="tooltiptext">6. Total advance paid by customer</span>
-                        <span class="ibm-required">
-                          *</span>
-                      </div>
-                      <div class="fieldPaddingTop">
-                        <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value=""
-                          placeholder="Enter advance paid." onfocus="clearRedColor(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
-                      </div>
-                      
-                      <div for="deliveryDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery date
-                        <span class="tooltiptext">8. The date customer wants to deliver the dress.</span>
-                        <span class="ibm-required">
-                          *</span>
-                      </div>
-                      <div class="fieldPaddingTop">
-                        <input type="text" value="" class="fieldWidthSmall" id="deliveryDate" name="deliveryDate"
-                          spellcheck="true" placeholder="Delivery date" data-widget="datepicker"
-                          data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
-                      </div>
-                         
-                              <div for="fabricsFrom" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Fabrics from
-                                <span class="tooltiptext">12. Who is going to provide fabrics?</span>
-                              </div><span class="ibm-required"> *</span>
-                              <div class="fieldPaddingTop">
-                                <select name="fabricsFrom" id="fabricsFrom1" style="width:180px;">
-                                  <option selected value="select">Fabrics source</option>
-                                  <option value="Fashion Spray">Fashion Spray</option>
-                                  <option value="Customer">Customer Fabrics</option>
-                                </select>
-                              </div>
-
-                              <div for="measureBy" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Measurement by
-                                <span class="tooltiptext">15. Who took measurement of customer.</span>
-                              </div><span class="ibm-required"> *</span>
-                              <div class="fieldPaddingTop">
-                                <select name="measureBy" id="measureBy" style="width:180px;">
-                                  <option selected value="select">Select person</option>
-                                  <option value="Pruthvi Shetty">Pruthvi Shetty</option>
-                                  <option value="Master Sahil">Master-Sahil</option>
-                                  <option value="Disha">Disha</option>
-                                  <option value="Tailor">Tailor</option>
-                                </select>
-                              </div>
-                             
-                            
-
-                        
-                          
-                </div>
-          </div>
-          <div class=" ibm-col-12-12" style="padding-left:40px;">
-              <div class=" ibm-col-12-3" >
-              <div for="occasion" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Occasion
-                  <span class="tooltiptext">16. For what function customer ordered this product.</span>
-                </div><span class="ibm-required"> *</span>
-                <div class="fieldPaddingTop">
-                  <select name="occasion" id="occasion" style="width:180px;">
-                    <option selected value="select">Select occasion</option>
-                    <option value="Birthday">Birthday</option>
-                    <option value="Marriage">Marriage</option>
-                    <option value="Festival">Festival</option>
-                    <option value="Daily Wear">Daily Wear</option>
-                    <option value="other">Other</option>                                    
-                  </select>
-                </div>
-              </div>
-
-              <div class=" ibm-col-12-3" >
- 
-                  <div id="occasionOfId" class="display-none">
-                      <div for="occasionOf" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip"><span id="occaionOfTitle"></span>
-                        <span class="tooltiptext">17. Whose occasion customer ordering.</span>
-                      </div><span class="ibm-required"> *</span>
-                      <div class="fieldPaddingTop" id="occasionOfSelect">
-                  <span class="ibm-input-group ibm-radio-group">
-                      <input id="customerOccasion" name="occasionPerson" type="radio" value="customer" onclick="occasionOf(this);" /> 
-                      <label class="headerLabelFont" for="customerOccasion">Own</label>
-                      
-                      <input id="familyOccasion" name="occasionPerson" type="radio" value="family" onclick="occasionOf(this);" />
-                      <label class="headerLabelFont" for="relationOccasion">Family</label>
-
-                      <input id="otherOccasion" name="occasionPerson" type="radio" value="other" onclick="occasionOf(this);" />
-                      <label class="headerLabelFont" for="otherOccasion">Other</label>
-                 </span>
-                </div>
-                </div>
-
-                <div id="festivalNameId" class="display-none">
-                    <div for="festivalName" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Festival name
-                        <span class="tooltiptext">18.Name of festival</span>
-                        <span class="ibm-required">
-                          *</span>
-                      </div>
-                      <div class="fieldPaddingTop">
-                        <input type="text" class="fieldWidthSmall" id="festivalName" name="festivalName" value=""
-                          placeholder="Enter festival name." onfocus="clearRedColor(this)">
-                      </div>
-                </div>
-
-                <div id="otherOccasionId" class="display-none">
-                    <div for="otherOccasionName" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Other occasion
-                        <span class="tooltiptext">19. Name of other occasion</span>
-                        <span class="ibm-required">
-                          *</span>
-                      </div>
-                      <div class="fieldPaddingTop">
-                        <input type="text" class="fieldWidthSmall" id="otherOccasionName" name="otherOccasionName" value=""
-                          placeholder="Enter occasion." onfocus="clearRedColor(this)">
-                      </div>
-                </div>
-
-                </div>
-
-
-                                          
-                <div class=" ibm-col-12-3" >
-                <div id="occasionDateId" class="display-none">
-                    <div for="occasionDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip"><span id="occasionDateTitle"></span>
-                        <span class="tooltiptext">20. The date of a occasion.</span>
-                        <span class="ibm-required">
-                          *</span>
-                      </div>
-                      <div class="fieldPaddingTop">
-                        <input type="text" value="" class="fieldWidthSmall" id="occasionDate" name="occasionDate"
-                          spellcheck="true" placeholder="Occasion date" data-widget="datepicker"
-                          data-format="mmm dd, yyyy" onfocus="clearRedColor(this)">
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class=" ibm-col-12-3" >
-                  <div id="familyMemberRelationId" class="display-none">
-                      <div for="familyMemberRelation" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Relation type
-                          <span class="tooltiptext">21. What is the relation of customer to family member.</span>
-                          <span class="ibm-required">
-                            *</span>
-                        </div>
-                        <div class="fieldPaddingTop">
-                          <input type="text" class="fieldWidthSmall" id="familyMemberRelation" name="familyMemberRelation" value=""
-                            placeholder="Enter relation type." onfocus="clearRedColor(this)">
-                        </div>
-                      </div>
-                      </div>
 
           </div>
-                       
-          <div class=" ibm-col-12-12" style="padding-left:50px;">
+          <div class=" ibm-col-12-3">
 
-            <div for="orderNote" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Note and description of order.
-              <span class="tooltiptext">22. Description about order.</span>
+            <div for="dressFor" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Dress for
+              <span class="tooltiptext">2. Type of person to whom this dress getting ready</span>
+            </div><span class="ibm-required"> *</span>
+            <div class="fieldPaddingTop">
+              <select name="dressFor" id="dressFor" style="width:180px;">
+                <option selected value="selectPerson">Select person type</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+                <option value="Men">Men</option>
+              </select>
+            </div>
+
+            <div for="totalAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Total amount
+              <span class="tooltiptext">5. Total amount for selected dress</span>
               <span class="ibm-required">
                 *</span>
             </div>
             <div class="fieldPaddingTop">
-              <textarea placeholder="Enter details of the order." value="" rows="4" class="orderNote" id="orderNote" name="orderNote" maxlength="500"></textarea>
+              <input type="text" class="fieldWidthSmall" id="totalAmount" name="totalAmount" value=""
+                placeholder="Enter total amount." onfocus="clearRedColor(this)"
+                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
             </div>
-  
+            <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
+              required</span>
+
+
+            <div for="orderDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Order date
+              <span class="tooltiptext">9. Order given date.</span>
+              <span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" value="" class="fieldWidthSmall" id="orderDate" name="orderDate" spellcheck="true"
+                placeholder="Order date" data-widget="datepicker" data-format="mmm dd, yyyy"
+                onfocus="clearRedColor(this)">
+            </div>
+
+            <div for="modeOfPayment" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Payment mode
+              <span class="tooltiptext">11. In which mode customer paid the amount</span>
+              <span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" class="fieldWidthSmall" id="modeOfPayment" name="modeOfPayment" value=""
+                placeholder="Enter payment mode" onfocus="clearRedColor(this)">
+            </div>
+
+            <div for="typeOfCustomer" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer type
+              <span class="tooltiptext">14. Customer is new or existing?</span>
+            </div><span class="ibm-required"> *</span>
+            <div class="fieldPaddingTop">
+              <select name="typeOfCustomer" id="typeOfCustomer" style="width:180px;">
+                <option selected value="select">Select customer type</option>
+                <option value="First Visit">First Visit</option>
+                <option value="Second Visit">Second Visit</option>
+                <option value="Repeated">Repeated</option>
+                <option value="Well known">Well known</option>
+              </select>
+            </div>
+
+
+
+          </div>
+          <div class=" ibm-col-12-3">
+
+            <div id="dressTypeKids">
+              <div for="dressType" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Dress type
+                <span class="tooltiptext">3. Type of dress selected by customer</span>
+              </div><span class="ibm-required"> *</span>
+
+              <div class="fieldPaddingTop">
+                <select name="dressType" id="dressType" disabled style="width:180px;">
+                  <option selected value="selectType" disabled>Select dress type</option>
+                </select>
+              </div>
+            </div>
+
+            <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Advance paid
+              <span class="tooltiptext">6. Total advance paid by customer</span>
+              <span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value=""
+                placeholder="Enter advance paid." onfocus="clearRedColor(this)"
+                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+            </div>
+
+            <div for="deliveryDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Delivery date
+              <span class="tooltiptext">8. The date customer wants to deliver the dress.</span>
+              <span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" value="" class="fieldWidthSmall" id="deliveryDate" name="deliveryDate"
+                spellcheck="true" placeholder="Delivery date" data-widget="datepicker" data-format="mmm dd, yyyy"
+                onfocus="clearRedColor(this)">
+            </div>
+
+            <div for="fabricsFrom" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Fabrics from
+              <span class="tooltiptext">12. Who is going to provide fabrics?</span>
+            </div><span class="ibm-required"> *</span>
+            <div class="fieldPaddingTop">
+              <select name="fabricsFrom" id="fabricsFrom1" style="width:180px;">
+                <option selected value="select">Fabrics source</option>
+                <option value="Fashion Spray">Fashion Spray</option>
+                <option value="Customer">Customer Fabrics</option>
+              </select>
+            </div>
+
+            <div for="measureBy" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Measurement by
+              <span class="tooltiptext">15. Who took measurement of customer.</span>
+            </div><span class="ibm-required"> *</span>
+            <div class="fieldPaddingTop">
+              <select name="measureBy" id="measureBy" style="width:180px;">
+                <option selected value="select">Select person</option>
+                <option value="Pruthvi Shetty">Pruthvi Shetty</option>
+                <option value="Master Sahil">Master-Sahil</option>
+                <option value="Disha">Disha</option>
+                <option value="Tailor">Tailor</option>
+              </select>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+        <div class=" ibm-col-12-12" style="padding-left:40px;">
+          <div class=" ibm-col-12-3">
+            <div for="occasion" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Occasion
+              <span class="tooltiptext">16. For what function customer ordered this product.</span>
+            </div><span class="ibm-required"> *</span>
+            <div class="fieldPaddingTop">
+              <select name="occasion" id="occasion" style="width:180px;">
+                <option selected value="select">Select occasion</option>
+                <option value="Birthday">Birthday</option>
+                <option value="Marriage">Marriage</option>
+                <option value="Festival">Festival</option>
+                <option value="Daily Wear">Daily Wear</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </div>
 
-          <div class=" ibm-col-12-12" style="padding-left:50px;">
-            <div class=" ibm-col-12-3">
-            <div for="updateRequired" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip"><span id="anyUpdateTitle">Any fields update required?</span>
+          <div class=" ibm-col-12-3">
+
+            <div id="occasionOfId" class="display-none">
+              <div for="occasionOf" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip"><span
+                  id="occaionOfTitle"></span>
+                <span class="tooltiptext">17. Whose occasion customer ordering.</span>
+              </div><span class="ibm-required"> *</span>
+              <div class="fieldPaddingTop" id="occasionOfSelect">
+                <span class="ibm-input-group ibm-radio-group">
+                  <input id="customerOccasion" name="occasionPerson" type="radio" value="customer"
+                    onclick="occasionOf(this);" />
+                  <label class="headerLabelFont" for="customerOccasion">Own</label>
+
+                  <input id="familyOccasion" name="occasionPerson" type="radio" value="family"
+                    onclick="occasionOf(this);" />
+                  <label class="headerLabelFont" for="relationOccasion">Family</label>
+
+                  <input id="otherOccasion" name="occasionPerson" type="radio" value="other"
+                    onclick="occasionOf(this);" />
+                  <label class="headerLabelFont" for="otherOccasion">Other</label>
+                </span>
+              </div>
+            </div>
+
+            <div id="festivalNameId" class="display-none">
+              <div for="festivalName" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Festival name
+                <span class="tooltiptext">18.Name of festival</span>
+                <span class="ibm-required">
+                  *</span>
+              </div>
+              <div class="fieldPaddingTop">
+                <input type="text" class="fieldWidthSmall" id="festivalName" name="festivalName" value=""
+                  placeholder="Enter festival name." onfocus="clearRedColor(this)">
+              </div>
+            </div>
+
+            <div id="otherOccasionId" class="display-none">
+              <div for="otherOccasionName" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Other occasion
+                <span class="tooltiptext">19. Name of other occasion</span>
+                <span class="ibm-required">
+                  *</span>
+              </div>
+              <div class="fieldPaddingTop">
+                <input type="text" class="fieldWidthSmall" id="otherOccasionName" name="otherOccasionName" value=""
+                  placeholder="Enter occasion." onfocus="clearRedColor(this)">
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class=" ibm-col-12-3">
+            <div id="occasionDateId" class="display-none">
+              <div for="occasionDate" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip"><span
+                  id="occasionDateTitle"></span>
+                <span class="tooltiptext">20. The date of a occasion.</span>
+                <span class="ibm-required">
+                  *</span>
+              </div>
+              <div class="fieldPaddingTop">
+                <input type="text" value="" class="fieldWidthSmall" id="occasionDate" name="occasionDate"
+                  spellcheck="true" placeholder="Occasion date" data-widget="datepicker" data-format="mmm dd, yyyy"
+                  onfocus="clearRedColor(this)">
+              </div>
+            </div>
+          </div>
+
+
+          <div class=" ibm-col-12-3">
+            <div id="familyMemberRelationId" class="display-none">
+              <div for="familyMemberRelation" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Relation type
+                <span class="tooltiptext">21. What is the relation of customer to family member.</span>
+                <span class="ibm-required">
+                  *</span>
+              </div>
+              <div class="fieldPaddingTop">
+                <input type="text" class="fieldWidthSmall" id="familyMemberRelation" name="familyMemberRelation"
+                  value="" placeholder="Enter relation type." onfocus="clearRedColor(this)">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class=" ibm-col-12-12" style="padding-left:50px;">
+
+          <div for="orderNote" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Note and description of order.
+            <span class="tooltiptext">22. Description about order.</span>
+            <span class="ibm-required">
+              *</span>
+          </div>
+          <div class="fieldPaddingTop">
+            <textarea placeholder="Enter details of the order." value="" rows="4" class="orderNote" id="orderNote"
+              name="orderNote" maxlength="500"></textarea>
+          </div>
+
+        </div>
+
+
+        <div class=" ibm-col-12-12" style="padding-left:50px;">
+          <div class=" ibm-col-12-3">
+            <div for="updateRequired" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip"><span
+                id="anyUpdateTitle">Any fields update required?</span>
               <span class="tooltiptext">Enter the all the fields required to update in future.</span>
             </div><span class="ibm-required"> *</span>
             <div class="fieldPaddingTop" id="anyUpdateSelect">
-        <span class="ibm-input-group ibm-radio-group">
-            <input id="anyUpdateYes" name="updateRequired" type="radio" value="yes" onclick="fieldsUpdateRequired(this);" /> 
-            <label class="headerLabelFont">Yes</label>
-            
-            <input id="anyUpdateNo" name="updateRequired" type="radio" value="no" onclick="fieldsUpdateRequired(this);" />
-            <label class="headerLabelFont">No</label>
+              <span class="ibm-input-group ibm-radio-group">
+                <input id="anyUpdateYes" name="updateRequired" type="radio" value="yes"
+                  onclick="fieldsUpdateRequired(this);" />
+                <label class="headerLabelFont">Yes</label>
 
-     </span>
-      </div>
-      </div>
-      <div class=" ibm-col-12-3">
-          <div id="fieldsNumber" class="display-none">
-        <div for="updateFields" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Enter fields number
-          <span class="tooltiptext">Enter the all the fields number which required to updare in future.</span>
-          <span class="ibm-required">
-            *</span>
-        </div>
-        <div class="fieldPaddingTop">
-          <input type="text" class="" id="updateFields" name="updateFields" value=""
-            placeholder="Enter fields number" onfocus="clearRedColor(this)">
-        </div>
-        </div>
-      </div>
+                <input id="anyUpdateNo" name="updateRequired" type="radio" value="no"
+                  onclick="fieldsUpdateRequired(this);" />
+                <label class="headerLabelFont">No</label>
+
+              </span>
+            </div>
           </div>
-        
+          <div class=" ibm-col-12-3">
+            <div id="fieldsNumber" class="display-none">
+              <div for="updateFields" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Enter fields number
+                <span class="tooltiptext">Enter the all the fields number which required to updare in future.</span>
+                <span class="ibm-required">
+                  *</span>
+              </div>
+              <div class="fieldPaddingTop">
+                <input type="text" class="" id="updateFields" name="updateFields" value=""
+                  placeholder="Enter fields number" onfocus="clearRedColor(this)">
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <div class=" ibm-col-12-12 ibm-padding-top-1" style="padding-left:50px;padding-right:30px;">
           <div class="ibm-rule ibm-alternate ibm-gray-30">
@@ -381,18 +396,22 @@
 
 
         <div class=" ibm-col-12-12 display-none" style="padding-left:80px;" id="fabricDetailLabel">
-        <div><span class="ibm-bold" style="float:left;">Fabrics Details : </span></div>
+          <div><span class="ibm-bold" style="float:left;">Fabrics Details : </span></div>
         </div>
         <div class=" ibm-col-12-12 display-none fieldPaddingTop" style="padding-left:80px;" id="addFabrics">
-        
-				
-            <button id="Add">Add fabric details</button><p class="ibm-maximize-link" style="position: relative;color:grey;display: inline-block;margin-bottom:3px;"></p>
-            <button id="Remove" style="margin-left:50px;">Remove fabric details</button><p class="ibm-maximize-link" style="position: relative;color:grey;display: inline-block;margin-bottom:3px;"></p> 
-            
-            
-            <div id="textboxDiv">           
-                <div>
-            <div style="display: inline-block;">
+
+
+          <button id="Add">Add fabric details</button>
+          <p class="ibm-maximize-link" style="position: relative;color:grey;display: inline-block;margin-bottom:3px;">
+          </p>
+          <button id="Remove" style="margin-left:50px;">Remove fabric details</button>
+          <p class="ibm-maximize-link" style="position: relative;color:grey;display: inline-block;margin-bottom:3px;">
+          </p>
+
+
+          <div id="textboxDiv">
+            <div>
+              <div style="display: inline-block;">
                 <div for="fabrics0" class="ibm-textcolor-green-60 tooltip">Type of fabric
                   <span class="tooltiptext">Type of fabric required.</span>
                   <span class="ibm-required">
@@ -401,37 +420,39 @@
                 <div class="fieldPaddingTop">
                   <input type="text" class="fieldWidthSmall" id="fabrics0" name="fabrics0" value=""
                     placeholder="Enter type of fabric0." onfocus="clearRedColor(this)">
-                </div>                
+                </div>
               </div>
 
               <div style="display: inline-block;margin-left:38px;">
-                  <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Color
-                    <span class="tooltiptext">Total advance paid by customer</span>
-                    <span class="ibm-required">
-                      *</span>
-                  </div>
-                  <div class="fieldPaddingTop">
-                    <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value="" placeholder="Enter advance paid." onfocus="clearRedColor(this)">
-                  </div>
-                  <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                    required</span>
+                <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Color
+                  <span class="tooltiptext">Total advance paid by customer</span>
+                  <span class="ibm-required">
+                    *</span>
                 </div>
-                <div style="display: inline-block;margin-left:38px;">
-                    <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Quantity
-                      <span class="tooltiptext">Total advance paid by customer</span>
-                      <span class="ibm-required">
-                        *</span>
-                    </div>
-                    <div class="fieldPaddingTop">
-                      <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value="" placeholder="Enter advance paid." onfocus="clearRedColor(this)">
-                    </div>
-                    <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
-                      required</span>
-                  </div>
-</div>
+                <div class="fieldPaddingTop">
+                  <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value=""
+                    placeholder="Enter advance paid." onfocus="clearRedColor(this)">
+                </div>
+                <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
+                  required</span>
+              </div>
+              <div style="display: inline-block;margin-left:38px;">
+                <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Quantity
+                  <span class="tooltiptext">Total advance paid by customer</span>
+                  <span class="ibm-required">
+                    *</span>
+                </div>
+                <div class="fieldPaddingTop">
+                  <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value=""
+                    placeholder="Enter advance paid." onfocus="clearRedColor(this)">
+                </div>
+                <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
+                  required</span>
+              </div>
             </div>
-            
           </div>
+
+        </div>
 
 
 
@@ -447,17 +468,19 @@
       </form>
 
       <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
-          <p id="overlayMsg"></p>
-          <a href="/neworders" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit" onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
-  </div>
+        <p id="overlayMsg"></p>
+        <a href="/neworders" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+          onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
+      </div>
 
-  <div class="ibm-common-overlay" data-widget="overlay" id="errorOverlay">
-    <p id="errorOverlayMsg"></p>
-    <a href="javascript:;" id="overlayError" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit" onclick="IBMCore.common.widget.overlay.hide('overlayError',true);">Ok</a>
-</div>
+      <div class="ibm-common-overlay" data-widget="overlay" id="errorOverlay">
+        <p id="errorOverlayMsg"></p>
+        <a href="javascript:;" id="overlayError" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+          onclick="IBMCore.common.widget.overlay.hide('overlayError',true);">Ok</a>
+      </div>
 
 
-  
+
     </div>
     <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
       <p id="overlayMsg"></p>
