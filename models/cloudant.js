@@ -12,7 +12,9 @@ var data = {
     "services": {
         "cloudantNoSQLDB": {
             "credentials": {
-
+                //credentials
+              },
+            "label": "cloudantNoSQLDB"
         }
     }
 }
