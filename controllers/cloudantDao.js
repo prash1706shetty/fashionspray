@@ -1,7 +1,5 @@
 var cloudant = require('../models/cloudant');
 const logger = require('../config/logger').logger;
-var cookie = require("../util/cookie");
-
 let db;
 let access_control_db;
 
@@ -283,36 +281,6 @@ function findByTitle(title) {
 	});
 }
 
-function fetchByView(allDoc, cookieValue) {
-
-	return new Promise((resolve, reject) => {
-		db.view('allDoc', 'all-doc', async function (err, body) {
-			if (err) {
-				if (err.message == 'missing') {
-					logger.warn(`Document id ${id} does not exist.`, 'findById()');
-					resolve({ data: {}, statusCode: 404 });
-				} else {
-					logger.error('Error occurred: ' + err.message, 'findById()');
-					reject(err);
-				}
-			} else {
-				var userBlueGroup = cookie.getBlueGroup(cookieValue);
-				var privileges = '';
-				if(userBlueGroup.blueGroups == 'showcase-editor-admin'){
-					privileges = await getUserPrivileges('getAdminPrivileges');
-				} else if (userBlueGroup.blueGroups == 'showcase-editor-author') {
-					privileges = await getUserPrivileges('getAuthorPrivileges');
-				} else if (userBlueGroup.blueGroups == 'showcase-editor-reviewer') {
-					privileges = await getUserPrivileges('getReviewerPrivileges');
-				} else {
-					privileges = await getUserPrivileges('getPublisherPrivileges');
-				}
-				resolve({ data: body, userPrivileges: privileges, statusCode: 200 ,userEmailId:userBlueGroup.emailAddress});
-			}
-		});
-	});
-}
-
 function getUserPrivileges(viewName) {
 	return new Promise((resolve, reject) => {
 		access_control_db.view('privileges', viewName, function (err, body) {
@@ -497,7 +465,6 @@ module.exports.deleteById = deleteById;
 module.exports.deleteOrder = deleteOrder;
 module.exports.updateOrder = updateOrder;
 module.exports.findByTitle = findByTitle;
-module.exports.fetchByView = fetchByView;
 module.exports.insertOrderData = insertOrderData;
 module.exports.getOrderData = getOrderData;
 module.exports.getOrderCount = getOrderCount;

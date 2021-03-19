@@ -1,24 +1,3 @@
-function fetchDocFileByDocIdAndLang(document_id, fileName) {
-    var resp = ""
-    jQuery.ajax({
-        type: "POST",
-        url: "/caas/fetchDocFileByIdAndLang",
-        data: JSON.stringify({ language: "en", document_id: document_id, fileName: fileName }),
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + cookieValue
-        },
-        async: false,
-        success: function (result) {
-            resp = result;
-        },
-        error: function (e) {
-            alert("There was some internal error while fetching data, Please try again after sometime")
-        }
-    });
-    return resp;
-}
-
 function fetchDocByIdAndLang(document_id) {
     var resp = ""
     jQuery.ajax({
