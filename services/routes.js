@@ -106,7 +106,7 @@ router.post('/getOrder', async function (req, res) {
     res.send(orderData);
  });
 
- router.post('/fs/getReadyOrders', async function (req, res) {
+ router.get('/fs/getReadyOrders', async function (req, res) {
     var orderData = await cloudant.getReadyOrders();
     res.send(orderData);
  });
