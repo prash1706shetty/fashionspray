@@ -1,6 +1,6 @@
 (function validateENVVariables() {
     console.info('Validating env variables...');
-    var requiredEnv = ['CLOUDANT_URL'];
+    var requiredEnv = [];
     var missingCount = requiredEnv.reduce(function (count, name) {
         if (!process.env[name]) {
             console.error('Missing required environment variable : ' + name);
