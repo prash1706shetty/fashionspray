@@ -18,8 +18,6 @@ function dbCloudantConnect() {
             } else {
                 console.log("sucees else");
                 let db = cloudant.use('order');
-
-
                 logger.info('Connect success! Connected to DB: order');
                 resolve({ db: db });
             }

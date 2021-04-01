@@ -61,10 +61,6 @@ router.get('/edit', function (req, res) {
     res.sendFile(reqPath + "/views/" + "productList.html");
 });
 
-router.get('/view', function (req, res) {
-    res.sendFile(reqPath + "/views/captivate-pages/" + "index.html");
-});
-
 router.get('/useCases', function (req, res) {
     res.sendFile(reqPath + "/views/" + "useCaseList.html");
 });
