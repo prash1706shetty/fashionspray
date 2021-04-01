@@ -96,12 +96,12 @@ router.post('/getOrder', async function (req, res) {
     res.send(orderData);
  });
 
- router.post('/fs/getNewOrders', async function (req, res) {
+ router.get('/fs/getNewOrders', async function (req, res) {
     var orderData = await cloudant.getNewOrders();
     res.send(orderData);
  });
 
- router.post('/fs/getOnProcessOrders', async function (req, res) {
+ router.get('/fs/getOnProcessOrders', async function (req, res) {
     var orderData = await cloudant.getOnProcessOrders();
     res.send(orderData);
  });
@@ -112,7 +112,7 @@ router.post('/getOrder', async function (req, res) {
  });
 
  
- router.post('/fs/getDeliveredOrders', async function (req, res) {
+ router.get('/fs/getDeliveredOrders', async function (req, res) {
     var orderData = await cloudant.getDeliveredOrders();
     res.send(orderData);
  });

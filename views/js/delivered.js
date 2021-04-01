@@ -1,22 +1,9 @@
-var cookieValue = readCookie();
-var loggedInUserEmailId = "";
-var userPrivilege = ""
-var catalogsDetail = ""
 var orderList = '';
 
-
 jQuery(document).ready(function ($) {    
-  var data = {
-    "test1": "test1"
-  }
   jQuery.ajax({
-    type: "POST",
+    type: "GET",
     url: "/fs/getDeliveredOrders",
-    data: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + cookieValue
-    },
     async: false,
     success: function (result) {
       orderList = result.rows;
@@ -26,12 +13,9 @@ jQuery(document).ready(function ($) {
                       "May","Jun","Jul","Aug",
                       "Sep", "Oct","Nov","Dec"];
       var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Dress</th><th>Order Date</th><th>Delivery Date</th></tr></thead><tbody>";
-      //for (row of result.rows) {
       result.rows.forEach((row, index) => {
-  //deliveryDate = new Date(row.value.deliveryDate);  
   deliveryDate = new Date(row.value.deliveryDate.year, row.value.deliveryDate.month - 1, row.value.deliveryDate.date);
-  // orderDate = new Date(row.value.orderDate);
-  orderDate =new Date(row.value.orderDate.year, row.value.orderDate.month - 1, row.value.orderDate.date); 
+ orderDate =new Date(row.value.orderDate.year, row.value.orderDate.month - 1, row.value.orderDate.date); 
        
         var rowBgColor = '';
         var deliveryDateValue = '';
@@ -118,22 +102,14 @@ jQuery(document).ready(function ($) {
           return;
         }
       });
-
-
-
     },
     error: function (e) {
       alert("There was some internal error while updating, Please try again after sometime")
     }
   });
-
 });
 
-
-
-
 function getOrderDetails(e) {
-
   var odId = e.id.split('orderDetails-')[1];
   jQuery('#overlayOrder').html('');
   orderList.forEach((row, index) => {
@@ -149,8 +125,7 @@ function getOrderDetails(e) {
         "<div id='measureByDetails'><span class='ibm-bold'>Measurement taken by : </span><span>" + row.value.measureBy + "</span></div>" +
         "<div id='orderDateDetails'><span class='ibm-bold'>Order given date : </span><span>" + orderDate.getDate() + '/' + (orderDate.getMonth() + 1) + '/' + orderDate.getFullYear() + "</span></div>" +
         "<div id='orderNoteDetails'><span class='ibm-bold'>More details about order : </span><span>" + row.value.orderNote + "</span></div>";
-
-     
+ 
       var occasionDetailsOverlay = '';
       if (row.value.occationDetails.occasion == 'Festival') {
         var festivalDate = new Date(row.value.occationDetails.festivalDate);
@@ -179,53 +154,4 @@ function getOrderDetails(e) {
       jQuery('#overlayOrder').append(finalOrderOverlayDetails);
     }
   });
-}
-
-function closeOverlay(name) {
-  IBMCore.common.widget.overlay.hide(name);
-}
-
-
-function deleteDemo(e) {
-  var id = escapeSpecialCharacter(e.id);
-
-  jQuery('#' + id).prop('disabled', 'true');
-  jQuery('#cancelOverlayBtn-' + id.split('deletePrdBtn-')[1]).prop('disabled', 'true');
-  jQuery("#deleteSpinner").addClass('display-inline-block');
-
-  setTimeout(function () {
-    let docId = id.split('deletePrdBtn-')[1].replaceAll('\\', '');
-    var doc = {
-      docId: docId,
-      status: "Deleted"
-    }
-
-
-    jQuery.ajax({
-      type: "POST",
-      url: "/fs/deleteorder",
-      data: JSON.stringify(doc),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + cookieValue
-      },
-      async: false,
-      success: function (result) {
-        if (result.statusCode == 200) {
-          // updateTable();
-          closeOverlay('deleteOverlay');
-          window.location.replace("/");
-        } else {
-          alert('There was some error while updating data');
-          closeOverlay('deleteOverlay');
-
-        }
-      },
-      error: function (e) {
-        alert("There was some internal error while updating, Please try again after sometime")
-      }
-    });
-
-  }, 100);
-
 }
