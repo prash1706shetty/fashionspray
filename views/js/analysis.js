@@ -11,14 +11,15 @@ var womenCount = 0;
 var menCount = 0;
 var countArray = [];
   for (row of result.rows) {
-    if(row.value.dressFor == 'kids'){
+    if(row.value.dressFor == 'Kids'){
       kidsCount++;
-    } else if(row.value.dressFor == 'women'){
+    } else if(row.value.dressFor == 'Women'){
       womenCount++;
-    } else if(row.value.dressFor == 'men'){
+    } else if(row.value.dressFor == 'Men'){
       menCount++;
     }
   }
+
   countArray.push(kidsCount);
   countArray.push(womenCount);
   countArray.push(menCount);
@@ -27,18 +28,16 @@ var countArray = [];
     type: 'doughnut',
     data: {
       labels: ["Kids", "Women", "Men"],
-      datasets: [
-        {
-          label: "Number of order for each type of person.",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-          data: countArray
-        }
-      ]
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+        data: countArray
+      }]
     },
     options: {
       title: {
         display: true,
-        text: 'Total dress order for each type of Gender'
+        text: 'Number of orders per person.'
       }
     }
 });
@@ -74,22 +73,24 @@ new Chart(document.getElementById("bar-chart"), {
     }
 });
 
+
+
 new Chart(document.getElementById("pie-chart"), {
-    type: 'pie',
-    data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-      datasets: [{
-        label: "Population (millions)",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [2478,5267,734,784,433]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Predicted world population (millions) in 2050'
-      }
+  type: 'pie',
+  data: {
+    labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+    datasets: [{
+      label: "Population (millions)",
+      backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+      data: [2478,5267,734,784,433]
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Predicted world population (millions) in 2050'
     }
+  }
 });
 
 

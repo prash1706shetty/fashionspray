@@ -6,17 +6,10 @@ var orderList = '';
 
 
 jQuery(document).ready(function ($) {
-  var data = {
-    "test1": "test1"
-  }
+
   jQuery.ajax({
-    type: "POST",
-    url: "/caas/getDocuments",
-    data: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + cookieValue
-    },
+    type: "GET",
+    url: "/fs/getOrderData",
     async: false,
     success: function (result) {
       orderList = result.rows;
