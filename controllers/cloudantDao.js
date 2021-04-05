@@ -221,14 +221,32 @@ function getDifferentOrderCounts() {
 	});
 }
 
-function getYTTOrders() {
+function getYTTOrders(doc) {
 	return new Promise((resolve, reject) => {
-		db.view('order', 'yttOrders', function (err, body) {
+		db.find({
+			'selector': {
+				'deliveryDate.date': {
+					"$in": [doc.todayDate, doc.yesterdayDate, doc.tomorrowDate]
+				},
+				'deliveryDate.month': {
+					"$in": [doc.todaymonth, doc.yesterdayMonth, doc.tomorrowMonth]
+				},
+				'deliveryDate.year': {
+					"$in": [doc.todayyear, doc.yesterdayYear, doc.tomorrowYear]
+				}
+			},
+			'fields': [
+				'orderNumber',
+				'orderDate',
+				'deliveryDate',
+				'orderStatus'
+			]
+		}, (err, documents) => {
 			if (err) {
-				console.error('Error occurred: ' + err.message);
 				reject(err);
 			} else {
-				resolve(body);
+				console.log("documents->"+JSON.stringify(documents));
+				resolve({data:documents.docs});
 			}
 		});
 	});

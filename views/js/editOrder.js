@@ -478,11 +478,10 @@ function saveOrder() {
 
         if (occasionDate.includes('/')) {
           var from = occasionDate.split("/");
-          //occasionDateTimeStamp = new Date(from[2], from[1] - 1, from[0]).getTime();
           occasionDateTimeStamp = {
-            date: from[0],
-            month: from[1],
-            year: from[2]
+            date: parseInt(from[0]),
+            month: parseInt(from[1]),
+            year: parseInt(from[2])
           }
         }
 
@@ -518,9 +517,9 @@ function saveOrder() {
           var from = occasionDate.split("/");
           //occasionDateFamilyTimeStamp = new Date(from[2], from[1] - 1, from[0]).getTime();
           occasionDateFamilyTimeStamp = {
-            date: from[0],
-            month: from[1],
-            year: from[2]
+            date: parseInt(from[0]),
+            month: parseInt(from[1]),
+            year: parseInt(from[2])
           }
         }
 
@@ -563,9 +562,9 @@ function saveOrder() {
         var from = occasionDate.split("/");
        // festivalDateFamilyTimeStamp = new Date(from[2], from[1] - 1, from[0]).getTime();
        festivalDateFamilyTimeStamp = {
-        date: from[0],
-        month: from[1],
-        year: from[2]
+        date: parseInt(from[0]),
+        month: parseInt(from[1]),
+        year: parseInt(from[2])
       }
       }
 
@@ -602,9 +601,9 @@ function saveOrder() {
        var from = deliveryDate.split("/");
       // timeStampDate = new Date(from[2], from[1] - 1, from[0]).getTime();
       deliveryDateDetails = {
-        date: from[0],
-        month: from[1],
-        year: from[2]
+        date: parseInt(from[0]),
+        month: parseInt(from[1]),
+        year: parseInt(from[2])
       }
     } else {
       //timeStampDate = (new Date(deliveryDate)).getTime();
@@ -625,9 +624,9 @@ function saveOrder() {
       var from = orderDate.split("/");
       // timeStampOrderDate = new Date(from[2], from[1] - 1, from[0]).getTime();
       orderDateDetails = {
-        date: from[0],
-        month: from[1],
-        year: from[2]
+        date: parseInt(from[0]),
+        month: parseInt(from[1]),
+        year: parseInt(from[2])
       }
     } else {
       //timeStampOrderDate = (new Date(orderDate)).getTime();

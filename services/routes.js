@@ -123,7 +123,7 @@ router.post('/getOrder', async function (req, res) {
  });
 
  router.post('/fs/getYTTOrders', async function (req, res) {
-    var orderData = await cloudant.getYTTOrders();    
+    var orderData = await cloudant.getYTTOrders(req.body);    
     res.send(orderData);
  });
 
