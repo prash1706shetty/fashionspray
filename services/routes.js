@@ -21,8 +21,8 @@ router.get('/add/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "newOrder.html");
 });
 
-router.get('/dashboardold/', function (req, res) {
-    res.sendFile(reqPath + "/views/" + "dashboardold.html");
+router.get('/analysis/', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "analysis.html");
 });
 
 router.get('/dashboard/', function (req, res) {
