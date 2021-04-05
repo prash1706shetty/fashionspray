@@ -17,7 +17,6 @@ let access_control_db;
 })();
 
 function deleteOrder(doc) {
-
 	return new Promise((resolve, reject) => {
 		// Retrieve the list (need the rev)
 		findById(doc.docId).then((response) => {
@@ -41,7 +40,6 @@ function deleteOrder(doc) {
 }
 
 function updateOrder(doc) {
-
 	return new Promise((resolve, reject) => {
 		// Retrieve the list (need the rev)
 		findById(doc.orderNumber).then((response) => {
@@ -225,15 +223,30 @@ function getYTTOrders(doc) {
 	return new Promise((resolve, reject) => {
 		db.find({
 			'selector': {
-				'deliveryDate.date': {
-					"$in": [doc.todayDate, doc.yesterdayDate, doc.tomorrowDate]
-				},
-				'deliveryDate.month': {
-					"$in": [doc.todaymonth, doc.yesterdayMonth, doc.tomorrowMonth]
-				},
-				'deliveryDate.year': {
-					"$in": [doc.todayyear, doc.yesterdayYear, doc.tomorrowYear]
-				}
+				"$or": [
+					{
+						'deliveryDate.date': {
+							"$in": [doc.todayDate, doc.yesterdayDate, doc.tomorrowDate]
+						},
+						'deliveryDate.month': {
+							"$in": [doc.todaymonth, doc.yesterdayMonth, doc.tomorrowMonth]
+						},
+						'deliveryDate.year': {
+							"$in": [doc.todayyear, doc.yesterdayYear, doc.tomorrowYear]
+						}
+					},
+					{
+						'orderDate.date': {
+							"$in": [doc.todayDate, doc.yesterdayDate]
+						},
+						'orderDate.month': {
+							"$in": [doc.todaymonth, doc.yesterdayMonth]
+						},
+						'orderDate.year': {
+							"$in": [doc.todayyear, doc.yesterdayYear]
+						}
+					}
+				]
 			},
 			'fields': [
 				'orderNumber',
@@ -245,15 +258,13 @@ function getYTTOrders(doc) {
 			if (err) {
 				reject(err);
 			} else {
-				console.log("documents->"+JSON.stringify(documents));
-				resolve({data:documents.docs});
+				resolve({ data: documents.docs });
 			}
 		});
 	});
 }
 
 function getOrderById(doc) {
-
 	return new Promise((resolve, reject) => {
 		db.get(doc.docId, (err, document) => {
 			if (err) {
