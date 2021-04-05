@@ -30,7 +30,7 @@ router.get('/dashboard/', function (req, res) {
 });
 
 router.get('/editorder', function (req, res) {
-    res.sendFile(reqPath + "/views/" + "editOrder.html");   
+    res.sendFile(reqPath + "/views/" + "editOrder.html");
 });
 
 router.get('/orderList/', function (req, res) {
@@ -70,66 +70,66 @@ router.get('/useCases', function (req, res) {
     res.sendFile(reqPath + "/views/" + "useCaseList.html");
 });
 
-router.post('/caas/createDocument', async function (req, res) {
-   await cloudant.insertOrderData(req.body);
-   res.send('success');
+router.post('/fs/createDocument', async function (req, res) {
+    await cloudant.insertOrderData(req.body);
+    res.send('success');
 });
 
 router.post('/caas/getDocuments', async function (req, res) {
-   var orderData = await cloudant.getOrderData();
-   res.send(orderData);
+    var orderData = await cloudant.getOrderData();
+    res.send(orderData);
 });
 
-router.post('/caas/getOrderCount', async function (req, res) {
-    var orderData = await cloudant.getOrderCount();    
+router.get('/fs/getOrderCount', async function (req, res) {
+    var orderData = await cloudant.getOrderCount();
     res.send(orderData);
- });
+});
 
- router.post('/fs/deleteorder', async function (req, res) {
-    var orderData = await cloudant.deleteOrder(req.body);    
+router.post('/fs/deleteorder', async function (req, res) {
+    var orderData = await cloudant.deleteOrder(req.body);
     res.send(orderData);
- });
+});
 
- router.post('/fs/updateorder', async function (req, res) {     
-    var orderData = await cloudant.updateOrder(req.body);    
+router.post('/fs/updateorder', async function (req, res) {
+    var orderData = await cloudant.updateOrder(req.body);
     res.send(orderData);
- });
+});
 
 
 router.post('/getOrder', async function (req, res) {
-    var orderData = await cloudant.getOrderById(req.body);    
+    var orderData = await cloudant.getOrderById(req.body);
     res.send(orderData);
- });
+});
 
- router.get('/fs/getNewOrders', async function (req, res) {
+router.get('/fs/getNewOrders', async function (req, res) {
     var orderData = await cloudant.getNewOrders();
     res.send(orderData);
- });
+});
 
- router.get('/fs/getOnProcessOrders', async function (req, res) {
+router.get('/fs/getOnProcessOrders', async function (req, res) {
     var orderData = await cloudant.getOnProcessOrders();
     res.send(orderData);
- });
+});
 
- router.get('/fs/getReadyOrders', async function (req, res) {
+router.get('/fs/getReadyOrders', async function (req, res) {
     var orderData = await cloudant.getReadyOrders();
     res.send(orderData);
- });
+});
 
- 
- router.get('/fs/getDeliveredOrders', async function (req, res) {
+
+router.get('/fs/getDeliveredOrders', async function (req, res) {
     var orderData = await cloudant.getDeliveredOrders();
     res.send(orderData);
- });
+});
 
- router.post('/fs/getDifferentOrderCounts', async function (req, res) {
-    var orderData = await cloudant.getDifferentOrderCounts();    
+router.post('/fs/getDifferentOrderCounts', async function (req, res) {
+    var orderData = await cloudant.getDifferentOrderCounts();
     res.send(orderData);
- });
+});
 
- router.post('/fs/getYTTOrders', async function (req, res) {
-    var orderData = await cloudant.getYTTOrders(req.body);    
+router.post('/fs/getYTTOrders', async function (req, res) {
+    var orderData = await cloudant.getYTTOrders(req.body);
     res.send(orderData);
- });
+});
 
 module.exports = router;

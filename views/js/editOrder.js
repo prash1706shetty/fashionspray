@@ -1,4 +1,3 @@
-var cookieValue = readCookie();
 var formValidation = true;
 var createDate = '';
 
@@ -15,8 +14,7 @@ jQuery(document).ready(function ($) {
     url: "/getOrder",
     data: JSON.stringify(doc),
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + cookieValue
+      'Content-Type': 'application/json'
     },
     async: false,
     success: function (result) {
@@ -559,11 +557,11 @@ function saveOrder() {
       }
       if (occasionDate.includes('/')) {
         var from = occasionDate.split("/");
-       festivalDateFamilyTimeStamp = {
-        date: parseInt(from[0]),
-        month: parseInt(from[1]),
-        year: parseInt(from[2])
-      }
+        festivalDateFamilyTimeStamp = {
+          date: parseInt(from[0]),
+          month: parseInt(from[1]),
+          year: parseInt(from[2])
+        }
       }
 
       occasionData = {
@@ -596,7 +594,7 @@ function saveOrder() {
   } else {
 
     if (deliveryDate.includes('/')) {
-       var from = deliveryDate.split("/");
+      var from = deliveryDate.split("/");
       // timeStampDate = new Date(from[2], from[1] - 1, from[0]).getTime();
       deliveryDateDetails = {
         date: parseInt(from[0]),
@@ -737,8 +735,7 @@ function saveOrder() {
       url: "/fs/updateorder",
       data: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + cookieValue
+        'Content-Type': 'application/json'
       },
       async: false,
       success: function (result) {

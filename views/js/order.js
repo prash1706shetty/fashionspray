@@ -1,4 +1,3 @@
-var cookieValue = readCookie();
 var formValidation = true;
 
 jQuery(document).ready(function ($) {
@@ -118,19 +117,9 @@ jQuery(document).ready(function ($) {
     }
   }, 100); // check every 100ms
 
-
-
-  var data = {
-    "test1": "test1"
-  }
   jQuery.ajax({
-    type: "POST",
-    url: "/caas/getOrderCount",
-    data: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + cookieValue
-    },
+    type: "GET",
+    url: "/fs/getOrderCount",
     async: false,
     success: function (result) {
       if (result.rows.length != 0) {
@@ -455,11 +444,10 @@ function saveOrder() {
     }
     jQuery.ajax({
       type: "POST",
-      url: "/caas/createDocument",
+      url: "/fs/createDocument",
       data: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + cookieValue
+        'Content-Type': 'application/json'
       },
       async: false,
       success: function (result) {
