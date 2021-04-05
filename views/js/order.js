@@ -66,11 +66,11 @@ jQuery(document).ready(function ($) {
       $("#occaionOfTitle").text("Marriage of");
       $('#festivalNameId').addClass('display-none');
       $("#occasionDateTitle").text("Marriage date");
-    } else if (occasion == 'Festival') {
+    } else if (occasion == 'Function') {
       $('#occasionOfId').addClass('display-none');
       $('#festivalNameId').removeClass('display-none');
       $('#occasionDateId').removeClass('display-none');
-      $("#occasionDateTitle").text("Festival date");
+      $("#occasionDateTitle").text("Function date");
 
     } else if (occasion == 'other') {
       $('#occasionOfId').addClass('display-none');
@@ -294,7 +294,7 @@ function saveOrder() {
     }
   } else if (occasion == 'select') {
     formValidation = false;
-  } else if (occasion == 'Festival') {
+  } else if (occasion == 'Function') {
     var festivalName = jQuery('#festivalName').val();
     var occasionDate = jQuery('#occasionDate').val();
     if (festivalName == '') {

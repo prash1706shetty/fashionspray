@@ -93,11 +93,11 @@ jQuery(document).ready(function ($) {
       $("#occaionOfTitle").text("Marriage of");
       $('#festivalNameId').addClass('display-none');
       $("#occasionDateTitle").text("Marriage date");
-    } else if (occasion == 'Festival') {
+    } else if (occasion == 'Function') {
       $('#occasionOfId').addClass('display-none');
       $('#festivalNameId').removeClass('display-none');
       $('#occasionDateId').removeClass('display-none');
-      $("#occasionDateTitle").text("Festival date");
+      $("#occasionDateTitle").text("Function date");
 
     } else if (occasion == 'other') {
       $('#occasionOfId').addClass('display-none');
@@ -315,11 +315,11 @@ function preloadForm(result) {
       jQuery("#otherOccasion").prop("checked", true);
 
     }
-  } else if (occationDetails.occasion == 'Festival') {
+  } else if (occationDetails.occasion == 'Function') {
 
     jQuery('#festivalNameId').removeClass('display-none');
     jQuery('#occasionDateId').removeClass('display-none');
-    jQuery("#occasionDateTitle").text("Festival date");
+    jQuery("#occasionDateTitle").text("Function date");
     jQuery('#festivalName').val(occationDetails.festivalName);
     var occasionDateTimestamp = occationDetails.festivalDate;
     jQuery('#occasionDate').val(occasionDateTimestamp.date + '/' + occasionDateTimestamp.month + '/' + occasionDateTimestamp.year);
@@ -539,7 +539,7 @@ function saveOrder() {
     }
   } else if (occasion == 'select') {
     formValidation = false;
-  } else if (occasion == 'Festival') {
+  } else if (occasion == 'Function') {
     var festivalName = jQuery('#festivalName').val();
     var occasionDate = jQuery('#occasionDate').val();
 
@@ -552,7 +552,6 @@ function saveOrder() {
       formValidation = false;
     }
     if (festivalName != '' && occasionDate != '') {
-      //var festivalDateFamilyTimeStamp = (new Date(occasionDate)).getTime();
       var festivalDateFamilyTimeStamp = {
         date: new Date(occasionDate).getDate(),
         month: new Date(occasionDate).getMonth() + 1,
@@ -560,7 +559,6 @@ function saveOrder() {
       }
       if (occasionDate.includes('/')) {
         var from = occasionDate.split("/");
-       // festivalDateFamilyTimeStamp = new Date(from[2], from[1] - 1, from[0]).getTime();
        festivalDateFamilyTimeStamp = {
         date: parseInt(from[0]),
         month: parseInt(from[1]),

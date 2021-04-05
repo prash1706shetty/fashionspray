@@ -8,6 +8,11 @@ router.use(bodyParser.json({ limit: 104857600 }));
 router.use(bodyParser.urlencoded({ limit: 104857600, extended: true }));
 
 let reqPath = path.join(__dirname, '../');
+
+router.get('/expense', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "expense.html");
+});
+
 router.get('/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "orderList.html");
 });

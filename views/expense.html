@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index, follow" />
+  <title>Fashion Spray</title>
+
+  <script src="https://1.www.s81c.com/common/stats/ida_stats.js"></script>
+  <link href="https://1.www.s81c.com/common/v18/css/www.css" rel="stylesheet" />
+  <link href="https://1.www.s81c.com/common/v19a/css/www.css" rel="stylesheet" />
+  <script src="https://1.www.s81c.com/common/v18/js/www.js"></script>
+  <script src="https://1.www.s81c.com/common/v19a/js/www.js"></script>
+  <link href="https://1.www.s81c.com/common/v18/css/forms.css" rel="stylesheet">
+  <script src="https://1.www.s81c.com/common/v18/js/forms.js"></script>
+  <link href="https://1.www.s81c.com/common/v18/css/grid-fluid.css" rel="stylesheet" />
+  <script src="./js/common.js"></script>
+  <script src="./js/order.js"></script>
+  <script src="./js/request.js"></script>
+  <script src="./js/constant.js"></script>
+  <link href="./css/styles.css" rel="stylesheet">
+
+</head>
+
+<body id="ibm-com" class="ibm-type">
+  <div id="ibm-top" class="ibm-landing-page">
+
+    <div class="ibm-col-12-12 headerFirst">
+      <div style="padding-top:10px;padding-left:40px;">
+        <h2><span style="font-size:30px;font-weight: bold;">Fashion Spray</span></h2>
+      </div>
+    </div>
+
+    <div class="ibm-col-12-12 headerSecond" style="padding:10px;">
+      <div class="ibm-col-12-6">
+        <span class="ibm-bold" style="padding-left: 30px;float:left;">Order Details : </span>
+      </div>
+      <div class="ibm-col-12-3">
+
+      </div>
+      <div class="ibm-col-12-3">
+        <div><button onclick="location.href = '/dashboard';" class="createOrder ibm-btn-small" style="width: 150px;">Go
+            to dashboard</button></div>
+      </div>
+    </div>
+
+
+    <div id="ibm-content-wrapper">
+
+
+      <form id="landingPageForm" class="ibm-row-form" action="javascript:void(0);">
+
+        <div class=" ibm-col-12-12" style="padding-left:40px;">
+          <div class=" ibm-col-12-6">
+
+            <div for="customerName" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer name
+              <span class="tooltiptext">1. Name of the customer who gave order</span>
+              <span class="ibm-required">*</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" value="" class="textFieldWidth" id="customerName" name="customerName" maxlength="50"
+                placeholder="Enter customer full name." onfocus="clearRedColor(this)">
+            </div>
+            <span class=" validationFontSize display-none" id='offerNameError'>Offering
+              Name is required</span>
+
+            <div for="orderNumber" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Order number
+              <span class="tooltiptext">4. Order number for the product.</span><span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" class="textFieldWidth" value="" id="orderNumber" name="orderNumber" disabled
+                maxlength="50">
+            </div>
+
+
+          </div>
+          <div class=" ibm-col-12-3">
+
+            <div for="dressFor" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Dress for
+              <span class="tooltiptext">2. Type of person to whom this dress getting ready</span>
+            </div><span class="ibm-required"> *</span>
+            <div class="fieldPaddingTop">
+              <select name="dressFor" id="dressFor" style="width:180px;">
+                <option selected value="selectPerson">Select person type</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+                <option value="Men">Men</option>
+              </select>
+            </div>
+
+            <div for="totalAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Total amount
+              <span class="tooltiptext">5. Total amount for selected dress</span>
+              <span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" class="fieldWidthSmall" id="totalAmount" name="totalAmount" value=""
+                placeholder="Enter total amount." onfocus="clearRedColor(this)"
+                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+            </div>
+            <span class="validationFontSize display-none" id='marketPlaceUrlError'>Marketplace URL is
+              required</span>
+
+          
+
+
+
+          </div>
+          <div class=" ibm-col-12-3">
+
+            <div id="dressTypeKids">
+              <div for="dressType" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Dress type
+                <span class="tooltiptext">3. Type of dress selected by customer</span>
+              </div><span class="ibm-required"> *</span>
+
+              <div class="fieldPaddingTop">
+                <select name="dressType" id="dressType" disabled style="width:180px;">
+                  <option selected value="selectType" disabled>Select dress type</option>
+                </select>
+              </div>
+            </div>
+
+            <div for="advanceAmount" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Advance paid
+              <span class="tooltiptext">6. Total advance paid by customer</span>
+              <span class="ibm-required">
+                *</span>
+            </div>
+            <div class="fieldPaddingTop">
+              <input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value=""
+                placeholder="Enter advance paid." onfocus="clearRedColor(this)"
+                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+            </div>
+
+      
+          </div>
+        </div>
+
+        <div class=" ibm-col-12-12 ibm-padding-top-1" style="padding-left:50px;padding-right:30px;">
+          <div class="ibm-rule ibm-alternate ibm-gray-30">
+            <hr>
+          </div>
+        </div>
+
+
+
+        
+
+
+        <div class="ibm-fluid">
+          <div class="ibm-col-12-12" align="right">
+            <p class="ibm-btn-row ibm-button-link" style="padding-right:5px;">
+              <button class="buttonCancel cancelHover" onclick="window.open('/add','_self');">Cancel</button>
+              <button id="saveOrderId" class="saveOrder" style="width: 130px;" onclick="saveOrder()">Save</button>
+              <span id="loadingIndicator" class="ibm-spinner ibm-h2 visibility-hidden"></span>
+            </p>
+          </div>
+        </div>
+      </form>
+
+      <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
+        <p id="overlayMsg"></p>
+        <a href="/neworders" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+          onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
+      </div>
+
+      <div class="ibm-common-overlay" data-widget="overlay" id="errorOverlay">
+        <p id="errorOverlayMsg"></p>
+        <a href="javascript:;" id="overlayError" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+          onclick="IBMCore.common.widget.overlay.hide('overlayError',true);">Ok</a>
+      </div>
+
+
+
+    </div>
+    <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
+      <p id="overlayMsg"></p>
+      <a href="javascript:;" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+        onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
+    </div>
+
+    <!-- FOOTER_BEGIN -->
+    <footer role="contentinfo" aria-label="IBM">
+
+    </footer>
+    <!-- FOOTER_END -->
+  </div>
+
+</body>
+
+</html>
