@@ -1,17 +1,8 @@
-var cookieValue = readCookie();
 jQuery(document).ready(function ($) {
 
-  var data = {
-    "test1": "test1"
-  }
   jQuery.ajax({
-    type: "POST",
+    type: "GET",
     url: "/fs/getDifferentOrderCounts",
-    data: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + cookieValue
-    },
     async: false,
     success: function (result) {
       if (result.rows.length != 0) {
@@ -65,8 +56,7 @@ jQuery(document).ready(function ($) {
     url: "/fs/getYTTOrders",
     data: JSON.stringify(doc),
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + cookieValue
+      'Content-Type': 'application/json'
     },
     async: false,
     success: function (result) {

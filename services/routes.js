@@ -75,7 +75,7 @@ router.post('/fs/createDocument', async function (req, res) {
     res.send('success');
 });
 
-router.post('/caas/getDocuments', async function (req, res) {
+router.get('/fs/getOrderData', async function (req, res) {
     var orderData = await cloudant.getOrderData();
     res.send(orderData);
 });
@@ -122,7 +122,7 @@ router.get('/fs/getDeliveredOrders', async function (req, res) {
     res.send(orderData);
 });
 
-router.post('/fs/getDifferentOrderCounts', async function (req, res) {
+router.get('/fs/getDifferentOrderCounts', async function (req, res) {
     var orderData = await cloudant.getDifferentOrderCounts();
     res.send(orderData);
 });
