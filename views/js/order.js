@@ -191,6 +191,8 @@ function fieldsUpdateRequired(updateChecked) {
 
 function saveOrder() {
 
+
+  jQuery('#loadingIndicator').removeClass('visibility-hidden');
   jQuery('saveOrderId').prop('disabled', true);
   var formValidation = true;
   var deliveryDateDetails = '';
@@ -407,7 +409,6 @@ function saveOrder() {
   }
 
   if (formValidation) {
-    jQuery('#loadingIndicator').removeClass('visibility-hidden');
     jQuery('saveOrderId').prop('disabled', true);
     var data = {
       "_id": orderNumber,
@@ -454,13 +455,14 @@ function saveOrder() {
         jQuery('#loadingIndicator').addClass('visibility-hidden');
         IBMCore.common.widget.overlay.show("confirmationOverlay");
         jQuery("#overlayMsg").empty().append('<span style="color: red;">Order data uploaded successfully</span>');
-        //
+        
       },
       error: function (e) {
         alert("There was an error while creating order.")
       }
     });
   } else {
+    jQuery('#loadingIndicator').addClass('visibility-hidden');
     IBMCore.common.widget.overlay.show("errorOverlay");
     jQuery("#errorOverlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');
   }

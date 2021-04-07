@@ -127,6 +127,11 @@ router.get('/fs/getDifferentOrderCounts', async function (req, res) {
     res.send(orderData);
 });
 
+router.get('/fs/getOrderByMonth', async function (req, res) {
+    var orderData = await cloudant.getOrderByMonth();
+    res.send(orderData);
+});
+
 router.post('/fs/getYTTOrders', async function (req, res) {
     var orderData = await cloudant.getYTTOrders(req.body);
     res.send(orderData);

@@ -219,6 +219,19 @@ function getDifferentOrderCounts() {
 	});
 }
 
+function getOrderByMonth() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'orderByMonth', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
 function getYTTOrders(doc) {
 	return new Promise((resolve, reject) => {
 		db.find({
@@ -299,3 +312,5 @@ module.exports.getDifferentOrderCounts = getDifferentOrderCounts;
 module.exports.getOnProcessOrders = getOnProcessOrders;
 module.exports.getReadyOrders = getReadyOrders;
 module.exports.getYTTOrders = getYTTOrders;
+module.exports.getOrderByMonth = getOrderByMonth;
+
