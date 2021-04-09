@@ -17,7 +17,7 @@ jQuery(document).ready(function ($) {
       var monthNames = ["Jan", "Feb", "Mar", "Apr",
         "May", "Jun", "Jul", "Aug",
         "Sep", "Oct", "Nov", "Dec"];
-      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Dress</th><th>Delivery Date</th><th>Status</th><th>Action</th></tr></thead><tbody>";
+      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Mobile Number</th><th>Delivery Date</th><th>Status</th><th>Action</th></tr></thead><tbody>";
       //for (row of result.rows) {
       result.rows.forEach((row, index) => {
         //deliveryDate = new Date(row.value.deliveryDate);  
@@ -69,7 +69,7 @@ jQuery(document).ready(function ($) {
           '<td>' + row.value.orderNumber + '</td>' +
           '<td id ="orderDetails-' + row.value._id + '" onclick="getOrderDetails(this);IBMCore.common.widget.overlay.show(\'overlayOrder\'); return false;">' + row.value.customerName + '</td>' +
 
-          '<td>' + row.value.dressType + '</td>' +
+          '<td>' + row.value.mobileNumber + '</td>' +
           '<td>' + deliveryDateValue + '</td>' +
           '<td style=' + rowBgColor + '>' + orderStatusValue + '</td>' +
           '<td id="toggle' + index + '" class="elipsis"><img src="/images/overflow-menu--vertical.svg" class="elipsis" style="cursor: pointer;" onclick= "productActionToggle(' + index + ');  return false;\" width="30" height="30"><div style="position:absolute;z-index:1"><ul id="productAction' + index + '" style="display:none;" class="ibm-dropdown-menu productAction"><li><a  style="cursor: pointer;text-decoration: none;" id ="editProduct-' + row.value._id + '" href="/editorder?on=' + row.value.orderNumber + '">Edit</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete</a></li></ul></div></td>' +
