@@ -13,7 +13,7 @@ router.get('/expense', function (req, res) {
     res.sendFile(reqPath + "/views/" + "expense.html");
 });
 
-router.get('/allOrders', function (req, res) {
+router.get('/allorders', function (req, res) {
     res.sendFile(reqPath + "/views/" + "orderList.html");
 });
 
