@@ -1,6 +1,6 @@
 var orderList = '';
 
-jQuery(document).ready(function ($) {    
+jQuery(document).ready(function ($) {
   jQuery.ajax({
     type: "GET",
     url: "/fs/getDeliveredOrders",
@@ -9,14 +9,14 @@ jQuery(document).ready(function ($) {
       orderList = result.rows;
       var deliveryDate = '';
       var orderDate = '';
-      var monthNames =["Jan","Feb","Mar","Apr",
-                      "May","Jun","Jul","Aug",
-                      "Sep", "Oct","Nov","Dec"];
-      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Dress</th><th>Order Date</th><th>Delivery Date</th></tr></thead><tbody>";
+      var monthNames = ["Jan", "Feb", "Mar", "Apr",
+        "May", "Jun", "Jul", "Aug",
+        "Sep", "Oct", "Nov", "Dec"];
+      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Mobile Number</th><th>Order Date</th><th>Delivery Date</th></tr></thead><tbody>";
       result.rows.forEach((row, index) => {
-  deliveryDate = new Date(row.value.deliveryDate.year, row.value.deliveryDate.month - 1, row.value.deliveryDate.date);
- orderDate =new Date(row.value.orderDate.year, row.value.orderDate.month - 1, row.value.orderDate.date); 
-       
+        deliveryDate = new Date(row.value.deliveryDate.year, row.value.deliveryDate.month - 1, row.value.deliveryDate.date);
+        orderDate = new Date(row.value.orderDate.year, row.value.orderDate.month - 1, row.value.orderDate.date);
+
         var rowBgColor = '';
         var deliveryDateValue = '';
         var orderDateValue = '';
@@ -48,46 +48,46 @@ jQuery(document).ready(function ($) {
         var yesterdayDate = new Date();
         yesterdayDate.setDate(yesterdayDate.getDate() - 1);
         var currentYear = deliveryDate.getFullYear().toString();
-        currentYear = currentYear.substring(currentYear.length-2);
+        currentYear = currentYear.substring(currentYear.length - 2);
 
         var orderDateYear = orderDate.getFullYear().toString();
-        orderDateYear = orderDateYear.substring(orderDateYear.length-2);
+        orderDateYear = orderDateYear.substring(orderDateYear.length - 2);
 
-        if(deliveryDate.getDate()< 10){
-          deliveryDateValue = '0'+deliveryDate.getDate()  + monthNames[deliveryDate.getMonth()] + ' ' + currentYear;
+        if (deliveryDate.getDate() < 10) {
+          deliveryDateValue = '0' + deliveryDate.getDate() + monthNames[deliveryDate.getMonth()] + ' ' + currentYear;
         } else {
-          deliveryDateValue = deliveryDate.getDate()  + monthNames[deliveryDate.getMonth()] + ' ' + currentYear;
-        }        
-        if(deliveryDate.getDate() == new Date().getDate() && deliveryDate.getMonth() == new Date().getMonth() && deliveryDate.getYear() == new Date().getYear()){
+          deliveryDateValue = deliveryDate.getDate() + monthNames[deliveryDate.getMonth()] + ' ' + currentYear;
+        }
+        if (deliveryDate.getDate() == new Date().getDate() && deliveryDate.getMonth() == new Date().getMonth() && deliveryDate.getYear() == new Date().getYear()) {
           deliveryDateValue = 'Today';
-        } else if(deliveryDate.getDate() == tomorrowDate.getDate() && deliveryDate.getMonth() == tomorrowDate.getMonth() && deliveryDate.getYear() == tomorrowDate.getYear()){
+        } else if (deliveryDate.getDate() == tomorrowDate.getDate() && deliveryDate.getMonth() == tomorrowDate.getMonth() && deliveryDate.getYear() == tomorrowDate.getYear()) {
           deliveryDateValue = 'Tomorrow';
-        } else if(deliveryDate.getDate() == yesterdayDate.getDate() && deliveryDate.getMonth() == yesterdayDate.getMonth() && deliveryDate.getYear() == yesterdayDate.getYear()){
+        } else if (deliveryDate.getDate() == yesterdayDate.getDate() && deliveryDate.getMonth() == yesterdayDate.getMonth() && deliveryDate.getYear() == yesterdayDate.getYear()) {
           deliveryDateValue = 'Yesterday';
         }
 
 
-        if(orderDate.getDate()< 10){
-            orderDateValue = '0'+orderDate.getDate()  + monthNames[orderDate.getMonth()] + ' ' + orderDateYear;
-          } else {
-            orderDateValue = orderDate.getDate()  + monthNames[orderDate.getMonth()] + ' ' + orderDateYear;
-          }        
-          if(orderDate.getDate() == new Date().getDate() && orderDate.getMonth() == new Date().getMonth() && orderDate.getYear() == new Date().getYear()){
-            orderDateValue = 'Today';
-          } else if(orderDate.getDate() == tomorrowDate.getDate() && orderDate.getMonth() == tomorrowDate.getMonth() && orderDate.getYear() == tomorrowDate.getYear()){
-            orderDateValue = 'Tomorrow';
-          } else if(orderDate.getDate() == yesterdayDate.getDate() && orderDate.getMonth() == yesterdayDate.getMonth() && orderDate.getYear() == yesterdayDate.getYear()){
-            orderDateValue = 'Yesterday';
-          }
+        if (orderDate.getDate() < 10) {
+          orderDateValue = '0' + orderDate.getDate() + monthNames[orderDate.getMonth()] + ' ' + orderDateYear;
+        } else {
+          orderDateValue = orderDate.getDate() + monthNames[orderDate.getMonth()] + ' ' + orderDateYear;
+        }
+        if (orderDate.getDate() == new Date().getDate() && orderDate.getMonth() == new Date().getMonth() && orderDate.getYear() == new Date().getYear()) {
+          orderDateValue = 'Today';
+        } else if (orderDate.getDate() == tomorrowDate.getDate() && orderDate.getMonth() == tomorrowDate.getMonth() && orderDate.getYear() == tomorrowDate.getYear()) {
+          orderDateValue = 'Tomorrow';
+        } else if (orderDate.getDate() == yesterdayDate.getDate() && orderDate.getMonth() == yesterdayDate.getMonth() && orderDate.getYear() == yesterdayDate.getYear()) {
+          orderDateValue = 'Yesterday';
+        }
 
         table = table + '<tr>' +
-        '<td>' + row.value.orderNumber + '</td>' +
+          '<td>' + row.value.orderNumber + '</td>' +
           '<td id ="orderDetails-' + row.value._id + '" onclick="getOrderDetails(this);IBMCore.common.widget.overlay.show(\'overlayOrder\'); return false;">' + row.value.customerName + '</td>' +
-          
-          '<td>' + row.value.dressType + '</td>' +
+
+          '<td>' + row.value.mobileNumber + '</td>' +
           '<td>' + orderDateValue + '</td>' +
           '<td>' + deliveryDateValue + '</td>' +
-          
+
           '</tr>';
 
       });
@@ -114,7 +114,7 @@ function getOrderDetails(e) {
   jQuery('#overlayOrder').html('');
   orderList.forEach((row, index) => {
     if (row.value._id == odId) {
-      var orderDate = new Date(row.value.orderDate);
+      var orderDate = row.value.orderDate;
       var orderOverlayDetails = "<div id='customerNameDetails'><span class='ibm-bold'>Customer name : </span><span>" + row.value.customerName + "</span></div>" +
         "<div id='dressForDetails'><span class='ibm-bold'>Dress : </span><span>" + row.value.dressFor + " " + row.value.dressType + "</span></div>" +
         "<div id='totalAmountDetails'><span class='ibm-bold'>Total amount : </span><span>" + row.value.totalAmount + "</span></div>" +
@@ -123,21 +123,21 @@ function getOrderDetails(e) {
         "<div id='fabricsFromDetails'><span class='ibm-bold'>Fabrics from : </span><span>" + row.value.fabricsFrom + "</span></div>" +
         "<div id='customerLocationDetails'><span class='ibm-bold'>Location : </span><span>" + row.value.customerLocation + "</span></div>" +
         "<div id='measureByDetails'><span class='ibm-bold'>Measurement taken by : </span><span>" + row.value.measureBy + "</span></div>" +
-        "<div id='orderDateDetails'><span class='ibm-bold'>Order given date : </span><span>" + orderDate.getDate() + '/' + (orderDate.getMonth() + 1) + '/' + orderDate.getFullYear() + "</span></div>" +
+        "<div id='orderDateDetails'><span class='ibm-bold'>Order given date : </span><span>" + orderDate.date + '/' + orderDate.month + '/' + orderDate.year + "</span></div>" +
         "<div id='orderNoteDetails'><span class='ibm-bold'>More details about order : </span><span>" + row.value.orderNote + "</span></div>";
- 
+
       var occasionDetailsOverlay = '';
       if (row.value.occationDetails.occasion == 'Festival') {
-        var festivalDate = new Date(row.value.occationDetails.festivalDate);
-        occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.festivalName + " " + row.value.occationDetails.occasion + " on " + festivalDate.getDate() + '/' + (festivalDate.getMonth() + 1) + '/' + festivalDate.getFullYear() + "</span></div>";
+        var festivalDate = row.value.occationDetails.festivalDate;
+        occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.festivalName + " " + row.value.occationDetails.occasion + " on " + festivalDate.date + '/' + festivalDate.month + '/' + festivalDate.year + "</span></div>";
       } else if (row.value.occationDetails.occasion == 'Marriage' || row.value.occationDetails.occasion == 'Birthday') {
-        var occasionDate = new Date(row.value.occationDetails.occasionDate);
+        var occasionDate = row.value.occationDetails.occasionDate;
         if (row.value.occationDetails.occasionof == 'family') {
-          occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + " of " + row.value.occationDetails.familyMemberRelation + " on " + occasionDate.getDate() + '/' + (occasionDate.getMonth() + 1) + '/' + occasionDate.getFullYear() + "</span></div>";
+          occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + " of " + row.value.occationDetails.familyMemberRelation + " on " + occasionDate.date + '/' + occasionDate.month + '/' + occasionDate.year + "</span></div>";
         } else if (row.value.occationDetails.occasionof == 'other') {
           occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + " of " + row.value.occationDetails.occasionof + "</span></div>";
         } else {
-          occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + " of " + row.value.occationDetails.occasionof + " on " + occasionDate.getDate() + '/' + (occasionDate.getMonth() + 1) + '/' + occasionDate.getFullYear() + "</span></div>";
+          occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.occasion + " of " + row.value.occationDetails.occasionof + " on " + occasionDate.date + '/' + occasionDate.month + '/' + occasionDate.year + "</span></div>";
         }
       } else if (row.value.occationDetails.occasion == 'other') {
         occasionDetailsOverlay = "<div id='occasionDetails'><span class='ibm-bold'>Occasion : </span><span>" + row.value.occationDetails.otherOccasionName + "</span></div>";
