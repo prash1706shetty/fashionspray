@@ -742,7 +742,7 @@ function saveOrder() {
         if (result.statusCode == 200) {
           // updateTable();
           // closeOverlay('deleteOverlay');
-          window.location.replace("/");
+          window.location.replace("/allorders");
         } else {
           alert('There was some error while updating data');
           closeOverlay('deleteOverlay');
