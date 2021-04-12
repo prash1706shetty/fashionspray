@@ -13,7 +13,7 @@ router.get('/expense', function (req, res) {
     res.sendFile(reqPath + "/views/" + "expense.html");
 });
 
-router.get('/', function (req, res) {
+router.get('/allOrders', function (req, res) {
     res.sendFile(reqPath + "/views/" + "orderList.html");
 });
 
@@ -38,7 +38,7 @@ router.get('/orderList/', function (req, res) {
 });
 
 router.get('/neworders', function (req, res) {
-    res.sendFile(reqPath + "/views/" + "newOrders.html");
+    res.sendFile(reqPath + "/views/" + "newOrdersList.html");
 });
 
 router.get('/onprocess', function (req, res) {
@@ -115,7 +115,6 @@ router.get('/fs/getReadyOrders', async function (req, res) {
     var orderData = await cloudant.getReadyOrders();
     res.send(orderData);
 });
-
 
 router.get('/fs/getDeliveredOrders', async function (req, res) {
     var orderData = await cloudant.getDeliveredOrders();
