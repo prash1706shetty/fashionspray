@@ -21,6 +21,10 @@ router.get('/add/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "newOrder.html");
 });
 
+router.get('/addfabrics', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "addFabrics.html");
+});
+
 router.get('/analysis/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "analysis.html");
 });

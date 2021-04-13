@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>Fashion Spray</title>
+
+    <script src="https://1.www.s81c.com/common/stats/ida_stats.js"></script>
+    <link href="https://1.www.s81c.com/common/v18/css/www.css" rel="stylesheet" />
+    <link href="https://1.www.s81c.com/common/v19a/css/www.css" rel="stylesheet" />
+    <script src="https://1.www.s81c.com/common/v18/js/www.js"></script>
+    <script src="https://1.www.s81c.com/common/v19a/js/www.js"></script>
+    <link href="https://1.www.s81c.com/common/v18/css/forms.css" rel="stylesheet" />
+    <script src="https://1.www.s81c.com/common/v18/js/forms.js"></script>
+    <link href="https://1.www.s81c.com/common/v18/css/grid-fluid.css" rel="stylesheet" />
+    <script src="./js/common.js"></script>
+    <script src="./js/addFabrics.js"></script>
+    <script src="./js/request.js"></script>
+    <script src="./js/constant.js"></script>
+    <link href="./css/styles.css" rel="stylesheet" />
+</head>
+
+<body id="ibm-com" class="ibm-type">
+    <div id="ibm-top" class="ibm-landing-page">
+        <div class="ibm-col-12-12 headerFirst">
+            <div style="padding-top: 10px">
+                <h2>
+                    <span style="font-size: 30px; font-weight: bold">Fashion Spray</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="ibm-col-12-12 headerSecond" style="padding: 10px">
+            <div class="ibm-col-12-6">
+                <span class="ibm-bold" style="float: left">Fabrics Details : </span>
+            </div>
+            <div class="ibm-col-12-3"></div>
+            <div class="ibm-col-12-3">
+                <div>
+                    <button onclick="location.href = '/dashboard';" class="createOrder ibm-btn-small"
+                        style="width: 150px">
+                        Go to dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="ibm-content-wrapper">
+            <form id="landingPageForm" class="ibm-row-form" action="javascript:void(0);">
+                <div class="ibm-col-12-12 fieldPaddingTop" id="addFabrics">
+                    <div class="ibm-col-12-6 ibm-padding-top-1">
+                        <button id="Add">Add fabric details</button>
+                        <p class="ibm-maximize-link" style="
+                  position: relative;
+                  color: grey;
+                  display: inline-block;
+                  margin-bottom: 3px;
+                "></p>
+                        <button id="Remove" style="margin-left: 50px">
+                            Remove fabric details
+                        </button>
+                        <p class="ibm-maximize-link" style="
+                  position: relative;
+                  color: grey;
+                  display: inline-block;
+                  margin-bottom: 3px;
+                "></p>
+                    </div>
+                </div>
+
+                <div id="textboxDiv">
+                    <div class="ibm-col-12-12">
+                        <div class="ibm-col-12-3">
+                            <div for="fabricType1" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">
+                                Fabric type
+                                <span class="tooltiptext">Type of fabric.</span>
+                                <span class="ibm-required"> *</span>
+                            </div>
+                            <div class="fieldPaddingTop">
+                                <input type="text" class="fieldWidthSmall" id="fabricType1" name="fabricType1" value=""
+                                    placeholder="Enter type of fabric." onfocus="clearRedColor(this)" />
+                            </div>
+                        </div>
+
+                        <div class="ibm-col-12-3">
+                            <div for="colorType1" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">
+                                Color
+                                <span class="tooltiptext">Color of the fabric</span>
+                                <span class="ibm-required"> *</span>
+                            </div>
+                            <div class="fieldPaddingTop">
+                                <input type="text" class="fieldWidthSmall" id="colorType1" name="colorType1" value=""
+                                    placeholder="Enter color of the fabric." onfocus="clearRedColor(this)" />
+                            </div>
+                        </div>
+                        <div class="ibm-col-12-3">
+                            <div for="fabricQuantity1" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">
+                                Quantity
+                                <span class="tooltiptext">Number of meter fabric required.</span>
+                                <span class="ibm-required"> *</span>
+                            </div>
+                            <div class="fieldPaddingTop">
+                                <input type="text" class="fieldWidthSmall" id="fabricQuantity1" name="fabricQuantity1"
+                                    value="" placeholder="Enter number of meter." onfocus="clearRedColor(this)" />
+                            </div>
+                        </div>
+
+                        <div class="ibm-col-12-3">
+                            <div for="fabricNote1" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">
+                                Note and description of fabric.
+                                <span class="tooltiptext">Note.</span>
+                                <span class="ibm-required"> *</span>
+                            </div>
+                            <div class="fieldPaddingTop">
+                                <textarea placeholder="Enter fabric details." value="" rows="1"
+                                    id="fabricNote1" name="fabricNote1" maxlength="500"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibm-fluid">
+                    <div class="ibm-col-12-12" align="right">
+                        <p class="ibm-btn-row ibm-button-link" style="padding-right: 5px">
+                            <button class="buttonCancel cancelHover" onclick="window.open('/add','_self');">
+                                Cancel
+                            </button>
+                            <button id="saveOrderId" class="saveOrder" style="width: 130px" onclick="saveOrder()">
+                                Save
+                            </button>
+                            <span id="loadingIndicator" class="ibm-spinner ibm-h2 visibility-hidden"></span>
+                        </p>
+                    </div>
+                </div>
+            </form>
+
+            <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
+                <p id="overlayMsg"></p>
+                <a href="/neworders" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+                    onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
+            </div>
+
+            <div class="ibm-common-overlay" data-widget="overlay" id="errorOverlay">
+                <p id="errorOverlayMsg"></p>
+                <a href="javascript:;" id="overlayError" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+                    onclick="IBMCore.common.widget.overlay.hide('overlayError',true);">Ok</a>
+            </div>
+        </div>
+        <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
+            <p id="overlayMsg"></p>
+            <a href="javascript:;" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+                onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
+        </div>
+
+        <!-- FOOTER_BEGIN -->
+        <footer role="contentinfo" aria-label="IBM"></footer>
+        <!-- FOOTER_END -->
+    </div>
+</body>
+
+</html>

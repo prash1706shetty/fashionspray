@@ -1,8 +1,5 @@
 jQuery(document).ready(function ($) {
 
-
-
-
   jQuery.ajax({
     type: "GET",
     url: "/fs/getOrderData",
@@ -50,8 +47,6 @@ jQuery(document).ready(function ($) {
     }
   });
 
-
-
   jQuery.ajax({
     type: "GET",
     url: "/fs/getOrderByMonth",
@@ -89,8 +84,8 @@ jQuery(document).ready(function ($) {
             datasets: [
               {
                 label: "Total order",
-                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
-                data: [janCount,febCount,marchCount,aprilCount]
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                data: [janCount, febCount, marchCount, aprilCount]
               }
             ]
           },
@@ -101,9 +96,7 @@ jQuery(document).ready(function ($) {
               text: 'Order by each month'
             }
           }
-      });
-
-
+        });
       }
     },
     error: function (e) {
@@ -112,28 +105,25 @@ jQuery(document).ready(function ($) {
   });
 
 
-  $("#usecases li").on("click", function(){
+  $("#usecases li").on("click", function () {
     var id = $(this).attr('id');
-    
-    if(id=='monthlyOrder'){
+
+    if (id == 'monthlyOrder') {
       $('#genderChart').addClass('display-none');
       $('#monthlyChart').removeClass('display-none');
-      $("#monthlyOrderAnchor").css("color","blue");
-      $("#orderByGenderAnchor").css("color","");
+      $("#monthlyOrderAnchor").css("color", "blue");
+      $("#orderByGenderAnchor").css("color", "");
       $('#monthlyOrderAnchor').attr('aria-selected', true);
       $('#orderByGenderAnchor').attr('aria-selected', false);
     } else {
       $('#monthlyChart').addClass('display-none');
       $('#genderChart').removeClass('display-none');
-      $("#orderByGenderAnchor").css("color","blue");
-      $("#monthlyOrderAnchor").css("color","");
+      $("#orderByGenderAnchor").css("color", "blue");
+      $("#monthlyOrderAnchor").css("color", "");
       $('#monthlyOrderAnchor').attr('aria-selected', false);
       $('#orderByGenderAnchor').attr('aria-selected', true);
     }
   });
-
-  
-
   // new Chart(document.getElementById("pie-chart"), {
   //   type: 'pie',
   //   data: {

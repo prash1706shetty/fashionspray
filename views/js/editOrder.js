@@ -740,8 +740,6 @@ function saveOrder() {
       async: false,
       success: function (result) {
         if (result.statusCode == 200) {
-          // updateTable();
-          // closeOverlay('deleteOverlay');
           window.location.replace("/allorders");
         } else {
           alert('There was some error while updating data');
