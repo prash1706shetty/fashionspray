@@ -49,21 +49,63 @@
 
         <div id="ibm-content-wrapper">
             <form id="landingPageForm" class="ibm-row-form" action="javascript:void(0);">
-                <div class="ibm-col-12-12 fieldPaddingTop" id="addFabrics">
-                    <div class="ibm-col-12-6 ibm-padding-top-1">
-                        <button id="Add">Add fabric details</button>
+
+                <div class="ibm-col-12-12 fieldPaddingTop">
+                    <div class="ibm-col-12-6 fieldPaddingTop">
+                        <div class="ibm-textcolor-grey-60 ibm-padding-top-1"><span class="ibm-bold">Customer Name :
+                            </span>
+                            <span id="customerName"></span>
+                        </div>
+                        <div class="ibm-textcolor-grey-60 ibm-padding-top-1"><span class="ibm-bold">Mobile Number :
+                            </span>
+                            <span id="mobileNumber"></span>
+                        </div>
+                        <div class="ibm-textcolor-grey-60 ibm-padding-top-1"><span class="ibm-bold">Order Number :
+                            </span>
+                            <span id="orderNumber"></span>
+                        </div>
+                        <div class="ibm-textcolor-grey-60 ibm-padding-top-1"><span class="ibm-bold">Dress :
+                            </span>
+                            <span id="dress"></span>
+                        </div>
+                    </div>
+
+                    <div class="ibm-col-12-6 fieldPaddingTop">
+                        <div class="ibm-textcolor-grey-60 ibm-padding-top-1"><span class="ibm-bold">Order Date :
+                            </span>
+                            <span id="orderDate"></span>
+                        </div>
+                        <div class="ibm-textcolor-grey-60 ibm-padding-top-1"><span class="ibm-bold">Delivery Date :
+                            </span>
+                            <span id="deliveryDate"></span>
+                        </div>
+                        <div class="ibm-textcolor-grey-60 ibm-padding-top-1"><span class="ibm-bold">Details :
+                            </span>
+                            <span id="orderNote"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibm-col-12-12 fieldPaddingTop">
+                    <div class="ibm-rule ibm-alternate ibm-gray-30">
+                        <hr>
+                    </div>
+                </div>
+                <div class="ibm-col-12-12" id="addFabrics">
+                    <div class="ibm-col-12-3 ibm-padding-top-1">
+                        <button id="Add" type="button" class="ibm-btn-sec ibm-btn-green-50">Add fabric</button>
                         <p class="ibm-maximize-link" style="
                   position: relative;
-                  color: grey;
+                  color: green;
                   display: inline-block;
                   margin-bottom: 3px;
                 "></p>
-                        <button id="Remove" style="margin-left: 50px">
-                            Remove fabric details
-                        </button>
-                        <p class="ibm-maximize-link" style="
+                    </div>
+                    <div class="ibm-col-12-3 ibm-padding-top-1">
+                        <button type="button" id="Remove" class="ibm-btn-sec ibm-btn-red-50">Remove fabric</button>
+                        <p class="ibm-minimize-link" style="
                   position: relative;
-                  color: grey;
+                  color: red;
                   display: inline-block;
                   margin-bottom: 3px;
                 "></p>
@@ -71,16 +113,16 @@
                 </div>
 
                 <div id="textboxDiv">
-                    <div class="ibm-col-12-12">
+                    <div class="ibm-col-12-12 ibm-padding-top-1">
                         <div class="ibm-col-12-3">
                             <div for="fabricType1" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">
-                                Fabric type
+                                Fabric type 1
                                 <span class="tooltiptext">Type of fabric.</span>
                                 <span class="ibm-required"> *</span>
                             </div>
                             <div class="fieldPaddingTop">
                                 <input type="text" class="fieldWidthSmall" id="fabricType1" name="fabricType1" value=""
-                                    placeholder="Enter type of fabric." onfocus="clearRedColor(this)" />
+                                    placeholder="Enter fabric type." onfocus="clearRedColor(this)" />
                             </div>
                         </div>
 
@@ -92,37 +134,41 @@
                             </div>
                             <div class="fieldPaddingTop">
                                 <input type="text" class="fieldWidthSmall" id="colorType1" name="colorType1" value=""
-                                    placeholder="Enter color of the fabric." onfocus="clearRedColor(this)" />
+                                    placeholder="Enter fabric color." onfocus="clearRedColor(this)" />
                             </div>
                         </div>
                         <div class="ibm-col-12-3">
                             <div for="fabricQuantity1" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">
                                 Quantity
-                                <span class="tooltiptext">Number of meter fabric required.</span>
+                                <span class="tooltiptext">Number of meter fabric.</span>
                                 <span class="ibm-required"> *</span>
                             </div>
                             <div class="fieldPaddingTop">
                                 <input type="text" class="fieldWidthSmall" id="fabricQuantity1" name="fabricQuantity1"
-                                    value="" placeholder="Enter number of meter." onfocus="clearRedColor(this)" />
+                                    value="" placeholder="Enter in meter." onfocus="clearRedColor(this)" />
                             </div>
                         </div>
 
                         <div class="ibm-col-12-3">
                             <div for="fabricNote1" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">
-                                Note and description of fabric.
+                                Note
                                 <span class="tooltiptext">Note.</span>
                                 <span class="ibm-required"> *</span>
                             </div>
                             <div class="fieldPaddingTop">
-                                <textarea placeholder="Enter fabric details." value="" rows="1"
-                                    id="fabricNote1" name="fabricNote1" maxlength="500"></textarea>
+                                <textarea placeholder="Enter fabric details." value="" rows="2" id="fabricNote1"
+                                    name="fabricNote1" maxlength="500"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="ibm-col-12-12 fieldPaddingTop">
+                    <div class="ibm-rule ibm-alternate ibm-gray-30">
+                        <hr>
+                    </div>
+                </div>
                 <div class="ibm-fluid">
-                    <div class="ibm-col-12-12" align="right">
+                    <div class="ibm-col-12-12 ibm-padding-top-1" align="right">
                         <p class="ibm-btn-row ibm-button-link" style="padding-right: 5px">
                             <button class="buttonCancel cancelHover" onclick="window.open('/add','_self');">
                                 Cancel
