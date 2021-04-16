@@ -92,28 +92,22 @@
                     </div>
                 </div>
                 <div class="ibm-col-12-12" id="addFabrics">
-                    <div class="ibm-col-12-3 ibm-padding-top-1">
-                        <button id="Add" type="button" class="ibm-btn-sec ibm-btn-green-50">Add fabric</button>
-                        <p class="ibm-maximize-link" style="
-                  position: relative;
-                  color: green;
-                  display: inline-block;
-                  margin-bottom: 3px;
-                "></p>
+                    <div class="ibm-col-12-8 ibm-padding-top-1">
+
                     </div>
-                    <div class="ibm-col-12-3 ibm-padding-top-1">
-                        <button type="button" id="Remove" class="ibm-btn-sec ibm-btn-red-50">Remove fabric</button>
-                        <p class="ibm-minimize-link" style="
-                  position: relative;
-                  color: red;
-                  display: inline-block;
-                  margin-bottom: 3px;
-                "></p>
+
+                    <div class="ibm-col-12-4">
+                        <button id="Add" type="button" class="ibm-btn-sec ibm-btn-green-50 ibm-btn-small">Add
+                            fabric</button>
+
+
+                        <button type="button" id="Remove" class="ibm-btn-sec ibm-btn-red-50 ibm-btn-small">Remove
+                            fabric</button>
+
                     </div>
                 </div>
-
                 <div id="textboxDiv">
-                    <div class="ibm-col-12-12 ibm-padding-top-1">
+                    <div class="ibm-col-12-12">
                         <div class="ibm-col-12-3">
                             <div for="fabricType1" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">
                                 Fabric type 1
@@ -162,7 +156,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ibm-col-12-12 fieldPaddingTop">
+                <div class="ibm-col-12-12 fieldPaddingTop ibm-padding-top-1">
                     <div class="ibm-rule ibm-alternate ibm-gray-30">
                         <hr>
                     </div>
@@ -184,7 +178,7 @@
 
             <div class="ibm-common-overlay" data-widget="overlay" id="confirmationOverlay">
                 <p id="overlayMsg"></p>
-                <a href="/neworders" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
+                <a href="/orderlistforfabrics" id="overlayOk" class="ibm-btn-pri ibm-btn-blue-50 okButton" type="submit"
                     onclick="IBMCore.common.widget.overlay.hide('overlayOk',true);">Ok</a>
             </div>
 

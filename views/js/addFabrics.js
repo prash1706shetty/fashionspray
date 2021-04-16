@@ -1,12 +1,12 @@
 var formValidation = true;
 var addCount = 1;
+var orderNumber = '';
 
 jQuery(document).ready(function ($) {
-
     var searchParams = new URLSearchParams(window.location.search);
     let param = searchParams.get('on')
     var doc = {
-        docId: 'fs21200'
+        docId: param
     }
 
     jQuery.ajax({
@@ -25,7 +25,6 @@ jQuery(document).ready(function ($) {
             alert("There was some internal error while updating, Please try again after sometime")
         }
     });
-
 
     $("#fabricsFrom").change(function () {
         var faricsFrom = $('#fabricsFrom').val();
@@ -105,6 +104,7 @@ jQuery(document).ready(function ($) {
 });
 
 function preloadForm(result) {
+    orderNumber = result.orderNumber;
     jQuery('#customerName').text(result.customerName);
     jQuery('#mobileNumber').text(result.mobileNumber);
     jQuery('#orderNumber').text(result.orderNumber);
@@ -115,7 +115,45 @@ function preloadForm(result) {
 }
 
 function saveOrder() {
-    console.log("count-->" + addCount);
+
+    var fabricsArray = [];
+    for (var i = 1; i <= addCount; i++) {
+        var fabrics = {};
+        fabrics['fabricType' + i] = jQuery('#fabricType' + i).val();
+        fabrics['colorType' + i] = jQuery('#colorType' + i).val();
+        fabrics['fabricQuantity' + i] = jQuery('#fabricQuantity' + i).val();
+        fabrics['fabricNote' + i] = jQuery('#fabricNote' + i).val();
+        fabricsArray.push(fabrics);
+    }
+    var doc = {
+        docId: orderNumber,
+        fabrics: fabricsArray
+    }
+    jQuery.ajax({
+        type: "POST",
+        url: "/fs/addFabrics",
+        data: JSON.stringify(doc),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        async: false,
+        success: function (result) {
+            if (result.statusCode == 200) {
+                jQuery('#loadingIndicator').addClass('visibility-hidden');
+                IBMCore.common.widget.overlay.show("confirmationOverlay");
+                jQuery("#overlayMsg").empty().append('<span style="color: red;">Fabrics details updated.</span>');
+            } else {
+                alert('There was some error while updating data');
+
+            }
+        },
+        error: function (e) {
+            jQuery('#loadingIndicator').addClass('visibility-hidden');
+            IBMCore.common.widget.overlay.show("errorOverlay");
+            jQuery("#errorOverlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');
+
+        }
+    });
 }
 
 function clearRedColor(focusEvent) {

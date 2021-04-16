@@ -18,12 +18,30 @@ let access_control_db;
 
 function deleteOrder(doc) {
 	return new Promise((resolve, reject) => {
-		// Retrieve the list (need the rev)
 		findById(doc.docId).then((response) => {
-			// Parse the stringified JSON
 			let list = JSON.parse(response.data);
 			list.orderStatus = doc.status;
-			// Update the document in Cloudant
+			db.insert(list, (err, response) => {
+				if (err) {
+					logger.error('Error occurred: ' + err.message, 'update()');
+					reject(err);
+				} else {
+					resolve({ data: { updatedId: response.id, updatedRevId: response.rev }, statusCode: 200 });
+				}
+			});
+		}).catch((err) => {
+			logger.error('Error occurred: ' + err.message, 'update()');
+			reject(err);
+		});
+	});
+}
+
+
+function addFabrics(doc) {
+	return new Promise((resolve, reject) => {
+		findById(doc.docId).then((response) => {
+			let list = JSON.parse(response.data);
+			list.fabrics = doc.fabrics;
 			db.insert(list, (err, response) => {
 				if (err) {
 					logger.error('Error occurred: ' + err.message, 'update()');
@@ -131,6 +149,19 @@ function insertOrderData(data) {
 function getOrderData() {
 	return new Promise((resolve, reject) => {
 		db.view('order', 'newOrder', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
+function getOrdersForFabrics() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'orderForFabrics', function (err, body) {
 			if (err) {
 				console.error('Error occurred: ' + err.message);
 				reject(err);
@@ -313,4 +344,6 @@ module.exports.getOnProcessOrders = getOnProcessOrders;
 module.exports.getReadyOrders = getReadyOrders;
 module.exports.getYTTOrders = getYTTOrders;
 module.exports.getOrderByMonth = getOrderByMonth;
+module.exports.getOrdersForFabrics = getOrdersForFabrics;
+module.exports.addFabrics = addFabrics;
 

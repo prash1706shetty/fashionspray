@@ -2,151 +2,179 @@
 <html lang="en-US">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="index, follow" />
-  <title>Fashion Spray</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>Fashion Spray</title>
 
-  <script src="./js/ida_stats.js"></script>
-  <link href="./css/wwwv18.css" rel="stylesheet" />
-  <link href="./css/wwwv19a.css" rel="stylesheet" />
-  <script src="./js/wwwv18.js"></script>
-  <script src="./js/wwwv19a.js"></script>
-  <link href="./css/forms.css" rel="stylesheet">
-  <script src="./js/forms.js"></script>
-  <link href="./css/grid-fluid.css" rel="stylesheet" />
-  <link href="./css/v18tables.css" rel="stylesheet">
-  <script src="./js/v18tables.js"></script>
-  <script src="./js/common.js"></script>
-  <script src="./js/constant.js"></script>
-  <script src="./js/request.js"></script>
-   <script src="./js/dashboard.js"></script>
-  <link href="./css/styles.css" rel="stylesheet">
+    <script src="./js/ida_stats.js"></script>
+    <link href="./css/wwwv18.css" rel="stylesheet" />
+    <link href="./css/wwwv19a.css" rel="stylesheet" />
+    <script src="./js/wwwv18.js"></script>
+    <script src="./js/wwwv19a.js"></script>
+    <link href="./css/forms.css" rel="stylesheet">
+    <script src="./js/forms.js"></script>
+    <link href="./css/grid-fluid.css" rel="stylesheet" />
+    <link href="./css/v18tables.css" rel="stylesheet">
+    <script src="./js/v18tables.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/constant.js"></script>
+    <script src="./js/request.js"></script>
+    <script src="./js/dashboard.js"></script>
+    <link href="./css/styles.css" rel="stylesheet">
 </head>
 
 <body id="ibm-com" class="ibm-type">
-  <div id="ibm-top" class="ibm-landing-page">
-    <div class="ibm-col-12-12 headerFirst">
-      <div style="padding-top:10px;padding-left:10px;">
-        <h2><span style="font-size:30px;font-weight: bold;">Fashion Spray</span></h2>
-      </div>
+    <div id="ibm-top" class="ibm-landing-page">
+        <div class="ibm-col-12-12 headerFirst">
+            <div style="padding-top:10px;padding-left:10px;">
+                <h2><span style="font-size:30px;font-weight: bold;">Fashion Spray</span></h2>
+            </div>
 
-    </div>
-   
-    <div class="ibm-col-12-12 headerSecond" style="padding:10px;">
-      <div class="ibm-col-12-6">
-        <span class="ibm-bold" style="float:left;">Dashboard: </span>
-      </div>
-      <div class="ibm-col-12-3">
-            
-      </div>
-      <div class="ibm-col-12-3">
-        <div><button onclick="location.href = '/add';" class="createOrder ibm-btn-small" style="width: 150px;">Create
-            Order</button></div>
-      </div>
-    </div>
+        </div>
 
-    <div class="ibm-col-12-12 ibm-padding-top-1" data-widget="setsameheight" data-items=".ibm-blocklink">
+        <div class="ibm-col-12-12 headerSecond" style="padding:10px;">
+            <div class="ibm-col-12-3">
+                <span class="ibm-bold" style="float:left;">Dashboard: </span>
+            </div>
+            <div class="ibm-col-12-3">
+                <div><button onclick="location.href = '/analysis';" class="createOrder ibm-btn-small"
+                        style="width: 150px;">Order Analysis</button></div>
+            </div>
+            <div class="ibm-col-12-3">
+                <div><button onclick="location.href = '/orderlistforfabrics';" class="createOrder ibm-btn-small"
+                        style="width: 150px;">Add Fabrics</button></div>
+            </div>
+            <div class="ibm-col-12-3">
+                <div><button onclick="location.href = '/add';" class="createOrder ibm-btn-small"
+                        style="width: 150px;">Create
+                        Order</button></div>
+            </div>
+        </div>
+
+        <div class="ibm-col-12-12 ibm-padding-top-1" data-widget="setsameheight" data-items=".ibm-blocklink">
             <div class="ibm-col-12-3">
                 <div class="ibm-card ibm-card--noborder">
                     <a class="ibm-blocklink ibm-border-gray-20" href="/neworders">
-                        <div class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30"><img class="ibm-donwsize" src="./images/neworder.png" width="100" height="100" alt="" /></div>
+                        <div
+                            class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30">
+                            <img class="ibm-donwsize" src="./images/neworder.png" width="100" height="100" alt="" />
+                        </div>
                         <div class="ibm-card__content ibm-textcolor-default">
                             <h3 class="ibm-bold ibm-h4">New : <span id="numberOfNewOrders"></span></h3>
-                            <p>New orders.</p>                           
+                            <p>New orders.</p>
                         </div>
                     </a>
                 </div>
             </div>
-           
+
             <div class="ibm-col-12-3">
-                    <div class="ibm-card ibm-card--noborder">
-                        <a class="ibm-blocklink ibm-border-gray-20" href="/onprocess">
-                            <div class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30"><img class="ibm-donwsize" src="./images/inprogress.gif" width="100" height="100" alt="" /></div>
-                            <div class="ibm-card__content ibm-textcolor-default">
-                                <h3 class="ibm-bold ibm-h4">On process : <span id="numberOfProcessOrders"></span></h3>
-                                <p>Under process.</p>                                
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibm-col-12-3">
-                    <div class="ibm-card ibm-card--noborder">
-                        <a class="ibm-blocklink ibm-border-gray-20" href="/readytodeliver">
-                            <div class="ibm-card__image ibm-background-blue-30 ibm-center ibm-padding-top-1 ibm-padding-bottom-1"><img class="ibm-downsize" src="./images/ready.png" width="100" height="100" alt="" /></div>
-                            <div class="ibm-card__content ibm-textcolor-default">
-                                <h3 class="ibm-bold ibm-h4">Ready : <span id="numberOfReadyOrders"></span></h3>
-                                <p>Ready to deliver.</p>                                
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibm-col-12-3">
-                        <div class="ibm-card ibm-card--noborder">
-                            <a class="ibm-blocklink ibm-border-gray-20" href="/delivered">
-                                <div class="ibm-card__image ibm-background-blue-30 ibm-center ibm-padding-top-1 ibm-padding-bottom-1"><img class="ibm-downsize" src="./images/delivered.png" width="100" height="100" alt="" /></div>
-                                <div class="ibm-card__content ibm-textcolor-default">
-                                    <h3 class="ibm-bold ibm-h4">Delivered : <span id="numberOfDeliveredOrders"></span></h3>
-                                    <p>Delivered orders.</p>                                
-                                </div>
-                            </a>
+                <div class="ibm-card ibm-card--noborder">
+                    <a class="ibm-blocklink ibm-border-gray-20" href="/onprocess">
+                        <div
+                            class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30">
+                            <img class="ibm-donwsize" src="./images/inprogress.gif" width="100" height="100" alt="" />
                         </div>
-                    </div>
-        </div>
-        <div class="ibm-col-12-12" data-widget="setsameheight" data-items=".ibm-blocklink">
-                <div class="ibm-col-12-3">
-                    <div class="ibm-card ibm-card--noborder">
-                        <a class="ibm-blocklink ibm-border-gray-20" href="/allorders">
-                            <div class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30"><img class="ibm-donwsize" src="./images/allorders.jpg" width="100" height="100" alt="" /></div>
-                            <div class="ibm-card__content ibm-textcolor-default">
-                                <h3 class="ibm-bold ibm-h4">All : <span id="numberOfAllOrders"></span></h3>
-                                <p>All orders.</p>                           
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibm-col-12-3">
-                    <div class="ibm-card ibm-card--noborder">
-                        <a class="ibm-blocklink ibm-border-gray-20" href="/allorders">
-                            <div class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30"><img class="ibm-donwsize" src="./images/yesterday.png" width="100" height="100" alt="" /></div>
-                            <div class="ibm-card__content ibm-textcolor-default">
-                                <h3 class="ibm-bold ibm-h4">Yesterday</h3>                          
-                                <div>New order : <span id="numberOfOrderYest"></span></div> 
-                                <div>Delivery : <span id="numberOfDeliveryYest"></span></div>
-                                <div>Delivered : <span id="numberOfDeliveredYest"></span></div>                           
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibm-col-12-3">
-                    <div class="ibm-card ibm-card--noborder">
-                        <a class="ibm-blocklink ibm-border-gray-20" href="/allorders">
-                            <div class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30"><img class="ibm-donwsize" src="./images/today.png" width="100" height="100" alt="" /></div>
-                            <div class="ibm-card__content ibm-textcolor-default">
-                                <h3 class="ibm-bold ibm-h4">Today</h3>
-                                <div>New order : <span id="numberOfOrderToday"></span></div>
-                                <div>Delivery : <span id="numberOfDeliveryToday"></span></div>  
-                                <div>Delivered : <span id="numberOfDeliveredToday"></span></div>                          
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibm-col-12-3">
-                    <div class="ibm-card ibm-card--noborder">
-                        <a class="ibm-blocklink ibm-border-gray-20" href="/allorders">
-                            <div class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30"><img class="ibm-donwsize" src="./images/tomorrow.png" width="100" height="100" alt="" /></div>
-                            <div class="ibm-card__content ibm-textcolor-default">
-                                <h3 class="ibm-bold ibm-h4">Tomorrow : <span id="numberOfNewOrders"></span></h3>
-                                <div>Delivery : <span id="numberOfDelivertomo"></span></div>                                                                                   
-                            </div>
-                        </a>
-                    </div>
+                        <div class="ibm-card__content ibm-textcolor-default">
+                            <h3 class="ibm-bold ibm-h4">On process : <span id="numberOfProcessOrders"></span></h3>
+                            <p>Under process.</p>
+                        </div>
+                    </a>
                 </div>
             </div>
-   
+            <div class="ibm-col-12-3">
+                <div class="ibm-card ibm-card--noborder">
+                    <a class="ibm-blocklink ibm-border-gray-20" href="/readytodeliver">
+                        <div
+                            class="ibm-card__image ibm-background-blue-30 ibm-center ibm-padding-top-1 ibm-padding-bottom-1">
+                            <img class="ibm-downsize" src="./images/ready.png" width="100" height="100" alt="" />
+                        </div>
+                        <div class="ibm-card__content ibm-textcolor-default">
+                            <h3 class="ibm-bold ibm-h4">Ready : <span id="numberOfReadyOrders"></span></h3>
+                            <p>Ready to deliver.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="ibm-col-12-3">
+                <div class="ibm-card ibm-card--noborder">
+                    <a class="ibm-blocklink ibm-border-gray-20" href="/delivered">
+                        <div
+                            class="ibm-card__image ibm-background-blue-30 ibm-center ibm-padding-top-1 ibm-padding-bottom-1">
+                            <img class="ibm-downsize" src="./images/delivered.png" width="100" height="100" alt="" />
+                        </div>
+                        <div class="ibm-card__content ibm-textcolor-default">
+                            <h3 class="ibm-bold ibm-h4">Delivered : <span id="numberOfDeliveredOrders"></span></h3>
+                            <p>Delivered orders.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="ibm-col-12-12" data-widget="setsameheight" data-items=".ibm-blocklink">
+            <div class="ibm-col-12-3">
+                <div class="ibm-card ibm-card--noborder">
+                    <a class="ibm-blocklink ibm-border-gray-20" href="/allorders">
+                        <div
+                            class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30">
+                            <img class="ibm-donwsize" src="./images/allorders.jpg" width="100" height="100" alt="" />
+                        </div>
+                        <div class="ibm-card__content ibm-textcolor-default">
+                            <h3 class="ibm-bold ibm-h4">All : <span id="numberOfAllOrders"></span></h3>
+                            <p>All orders.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="ibm-col-12-3">
+                <div class="ibm-card ibm-card--noborder">
+                    <a class="ibm-blocklink ibm-border-gray-20" href="/allorders">
+                        <div
+                            class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30">
+                            <img class="ibm-donwsize" src="./images/yesterday.png" width="100" height="100" alt="" />
+                        </div>
+                        <div class="ibm-card__content ibm-textcolor-default">
+                            <h3 class="ibm-bold ibm-h4">Yesterday</h3>
+                            <div>New order : <span id="numberOfOrderYest"></span></div>
+                            <div>Delivery : <span id="numberOfDeliveryYest"></span></div>
+                            <div>Delivered : <span id="numberOfDeliveredYest"></span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="ibm-col-12-3">
+                <div class="ibm-card ibm-card--noborder">
+                    <a class="ibm-blocklink ibm-border-gray-20" href="/allorders">
+                        <div
+                            class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30">
+                            <img class="ibm-donwsize" src="./images/today.png" width="100" height="100" alt="" />
+                        </div>
+                        <div class="ibm-card__content ibm-textcolor-default">
+                            <h3 class="ibm-bold ibm-h4">Today</h3>
+                            <div>New order : <span id="numberOfOrderToday"></span></div>
+                            <div>Delivery : <span id="numberOfDeliveryToday"></span></div>
+                            <div>Delivered : <span id="numberOfDeliveredToday"></span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="ibm-col-12-3">
+                <div class="ibm-card ibm-card--noborder">
+                    <a class="ibm-blocklink ibm-border-gray-20" href="/allorders">
+                        <div
+                            class="ibm-card__image ibm-center ibm-padding-top-1 ibm-padding-bottom-1 ibm-background-blue-30">
+                            <img class="ibm-donwsize" src="./images/tomorrow.png" width="100" height="100" alt="" />
+                        </div>
+                        <div class="ibm-card__content ibm-textcolor-default">
+                            <h3 class="ibm-bold ibm-h4">Tomorrow : <span id="numberOfNewOrders"></span></h3>
+                            <div>Delivery : <span id="numberOfDelivertomo"></span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-  </div>
-  
+    </div>
 
 </body>
 
