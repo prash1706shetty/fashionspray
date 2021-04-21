@@ -119,10 +119,10 @@ function saveOrder() {
     var fabricsArray = [];
     for (var i = 1; i <= addCount; i++) {
         var fabrics = {};
-        fabrics['fabricType' + i] = jQuery('#fabricType' + i).val();
-        fabrics['colorType' + i] = jQuery('#colorType' + i).val();
-        fabrics['fabricQuantity' + i] = jQuery('#fabricQuantity' + i).val();
-        fabrics['fabricNote' + i] = jQuery('#fabricNote' + i).val();
+        fabrics['fabricType'] = jQuery('#fabricType' + i).val();
+        fabrics['colorType'] = jQuery('#colorType' + i).val();
+        fabrics['fabricQuantity'] = jQuery('#fabricQuantity' + i).val();
+        fabrics['fabricNote'] = jQuery('#fabricNote' + i).val();
         fabricsArray.push(fabrics);
     }
     var doc = {

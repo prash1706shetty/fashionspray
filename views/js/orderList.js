@@ -3,7 +3,7 @@ var orderList = '';
 jQuery(document).ready(function ($) {
   jQuery.ajax({
     type: "GET",
-    url: "/fs/getOrderData",
+    url: "/fs/getAllOrderData",
     async: false,
     success: function (result) {
       orderList = result.rows;

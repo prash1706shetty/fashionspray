@@ -17,6 +17,10 @@ router.get('/orderlistforfabrics', function (req, res) {
     res.sendFile(reqPath + "/views/" + "fabricsList.html");
 });
 
+router.get('/fabricspurchase', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "fabricsPurchase.html");
+});
+
 router.get('/allorders', function (req, res) {
     res.sendFile(reqPath + "/views/" + "orderList.html");
 });
@@ -83,13 +87,18 @@ router.post('/fs/createDocument', async function (req, res) {
     res.send('success');
 });
 
-router.get('/fs/getOrderData', async function (req, res) {
-    var orderData = await cloudant.getOrderData();
+router.get('/fs/getAllOrderData', async function (req, res) {
+    var orderData = await cloudant.getAllOrderData();
     res.send(orderData);
 });
 
 router.get('/fs/getOrdersForFabrics', async function (req, res) {
     var orderData = await cloudant.getOrdersForFabrics();
+    res.send(orderData);
+});
+
+router.get('/fs/getFabrics', async function (req, res) {
+    var orderData = await cloudant.getFabrics();
     res.send(orderData);
 });
 

@@ -146,9 +146,9 @@ function insertOrderData(data) {
 	});
 }
 
-function getOrderData() {
+function getAllOrderData() {
 	return new Promise((resolve, reject) => {
-		db.view('order', 'newOrder', function (err, body) {
+		db.view('order', 'allOrders', function (err, body) {
 			if (err) {
 				console.error('Error occurred: ' + err.message);
 				reject(err);
@@ -162,6 +162,19 @@ function getOrderData() {
 function getOrdersForFabrics() {
 	return new Promise((resolve, reject) => {
 		db.view('order', 'orderForFabrics', function (err, body) {
+			if (err) {
+				console.error('Error occurred: ' + err.message);
+				reject(err);
+			} else {
+				resolve(body);
+			}
+		});
+	});
+}
+
+function getFabrics() {
+	return new Promise((resolve, reject) => {
+		db.view('order', 'getFabrics', function (err, body) {
 			if (err) {
 				console.error('Error occurred: ' + err.message);
 				reject(err);
@@ -334,7 +347,7 @@ module.exports.deleteById = deleteById;
 module.exports.deleteOrder = deleteOrder;
 module.exports.updateOrder = updateOrder;
 module.exports.insertOrderData = insertOrderData;
-module.exports.getOrderData = getOrderData;
+module.exports.getAllOrderData = getAllOrderData;
 module.exports.getOrderCount = getOrderCount;
 module.exports.getOrderById = getOrderById;
 module.exports.getNewOrders = getNewOrders;
@@ -346,4 +359,4 @@ module.exports.getYTTOrders = getYTTOrders;
 module.exports.getOrderByMonth = getOrderByMonth;
 module.exports.getOrdersForFabrics = getOrdersForFabrics;
 module.exports.addFabrics = addFabrics;
-
+module.exports.getFabrics = getFabrics;
