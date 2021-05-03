@@ -57,6 +57,12 @@ jQuery(document).ready(function ($) {
         } else if (deliveryDate.getDate() == yesterdayDate.getDate() && deliveryDate.getMonth() == yesterdayDate.getMonth() && deliveryDate.getYear() == yesterdayDate.getYear()) {
           deliveryDateValue = 'Yesterday';
         }
+        var editFabrics = '';
+
+        if (row.value.fabrics != undefined) {
+          console.log("row.value.fabrics ->" + row.value.fabrics.length);
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="editFabrics-' + row.value._id + '" href="/editfabrics?on=' + row.value.orderNumber + '">Edit Fabrics</a></li>';
+        }
         table = table + '<tr>' +
           '<td>' + row.value.orderNumber + '</td>' +
           '<td id ="orderDetails-' + row.value._id + '" onclick="getOrderDetails(this);IBMCore.common.widget.overlay.show(\'overlayOrder\'); return false;">' + row.value.customerName + '</td>' +
@@ -64,7 +70,7 @@ jQuery(document).ready(function ($) {
           '<td>' + row.value.mobileNumber + '</td>' +
           '<td>' + deliveryDateValue + '</td>' +
           '<td style=' + rowBgColor + '>' + orderStatusValue + '</td>' +
-          '<td id="toggle' + index + '" class="elipsis"><img src="/images/overflow-menu--vertical.svg" class="elipsis" style="cursor: pointer;" onclick= "productActionToggle(' + index + ');  return false;\" width="30" height="30"><div style="position:absolute;z-index:1"><ul id="productAction' + index + '" style="display:none;" class="ibm-dropdown-menu productAction"><li><a  style="cursor: pointer;text-decoration: none;" id ="editProduct-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li></ul></div></td>' +
+          '<td id="toggle' + index + '" class="elipsis"><img src="/images/overflow-menu--vertical.svg" class="elipsis" style="cursor: pointer;" onclick= "productActionToggle(' + index + ');  return false;\" width="30" height="30"><div style="position:absolute;z-index:1"><ul id="productAction' + index + '" style="display:none;" class="ibm-dropdown-menu productAction"><li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li>' + editFabrics + '</ul></div></td>' +
           '</tr>';
       });
 

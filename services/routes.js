@@ -33,6 +33,10 @@ router.get('/addfabrics', function (req, res) {
     res.sendFile(reqPath + "/views/" + "addFabrics.html");
 });
 
+router.get('/editfabrics', function (req, res) {
+    res.sendFile(reqPath + "/views/" + "editFabrics.html");
+});
+
 router.get('/analysis/', function (req, res) {
     res.sendFile(reqPath + "/views/" + "analysis.html");
 });

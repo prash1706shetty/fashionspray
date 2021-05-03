@@ -1,4 +1,3 @@
-var formValidation = true;
 var addCount = 1;
 var orderNumber = '';
 
@@ -116,47 +115,86 @@ function preloadForm(result) {
 
 function saveOrder() {
 
+    console.log("test->" + addCount);
+    var formValidation = true;
     var fabricsArray = [];
     for (var i = 1; i <= addCount; i++) {
         var fabrics = {};
-        fabrics['fabricType'] = jQuery('#fabricType' + i).val();
-        fabrics['colorType'] = jQuery('#colorType' + i).val();
-        fabrics['fabricQuantity'] = jQuery('#fabricQuantity' + i).val();
-        fabrics['fabricNote'] = jQuery('#fabricNote' + i).val();
+
+        var fabricType = jQuery('#fabricType' + i).val();
+        var colorType = jQuery('#colorType' + i).val();
+        var fabricQuantity = jQuery('#fabricQuantity' + i).val();
+        var fabricNote = jQuery('#fabricNote' + i).val();
+
+        if (fabricType == '') {
+            jQuery('#fabricType' + i).addClass('redBorder');
+            formValidation = false;
+        } else {
+            fabrics['fabricType'] = fabricType;
+        }
+
+        if (colorType == '') {
+            jQuery('#colorType' + i).addClass('redBorder');
+            formValidation = false;
+        } else {
+            fabrics['colorType'] = colorType;
+        }
+
+        if (fabricQuantity == '') {
+            jQuery('#fabricQuantity' + i).addClass('redBorder');
+            formValidation = false;
+        } else {
+            fabrics['fabricQuantity'] = fabricQuantity;
+        }
+
+        if (fabricNote == '') {
+            jQuery('#fabricNote' + i).addClass('redBorder');
+            formValidation = false;
+        } else {
+            fabrics['fabricNote'] = fabricNote;
+        }
+
         fabricsArray.push(fabrics);
     }
     var doc = {
         docId: orderNumber,
         fabrics: fabricsArray
     }
-    jQuery.ajax({
-        type: "POST",
-        url: "/fs/addFabrics",
-        data: JSON.stringify(doc),
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        async: false,
-        success: function (result) {
-            if (result.statusCode == 200) {
+    if (formValidation) {
+        jQuery.ajax({
+            type: "POST",
+            url: "/fs/addFabrics",
+            data: JSON.stringify(doc),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            async: false,
+            success: function (result) {
+                if (result.statusCode == 200) {
+                    jQuery('#loadingIndicator').addClass('visibility-hidden');
+                    IBMCore.common.widget.overlay.show("confirmationOverlay");
+                    jQuery("#overlayMsg").empty().append('<span style="color: red;">Fabrics details updated.</span>');
+                } else {
+                    alert('There was some error while updating data');
+
+                }
+            },
+            error: function (e) {
                 jQuery('#loadingIndicator').addClass('visibility-hidden');
-                IBMCore.common.widget.overlay.show("confirmationOverlay");
-                jQuery("#overlayMsg").empty().append('<span style="color: red;">Fabrics details updated.</span>');
-            } else {
-                alert('There was some error while updating data');
+                IBMCore.common.widget.overlay.show("errorOverlay");
+                jQuery("#errorOverlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');
 
             }
-        },
-        error: function (e) {
-            jQuery('#loadingIndicator').addClass('visibility-hidden');
-            IBMCore.common.widget.overlay.show("errorOverlay");
-            jQuery("#errorOverlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');
-
-        }
-    });
+        });
+    } else {
+        jQuery('#loadingIndicator').addClass('visibility-hidden');
+        IBMCore.common.widget.overlay.show("errorOverlay");
+        jQuery("#errorOverlayMsg").empty().append('<span style="color: red;">Please fill all the fields.</span>');
+    }
 }
 
 function clearRedColor(focusEvent) {
+    console.log("focusEvent.id->"+focusEvent.id);
     jQuery('#' + focusEvent.id).removeClass('redBorder');
 }
 
