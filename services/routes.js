@@ -116,6 +116,11 @@ router.post('/fs/deleteorder', async function (req, res) {
     res.send(orderData);
 });
 
+router.post('/fs/deletefabrics', async function (req, res) {
+    var orderData = await cloudant.deleteFabrics(req.body);
+    res.send(orderData);
+});
+
 router.post('/fs/addFabrics', async function (req, res) {
     var orderData = await cloudant.addFabrics(req.body);
     res.send(orderData);

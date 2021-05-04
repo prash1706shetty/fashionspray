@@ -61,7 +61,7 @@ jQuery(document).ready(function ($) {
 
         if (row.value.fabrics != undefined) {
           console.log("row.value.fabrics ->" + row.value.fabrics.length);
-          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="editFabrics-' + row.value._id + '" href="/editfabrics?on=' + row.value.orderNumber + '">Edit Fabrics</a></li>';
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="editFabrics-' + row.value._id + '" href="/editfabrics?on=' + row.value.orderNumber + '">Edit Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete Fabrics</a></li>';
         } else {
           editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li>';
         }
@@ -147,4 +147,54 @@ function productActionToggle(id) {
 
 function closeOverlay(name) {
   IBMCore.common.widget.overlay.hide(name);
+}
+
+function showDeleteOverlay(e) {
+  jQuery('#deleteOverlay').empty();
+  var rejectOverlay = `<p class="ibm-h2">Delete</p><p id="deleteConfirmMsg">Are you sure you want to delete this fabrics for this order?</p>` +
+    `<div class="ibm-fluid"><div class="ibm-col-12-12"><p class="ibm-btn-row"> <span id="deleteSpinner" class="ibm-spinner ibm-h2 ibm-fright" />` +
+    `<button id="deletePrdBtn-${e.id.split('deleteProduct-')[1]}" class="ibm-btn-pri pg2-overlay-save ibm-btn-blue-50" style="float: right;" onclick="deleteDemo(this);">Delete</button>` +
+    `<button id="cancelOverlayBtn-${e.id.split('deleteProduct-')[1]}" class="ibm-btn-sec ibm-btn-transparent ibm-btn-blue-50" style="float: right"; onclick='closeOverlay("deleteOverlay")'>Cancel</button></p>` +
+    `</div></div>`;
+
+  jQuery('#deleteOverlay').append(rejectOverlay);
+  IBMCore.common.widget.overlay.show('deleteOverlay');
+  jQuery("#deleteSpinner").css("display", "none");
+}
+
+function deleteDemo(e) {
+  var id = escapeSpecialCharacter(e.id);
+  jQuery('#' + id).prop('disabled', 'true');
+  jQuery('#cancelOverlayBtn-' + id.split('deletePrdBtn-')[1]).prop('disabled', 'true');
+  jQuery("#deleteSpinner").addClass('display-inline-block');
+
+  setTimeout(function () {
+    let docId = id.split('deletePrdBtn-')[1].replaceAll('\\', '');
+    var doc = {
+      docId: docId
+    }
+    jQuery.ajax({
+      type: "POST",
+      url: "/fs/deletefabrics",
+      data: JSON.stringify(doc),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      async: false,
+      success: function (result) {
+        if (result.statusCode == 200) {
+          closeOverlay('deleteOverlay');
+          window.location.replace("/orderlistforfabrics");
+        } else {
+          alert('There was some error while updating data');
+          closeOverlay('deleteOverlay');
+
+        }
+      },
+      error: function (e) {
+        alert("There was some internal error while updating, Please try again after sometime")
+      }
+    });
+
+  }, 100);
 }

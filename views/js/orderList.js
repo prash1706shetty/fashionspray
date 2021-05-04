@@ -87,7 +87,7 @@ jQuery(document).ready(function ($) {
 
 function showDeleteOverlay(e) {
   jQuery('#deleteOverlay').empty();
-  var rejectOverlay = `<p class="ibm-h2">Delete</p><p id="deleteConfirmMsg">Are you sure you want to delete this demo?</p>` +
+  var rejectOverlay = `<p class="ibm-h2">Delete</p><p id="deleteConfirmMsg">Are you sure you want to delete this order?</p>` +
     `<div class="ibm-fluid"><div class="ibm-col-12-12"><p class="ibm-btn-row"> <span id="deleteSpinner" class="ibm-spinner ibm-h2 ibm-fright" />` +
     `<button id="deletePrdBtn-${e.id.split('deleteProduct-')[1]}" class="ibm-btn-pri pg2-overlay-save ibm-btn-blue-50" style="float: right;" onclick="deleteDemo(this);">Delete</button>` +
     `<button id="cancelOverlayBtn-${e.id.split('deleteProduct-')[1]}" class="ibm-btn-sec ibm-btn-transparent ibm-btn-blue-50" style="float: right"; onclick='closeOverlay("deleteOverlay")'>Cancel</button></p>` +
