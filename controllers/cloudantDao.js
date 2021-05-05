@@ -103,10 +103,7 @@ function updateOrder(doc) {
 	});
 }
 
-
-
 function findById(id) {
-
 	return new Promise((resolve, reject) => {
 		db.get(id, { attachments: true }, (err, document) => {
 			if (err) {
@@ -125,31 +122,6 @@ function findById(id) {
 			}
 		});
 	});
-}
-
-function deleteById(id, rev) {
-
-	return new Promise((resolve, reject) => {
-
-		db.destroy(id, rev, (err, document) => {
-			if (err) {
-				if (err.message == 'missing') {
-					logger.warn(`Document id ${id} does not exist.`, 'deleteById()');
-					resolve({ data: JSON.stringify(err.message), statusCode: 404 });
-				} else {
-					logger.error('Error occurred: ' + err.message, 'deleteByid()');
-					reject(err);
-				}
-			} else {
-				resolve({ data: JSON.stringify(document), statusCode: 200 });
-			}
-		});
-
-	}).catch((err) => {
-		logger.error('Error occurred: ' + err.message, 'update()');
-		reject(err);
-	});
-
 }
 
 function insertOrderData(data) {
@@ -363,7 +335,6 @@ function getOrderById(doc) {
 }
 
 module.exports.findById = findById;
-module.exports.deleteById = deleteById;
 module.exports.deleteOrder = deleteOrder;
 module.exports.updateOrder = updateOrder;
 module.exports.insertOrderData = insertOrderData;

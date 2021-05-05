@@ -69,7 +69,6 @@ router.get('/delivered', function (req, res) {
     res.sendFile(reqPath + "/views/" + "delivered.html");
 });
 
-
 router.get('/add/useCases', function (req, res) {
     res.sendFile(reqPath + "/views/" + "useCaseList.html");
 });
@@ -80,10 +79,6 @@ router.get('/edit/useCases', function (req, res) {
 
 router.get('/edit', function (req, res) {
     res.sendFile(reqPath + "/views/" + "productList.html");
-});
-
-router.get('/useCases', function (req, res) {
-    res.sendFile(reqPath + "/views/" + "useCaseList.html");
 });
 
 router.post('/fs/createDocument', async function (req, res) {
@@ -130,7 +125,6 @@ router.post('/fs/updateorder', async function (req, res) {
     var orderData = await cloudant.updateOrder(req.body);
     res.send(orderData);
 });
-
 
 router.post('/getOrder', async function (req, res) {
     var orderData = await cloudant.getOrderById(req.body);

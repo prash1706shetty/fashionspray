@@ -162,6 +162,39 @@ function showDeleteOverlay(e) {
   jQuery("#deleteSpinner").css("display", "none");
 }
 
+
+function escapeSpecialCharacter(text){
+  return text
+          .replaceAll('`','\\`')
+          .replaceAll('`','\\`')
+          .replaceAll('!','\\!')
+          .replaceAll('@','\\@')
+          .replaceAll('#','\\#')
+          .replaceAll('$','\\$')
+          .replaceAll('%','\\%')
+          .replaceAll('^','\\^')
+          .replaceAll('&','\\&')
+          .replaceAll('*','\\*')
+          .replaceAll('(','\\(')
+          .replaceAll(')','\\)')
+          .replaceAll('+','\\+')
+          .replaceAll('=','\\=')
+          .replaceAll('{','\\{')
+          .replaceAll('}','\\}')
+          .replaceAll('[','\\[')
+          .replaceAll(']','\\]')
+          .replaceAll('|','\\|')
+          .replaceAll(':','\\:')
+          .replaceAll(';','\\;')
+          .replaceAll('<','\\<')
+          .replaceAll('>','\\>')
+          .replaceAll(',','\\,')
+          .replaceAll('.','\\.')
+          .replaceAll('?','\\?')
+          .replaceAll('/','\\/');
+
+}
+
 function deleteDemo(e) {
   var id = escapeSpecialCharacter(e.id);
   jQuery('#' + id).prop('disabled', 'true');

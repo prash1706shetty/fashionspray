@@ -153,6 +153,38 @@ function closeOverlay(name) {
   IBMCore.common.widget.overlay.hide(name);
 }
 
+function escapeSpecialCharacter(text){
+  return text
+          .replaceAll('`','\\`')
+          .replaceAll('`','\\`')
+          .replaceAll('!','\\!')
+          .replaceAll('@','\\@')
+          .replaceAll('#','\\#')
+          .replaceAll('$','\\$')
+          .replaceAll('%','\\%')
+          .replaceAll('^','\\^')
+          .replaceAll('&','\\&')
+          .replaceAll('*','\\*')
+          .replaceAll('(','\\(')
+          .replaceAll(')','\\)')
+          .replaceAll('+','\\+')
+          .replaceAll('=','\\=')
+          .replaceAll('{','\\{')
+          .replaceAll('}','\\}')
+          .replaceAll('[','\\[')
+          .replaceAll(']','\\]')
+          .replaceAll('|','\\|')
+          .replaceAll(':','\\:')
+          .replaceAll(';','\\;')
+          .replaceAll('<','\\<')
+          .replaceAll('>','\\>')
+          .replaceAll(',','\\,')
+          .replaceAll('.','\\.')
+          .replaceAll('?','\\?')
+          .replaceAll('/','\\/');
+
+}
+
 function deleteDemo(e) {
   var id = escapeSpecialCharacter(e.id);
   jQuery('#' + id).prop('disabled', 'true');

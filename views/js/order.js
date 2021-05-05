@@ -1,8 +1,6 @@
 var formValidation = true;
 
 jQuery(document).ready(function ($) {
-
-  //$('.ibm-calendar-link').hide();
   $("#dressFor").change(function () {
     var personType = $('#dressFor').val();
     $('#dressType').removeAttr("disabled");
@@ -58,8 +56,6 @@ jQuery(document).ready(function ($) {
       $("#occaionOfTitle").text("Birthday of");
       $('#festivalNameId').addClass('display-none');
       $("#occasionDateTitle").text("Birthday date");
-      //var selectOption = '<select name="occasionOf" id="occasionOf" style="width:180px;"><option selected value="select">Select relation</option> <option value="customer">Customer</option><option value="familyMember">Family Member</option><option value="other">Other</option></select>';
-      //$('#occasionOfSelect').prepend(selectOption);
     } else if (occasion == 'Marriage') {
       $('#occasionOfId').removeClass('display-none');
       $("#occaionOfTitle").text("Marriage of");
@@ -83,7 +79,6 @@ jQuery(document).ready(function ($) {
     }
   });
 
-
   $("#fabricsFrom").change(function () {
     var faricsFrom = $('#fabricsFrom').val();
     if (faricsFrom == 'fs') {
@@ -93,22 +88,6 @@ jQuery(document).ready(function ($) {
     }
 
   });
-  var addCount = 0;
-  $("#Add").on("click", function () {
-    addCount++;
-    //$("#textboxDiv").append('<div><br><input id="fabrics' + addCount + '" type="text"/><br></div>');
-    $("#textboxDiv").append('<div class="ibm-padding-top-1"><div style="display: inline-block;"><div class="fieldPaddingTop"><input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value="" placeholder="Enter type of fabric." onfocus="clearRedColor(this)"></div></div><div style="display: inline-block;margin-left:38px;"><div class="fieldPaddingTop"><input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value="" placeholder="Enter advance paid." onfocus="clearRedColor(this)"></div></div> <div style="display: inline-block;margin-left:38px;"><div class="fieldPaddingTop"><input type="text" class="fieldWidthSmall" id="advanceAmount" name="advanceAmount" value="" placeholder="Enter advance paid." onfocus="clearRedColor(this)"></div></div></div>');
-  });
-  $("#Remove").on("click", function () {
-    if (addCount != 0) {
-      addCount--;
-    }
-
-    $("#textboxDiv").children().last().remove();
-  });
-
-
-  // $('.ibm-calendar-link').hide();
 
   var existCondition = setInterval(function () {
     if ($('.ibm-calendar-link').length) {
@@ -133,10 +112,9 @@ jQuery(document).ready(function ($) {
       }
     },
     error: function (e) {
-      alert("There was some internal error while updating, Please try again after sometime")
+      alert("There was some internal error while getOrderCount, Please try again after sometime")
     }
   });
-
 
   $("#mobileNumber").blur(function () {
     var mobileNumber = $("#mobileNumber").val();
@@ -145,10 +123,6 @@ jQuery(document).ready(function ($) {
       alert('Mobile number should be 10 digits.');
     }
   });
-
-
-
-
 });
 
 function clearRedColor(focusEvent) {
@@ -177,8 +151,6 @@ function occasionOf(occasionOf) {
   }
 }
 
-
-
 function fieldsUpdateRequired(updateChecked) {
   if (updateChecked.id == 'anyUpdateYes') {
     jQuery('#fieldsNumber').removeClass('display-none');
@@ -188,10 +160,7 @@ function fieldsUpdateRequired(updateChecked) {
   }
 }
 
-
 function saveOrder() {
-
-
   jQuery('#loadingIndicator').removeClass('visibility-hidden');
   jQuery('saveOrderId').prop('disabled', true);
   var formValidation = true;
@@ -273,15 +242,11 @@ function saveOrder() {
           familyMemberRelation: familyMemberRelation
         };
       }
-
-
     } else if (checkedValue == 'other') {
-
       occasionData = {
         occasion: occasion,
         occasionof: checkedValue
       };
-
     }
   } else if (occasion == 'select') {
     formValidation = false;
@@ -389,7 +354,6 @@ function saveOrder() {
     formValidation = false;
   }
 
-
   if (dressType == 'selectType') {
     formValidation = false;
   }
@@ -428,12 +392,12 @@ function saveOrder() {
       "measureBy": measureBy,
       "createDate": {
         date: new Date().getDate(),
-        month: new Date().getMonth()+1,
+        month: new Date().getMonth() + 1,
         year: new Date().getFullYear()
       },
       "updatedDate": {
         date: new Date().getDate(),
-        month: new Date().getMonth()+1,
+        month: new Date().getMonth() + 1,
         year: new Date().getFullYear()
       },
       "orderDate": orderDateDetails,
@@ -455,7 +419,7 @@ function saveOrder() {
         jQuery('#loadingIndicator').addClass('visibility-hidden');
         IBMCore.common.widget.overlay.show("confirmationOverlay");
         jQuery("#overlayMsg").empty().append('<span style="color: red;">Order data uploaded successfully</span>');
-        
+
       },
       error: function (e) {
         alert("There was an error while creating order.")
@@ -466,6 +430,5 @@ function saveOrder() {
     IBMCore.common.widget.overlay.show("errorOverlay");
     jQuery("#errorOverlayMsg").empty().append('<span style="color: red;">Please fill all the fields and select required option.</span>');
   }
-
 }
 
