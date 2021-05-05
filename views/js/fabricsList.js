@@ -11,34 +11,14 @@ jQuery(document).ready(function ($) {
       var monthNames = ["Jan", "Feb", "Mar", "Apr",
         "May", "Jun", "Jul", "Aug",
         "Sep", "Oct", "Nov", "Dec"];
-      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Mobile Number</th><th>Delivery Date</th><th>Status</th><th>Action</th></tr></thead><tbody>";
+      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Mobile Number</th><th>Delivery Date</th><th>Fabrics</th><th>Action</th></tr></thead><tbody>";
       result.rows.forEach((row, index) => {
         deliveryDate = new Date(row.value.deliveryDate.year, row.value.deliveryDate.month - 1, row.value.deliveryDate.date);
         var rowBgColor = '';
         var deliveryDateValue = '';
-        var orderStatusValue = row.value.orderStatus;
-        if (row.value.orderStatus == 'New') {
-          rowBgColor = "background-color:#99ff99";
-          var Difference_In_Time = deliveryDate.getTime() - new Date().getTime();
-          var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-          if (Difference_In_Days < 2) {
-            rowBgColor = "background-color:#b30000";
-            orderStatusValue = orderStatusValue + ' - Risk';
-          } else if (Difference_In_Days < 6) {
-            rowBgColor = "background-color:#ff3333";
-            orderStatusValue = orderStatusValue + ' - Critical'
-          }
-        }
+        var fabricStatusValue = 'Added';
+    
 
-        if (row.value.orderStatus == 'On process') {
-          rowBgColor = "background-color:#ffff66";
-        } else if (row.value.orderStatus == 'Delivered') {
-          rowBgColor = "background-color:#6666ff";
-        } else if (row.value.orderStatus == 'Rejected') {
-          rowBgColor = "background-color:#ff66ff";
-        } else if (row.value.orderStatus == 'Ready to deliver') {
-          rowBgColor = "background-color:#ffa31a";
-        }
         var tomorrowDate = new Date();
         tomorrowDate.setDate(tomorrowDate.getDate() + 1);
         var yesterdayDate = new Date();
@@ -60,10 +40,12 @@ jQuery(document).ready(function ($) {
         var editFabrics = '';
 
         if (row.value.fabrics != undefined) {
-          console.log("row.value.fabrics ->" + row.value.fabrics.length);
+          rowBgColor = "background-color:#99ff99";
           editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="editFabrics-' + row.value._id + '" href="/editfabrics?on=' + row.value.orderNumber + '">Edit Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete Fabrics</a></li>';
         } else {
-          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li>';
+          rowBgColor = "background-color:#ff3333";
+          fabricStatusValue = 'Not added.'
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="notRequiredProduct-' + row.value._id + '" onclick="showNotRequiredOverlay(this);">Not required</a></li>';
         }
         table = table + '<tr>' +
           '<td>' + row.value.orderNumber + '</td>' +
@@ -71,7 +53,7 @@ jQuery(document).ready(function ($) {
 
           '<td>' + row.value.mobileNumber + '</td>' +
           '<td>' + deliveryDateValue + '</td>' +
-          '<td style=' + rowBgColor + '>' + orderStatusValue + '</td>' +
+          '<td style=' + rowBgColor + '>' + fabricStatusValue + '</td>' +
           '<td id="toggle' + index + '" class="elipsis"><img src="/images/overflow-menu--vertical.svg" class="elipsis" style="cursor: pointer;" onclick= "productActionToggle(' + index + ');  return false;\" width="30" height="30"><div style="position:absolute;z-index:1"><ul id="productAction' + index + '" style="display:none;" class="ibm-dropdown-menu productAction">' + editFabrics + '</ul></div></td>' +
           '</tr>';
       });
@@ -102,6 +84,7 @@ function getOrderDetails(e) {
       var orderDate = row.value.orderDate;
       var orderOverlayDetails = "<div id='customerNameDetails'><span class='ibm-bold'>Customer name : </span><span>" + row.value.customerName + "</span></div>" +
         "<div id='dressForDetails'><span class='ibm-bold'>Dress : </span><span>" + row.value.dressFor + " " + row.value.dressType + "</span></div>" +
+        "<div id='orderStatus'><span class='ibm-bold'>Order status : </span><span>" + row.value.orderStatus +  "</span></div>" +
         "<div id='totalAmountDetails'><span class='ibm-bold'>Total amount : </span><span>" + row.value.totalAmount + "</span></div>" +
         "<div id=advanceAmountDetails><span class='ibm-bold'>Advance paid : </span><span>" + row.value.advanceAmount + "</span></div>" +
         "<div id='modeOfPaymentDetails'><span class='ibm-bold'>Payment mode : </span><span>" + row.value.modeOfPayment + "</span></div>" +
