@@ -17,7 +17,6 @@ jQuery(document).ready(function ($) {
         var rowBgColor = '';
         var deliveryDateValue = '';
         var fabricStatusValue = 'Added';
-    
 
         var tomorrowDate = new Date();
         tomorrowDate.setDate(tomorrowDate.getDate() + 1);
@@ -39,13 +38,25 @@ jQuery(document).ready(function ($) {
         }
         var editFabrics = '';
 
-        if (row.value.fabrics != undefined) {
-          rowBgColor = "background-color:#99ff99";
-          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="editFabrics-' + row.value._id + '" href="/editfabrics?on=' + row.value.orderNumber + '">Edit Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete Fabrics</a></li>';
-        } else {
+        if (row.value.fabrics == 'Fashion Spray fabrics') {
+          rowBgColor = "background-color:#ff3333";
+          fabricStatusValue = 'FS fabrics.'
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li>';
+
+        } else if (row.value.fabrics == 'Customer fabrics') {
+          rowBgColor = "background-color:#ff3333";
+          fabricStatusValue = 'Customer fabrics.'
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li>';
+
+        } else if (row.value.fabrics == undefined) {
           rowBgColor = "background-color:#ff3333";
           fabricStatusValue = 'Not added.'
           editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="notRequiredProduct-' + row.value._id + '" onclick="showNotRequiredOverlay(this);">Not required</a></li>';
+
+        } else {
+          rowBgColor = "background-color:#99ff99";
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="editFabrics-' + row.value._id + '" href="/editfabrics?on=' + row.value.orderNumber + '">Edit Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete Fabrics</a></li>';
+
         }
         table = table + '<tr>' +
           '<td>' + row.value.orderNumber + '</td>' +
@@ -84,7 +95,7 @@ function getOrderDetails(e) {
       var orderDate = row.value.orderDate;
       var orderOverlayDetails = "<div id='customerNameDetails'><span class='ibm-bold'>Customer name : </span><span>" + row.value.customerName + "</span></div>" +
         "<div id='dressForDetails'><span class='ibm-bold'>Dress : </span><span>" + row.value.dressFor + " " + row.value.dressType + "</span></div>" +
-        "<div id='orderStatus'><span class='ibm-bold'>Order status : </span><span>" + row.value.orderStatus +  "</span></div>" +
+        "<div id='orderStatus'><span class='ibm-bold'>Order status : </span><span>" + row.value.orderStatus + "</span></div>" +
         "<div id='totalAmountDetails'><span class='ibm-bold'>Total amount : </span><span>" + row.value.totalAmount + "</span></div>" +
         "<div id=advanceAmountDetails><span class='ibm-bold'>Advance paid : </span><span>" + row.value.advanceAmount + "</span></div>" +
         "<div id='modeOfPaymentDetails'><span class='ibm-bold'>Payment mode : </span><span>" + row.value.modeOfPayment + "</span></div>" +
@@ -145,36 +156,50 @@ function showDeleteOverlay(e) {
   jQuery("#deleteSpinner").css("display", "none");
 }
 
+function showNotRequiredOverlay(e) {
+  jQuery('#notRequiredOverlay').empty();
+  var rejectOverlay = `<p class="ibm-h2">Fabrics not required?</p><p id="notRequiredConfirmMsg">Why fabrics not required for this order?</p>` +
+    `<div class="ibm-fluid"><div class="ibm-col-12-12"><p class="ibm-btn-row"> <span id="notRequiredSpinner" class="ibm-spinner ibm-h2 ibm-fright" />` +
+    `<button id="notRequiredPrdBtn-${e.id.split('notRequiredProduct-')[1]}" class="ibm-btn-pri pg2-overlay-save ibm-btn-blue-50" style="float: right;" onclick="customerFabrics(this);">Customer Fabrics</button>` +
+    `<button id="notRequiredPrdBtn-${e.id.split('notRequiredProduct-')[1]}" class="ibm-btn-pri pg2-overlay-save ibm-btn-blue-50" style="float: right;" onclick="fsFabrics(this);">FS Fabrics</button>` +
+    `<button id="cancelOverlayBtn-${e.id.split('notRequiredProduct-')[1]}" class="ibm-btn-sec ibm-btn-transparent ibm-btn-blue-50" style="float: right"; onclick='closeOverlay("notRequiredOverlay")'>Cancel</button></p>` +
+    `</div></div>`;
 
-function escapeSpecialCharacter(text){
+  jQuery('#notRequiredOverlay').append(rejectOverlay);
+  IBMCore.common.widget.overlay.show('notRequiredOverlay');
+  jQuery("#notRequiredSpinner").css("display", "none");
+}
+
+
+function escapeSpecialCharacter(text) {
   return text
-          .replaceAll('`','\\`')
-          .replaceAll('`','\\`')
-          .replaceAll('!','\\!')
-          .replaceAll('@','\\@')
-          .replaceAll('#','\\#')
-          .replaceAll('$','\\$')
-          .replaceAll('%','\\%')
-          .replaceAll('^','\\^')
-          .replaceAll('&','\\&')
-          .replaceAll('*','\\*')
-          .replaceAll('(','\\(')
-          .replaceAll(')','\\)')
-          .replaceAll('+','\\+')
-          .replaceAll('=','\\=')
-          .replaceAll('{','\\{')
-          .replaceAll('}','\\}')
-          .replaceAll('[','\\[')
-          .replaceAll(']','\\]')
-          .replaceAll('|','\\|')
-          .replaceAll(':','\\:')
-          .replaceAll(';','\\;')
-          .replaceAll('<','\\<')
-          .replaceAll('>','\\>')
-          .replaceAll(',','\\,')
-          .replaceAll('.','\\.')
-          .replaceAll('?','\\?')
-          .replaceAll('/','\\/');
+    .replaceAll('`', '\\`')
+    .replaceAll('`', '\\`')
+    .replaceAll('!', '\\!')
+    .replaceAll('@', '\\@')
+    .replaceAll('#', '\\#')
+    .replaceAll('$', '\\$')
+    .replaceAll('%', '\\%')
+    .replaceAll('^', '\\^')
+    .replaceAll('&', '\\&')
+    .replaceAll('*', '\\*')
+    .replaceAll('(', '\\(')
+    .replaceAll(')', '\\)')
+    .replaceAll('+', '\\+')
+    .replaceAll('=', '\\=')
+    .replaceAll('{', '\\{')
+    .replaceAll('}', '\\}')
+    .replaceAll('[', '\\[')
+    .replaceAll(']', '\\]')
+    .replaceAll('|', '\\|')
+    .replaceAll(':', '\\:')
+    .replaceAll(';', '\\;')
+    .replaceAll('<', '\\<')
+    .replaceAll('>', '\\>')
+    .replaceAll(',', '\\,')
+    .replaceAll('.', '\\.')
+    .replaceAll('?', '\\?')
+    .replaceAll('/', '\\/');
 
 }
 
@@ -214,3 +239,83 @@ function deleteDemo(e) {
 
   }, 100);
 }
+
+function customerFabrics(e) {
+  var id = escapeSpecialCharacter(e.id);
+  jQuery('#' + id).prop('disabled', 'true');
+  jQuery('#cancelOverlayBtn-' + id.split('notRequiredPrdBtn-')[1]).prop('disabled', 'true');
+  jQuery("#notRequiredSpinner").addClass('display-inline-block');
+
+  setTimeout(function () {
+    let docId = id.split('notRequiredPrdBtn-')[1].replaceAll('\\', '');
+
+    var doc = {
+      docId: docId,
+      fabrics: 'Customer fabrics'
+    }
+    jQuery.ajax({
+      type: "POST",
+      url: "/fs/addFabrics",
+      data: JSON.stringify(doc),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      async: false,
+      success: function (result) {
+        if (result.statusCode == 200) {
+          closeOverlay('notRequiredOverlay');
+          window.location.replace("/orderlistforfabrics");
+        } else {
+          alert('There was some error while updating data');
+          closeOverlay('notRequiredOverlay');
+
+        }
+      },
+      error: function (e) {
+        alert("There was some internal error while updating, Please try again after sometime")
+      }
+    });
+
+  }, 100);
+}
+
+
+function fsFabrics(e) {
+  var id = escapeSpecialCharacter(e.id);
+  jQuery('#' + id).prop('disabled', 'true');
+  jQuery('#cancelOverlayBtn-' + id.split('notRequiredPrdBtn-')[1]).prop('disabled', 'true');
+  jQuery("#notRequiredSpinner").addClass('display-inline-block');
+
+  setTimeout(function () {
+    let docId = id.split('notRequiredPrdBtn-')[1].replaceAll('\\', '');
+
+    var doc = {
+      docId: docId,
+      fabrics: 'Fashion Spray fabrics'
+    }
+    jQuery.ajax({
+      type: "POST",
+      url: "/fs/addFabrics",
+      data: JSON.stringify(doc),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      async: false,
+      success: function (result) {
+        if (result.statusCode == 200) {
+          closeOverlay('notRequiredOverlay');
+          window.location.replace("/orderlistforfabrics");
+        } else {
+          alert('There was some error while updating data');
+          closeOverlay('notRequiredOverlay');
+
+        }
+      },
+      error: function (e) {
+        alert("There was some internal error while updating, Please try again after sometime")
+      }
+    });
+
+  }, 100);
+}
+

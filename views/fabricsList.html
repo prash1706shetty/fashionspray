@@ -1,72 +1,96 @@
 <!DOCTYPE html>
 <html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>Fashion Spray</title>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="index, follow" />
-  <title>Fashion Spray</title>
+    <script src="./js/ida_stats.js"></script>
+    <link href="./css/wwwv18.css" rel="stylesheet" />
+    <link href="./css/wwwv19a.css" rel="stylesheet" />
+    <script src="./js/wwwv18.js"></script>
+    <script src="./js/wwwv19a.js"></script>
+    <link href="./css/forms.css" rel="stylesheet" />
+    <script src="./js/forms.js"></script>
+    <link href="./css/grid-fluid.css" rel="stylesheet" />
+    <link href="./css/v18tables.css" rel="stylesheet" />
+    <script src="./js/v18tables.js"></script>
+    <script src="./js/fabricsList.js"></script>
+    <link href="./css/styles.css" rel="stylesheet" />
+  </head>
 
-  <script src="./js/ida_stats.js"></script>
-  <link href="./css/wwwv18.css" rel="stylesheet" />
-  <link href="./css/wwwv19a.css" rel="stylesheet" />
-  <script src="./js/wwwv18.js"></script>
-  <script src="./js/wwwv19a.js"></script>
-  <link href="./css/forms.css" rel="stylesheet" />
-  <script src="./js/forms.js"></script>
-  <link href="./css/grid-fluid.css" rel="stylesheet" />
-  <link href="./css/v18tables.css" rel="stylesheet" />
-  <script src="./js/v18tables.js"></script>
-  <script src="./js/fabricsList.js"></script>
-  <link href="./css/styles.css" rel="stylesheet" />
-</head>
-
-<body id="ibm-com" class="ibm-type">
-  <div id="ibm-top" class="ibm-landing-page">
-    <div class="ibm-col-12-12 headerFirst">
-      <div style="padding-top: 10px; padding-left: 40px">
-        <h2>
-          <span style="font-size: 30px; font-weight: bold">Fashion Spray</span>
-        </h2>
-      </div>
-    </div>
-
-    <div class="ibm-col-12-12 headerSecond" style="padding: 10px">
-      <div class="ibm-col-12-6">
-        <span class="ibm-bold ibm-textcolor-green-50 ibm-h4" style="padding-left: 30px; float: left">Orders
-          which require fabrics.</span>
-      </div>
-      <div class="ibm-col-12-3">
-
-        <button onclick="location.href = '/fabricspurchase';" class="createOrder ibm-btn-small" style="width: 150px">
-          Purchase list
-        </button>
-      </div>
-      
-      <div class="ibm-col-12-3">
-          <button onclick="location.href = '/dashboard';" class="createOrder ibm-btn-small" style="width: 150px">
-            Go to dashboard
-          </button>
-      </div>
-    </div>
-
-    <div id="ibm-content-wrapper">
-      <div class="ibm-col-12-6">
-        <div id="demoLoadingMessage" class="loadMessagePadding">
-          <p>
-            <span class="loadMessageFont">Order lists are loading, please wait...</span><span
-              class="ibm-spinner ibm-h4"></span>
-          </p>
+  <body id="ibm-com" class="ibm-type">
+    <div id="ibm-top" class="ibm-landing-page">
+      <div class="ibm-col-12-12 headerFirst">
+        <div style="padding-top: 10px; padding-left: 40px">
+          <h2>
+            <span style="font-size: 30px; font-weight: bold"
+              >Fashion Spray</span
+            >
+          </h2>
         </div>
       </div>
 
-      <div class="ibm-common-overlay" data-widget="overlay" id="overlayOrder"></div>
+      <div class="ibm-col-12-12 headerSecond" style="padding: 10px">
+        <div class="ibm-col-12-6">
+          <span
+            class="ibm-bold ibm-textcolor-green-50 ibm-h4"
+            style="padding-left: 30px; float: left"
+            >Orders which require fabrics.</span
+          >
+        </div>
+        <div class="ibm-col-12-3">
+          <button
+            onclick="location.href = '/fabricspurchase';"
+            class="createOrder ibm-btn-small"
+            style="width: 150px"
+          >
+            Purchase list
+          </button>
+        </div>
+
+        <div class="ibm-col-12-3">
+          <button
+            onclick="location.href = '/dashboard';"
+            class="createOrder ibm-btn-small"
+            style="width: 150px"
+          >
+            Go to dashboard
+          </button>
+        </div>
+      </div>
+
+      <div id="ibm-content-wrapper">
+        <div class="ibm-col-12-6">
+          <div id="demoLoadingMessage" class="loadMessagePadding">
+            <p>
+              <span class="loadMessageFont"
+                >Order lists are loading, please wait...</span
+              ><span class="ibm-spinner ibm-h4"></span>
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="ibm-common-overlay"
+          data-widget="overlay"
+          id="overlayOrder"
+        ></div>
+      </div>
+
+      <div id="table" style="padding: 50px"></div>
     </div>
 
-    <div id="table" style="padding: 50px"></div>
-  </div>
-
-  <div class="ibm-common-overlay ibm-overlay-alt" data-widget="overlay" id="deleteOverlay"></div>
-</body>
-
+    <div
+      class="ibm-common-overlay ibm-overlay-alt"
+      data-widget="overlay"
+      id="deleteOverlay"
+    ></div>
+    <div
+      class="ibm-common-overlay ibm-overlay-alt"
+      data-widget="overlay"
+      id="notRequiredOverlay"
+    ></div>
+  </body>
 </html>
