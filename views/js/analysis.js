@@ -135,7 +135,6 @@ jQuery(document).ready(function ($) {
     }
   });
 
-
   $("#usecases li").on("click", function () {
     var id = $(this).attr('id');
 

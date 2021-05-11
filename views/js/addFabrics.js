@@ -114,7 +114,6 @@ function preloadForm(result) {
 
 function saveOrder() {
 
-    console.log("test->" + addCount);
     var formValidation = true;
     var fabricsArray = [];
     for (var i = 1; i <= addCount; i++) {

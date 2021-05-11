@@ -60,9 +60,11 @@ jQuery(document).ready(function ($) {
         .append('<option value="Western">Western</option>');
     } else if (personType == 'Men') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
-        .append('<option value="Shirt">Shirt and Pant</option>')
-        .append('<option value="Pant">Western</option>')
-        .append('<option value="Sherwani">Sherwani</option>');
+      .append('<option value="Suit">Suit</option>')
+      .append('<option value="Western Suit">Western Suit</option>')
+      .append('<option value="Blazer">Blazer</option>')
+      .append('<option value="Western wear">Western wear</option>')
+      .append('<option value="Sherwani">Sherwani</option>');
     } else if (personType == 'selectPerson') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option');
       $('#dressType').attr('disabled', true);
@@ -238,9 +240,6 @@ function preloadForm(result) {
   jQuery('#customerLocation').prop('readonly', true);
   jQuery('#customerLocation').val(result.data.customerLocation);
 
-  jQuery('#modeOfPayment').prop('readonly', true);
-  jQuery('#modeOfPayment').val(result.data.modeOfPayment);
-
   jQuery('#fabricsFromTextField').prop('readonly', true);
   jQuery('#fabricsFromTextField').val(result.data.fabricsFrom);
 
@@ -275,6 +274,9 @@ function preloadForm(result) {
 
   jQuery('#typeOfCustomerTextField').prop('readonly', true);
   jQuery('#typeOfCustomerTextField').val(result.data.typeOfCustomer);
+
+  jQuery('#modeOfPaymentTextField').prop('readonly', true);
+  jQuery('#modeOfPaymentTextField').val(result.data.modeOfPayment);
 
   jQuery('#measureByTextField').prop('readonly', true);
   jQuery('#measureByTextField').val(result.data.measureBy);

@@ -145,9 +145,18 @@
                                   <span class="ibm-required">
                                     *</span>
                                 </div>
+
+                              <div class="fieldPaddingTop display-none" id="modeOfPaymentTextFielddd">
+                                <select name="modeOfPayment" id="modeOfPayment" style="width:180px;">
+                                  <option selected value="select">Select payment mode</option>
+                                  <option value="Cash">Cash</option>
+                                  <option value="Mobile banking">Mobile banking</option>
+                                  <option value="Not paid">Not paid</option>
+                                </select>
+                              </div>
+
                                 <div class="fieldPaddingTop">
-                                  <input type="text" class="fieldWidthSmall" id="modeOfPayment" name="modeOfPayment" value=""
-                                    placeholder="Enter payment mode" onfocus="clearRedColor(this)">
+                                  <input type="text" value="" class="fieldWidthSmall" id="modeOfPaymentTextField" name="modeOfPaymentTextField" maxlength="50">
                                 </div>
 
                                 <div for="typeOfCustomer" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Customer type

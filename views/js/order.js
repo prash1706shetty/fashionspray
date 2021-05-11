@@ -33,7 +33,10 @@ jQuery(document).ready(function ($) {
     } else if (personType == 'Men') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option>')
         .append('<option value="Shirt">Shirt and Pant</option>')
-        .append('<option value="Pant">Western</option>')
+        .append('<option value="Suit">Suit</option>')
+        .append('<option value="Western Suit">Western Suit</option>')
+        .append('<option value="Blazer">Blazer</option>')
+        .append('<option value="Western wear">Western wear</option>')
         .append('<option value="Sherwani">Sherwani</option>');
     } else if (personType == 'selectPerson') {
       $('#dressType').append('<option selected value="selectType">Select Dress Type</option');
