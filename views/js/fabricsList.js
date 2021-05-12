@@ -39,14 +39,14 @@ jQuery(document).ready(function ($) {
         var editFabrics = '';
 
         if (row.value.fabrics == 'Fashion Spray fabrics') {
-          rowBgColor = "background-color:#ff3333";
+          rowBgColor = "background-color:#f9ff99";
           fabricStatusValue = 'FS fabrics.'
-          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li>';
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="notRequiredProduct-' + row.value._id + '" onclick="showNotRequiredOverlay(this);">Not required</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete Fabrics</a></li>';
 
         } else if (row.value.fabrics == 'Customer fabrics') {
-          rowBgColor = "background-color:#ff3333";
+          rowBgColor = "background-color:#f9ff99";
           fabricStatusValue = 'Customer fabrics.'
-          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li>';
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="addFabrics-' + row.value._id + '" href="/addfabrics?on=' + row.value.orderNumber + '">Add Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="notRequiredProduct-' + row.value._id + '" onclick="showNotRequiredOverlay(this);">Not required</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete Fabrics</a></li>';
 
         } else if (row.value.fabrics == undefined) {
           rowBgColor = "background-color:#ff3333";
@@ -55,7 +55,7 @@ jQuery(document).ready(function ($) {
 
         } else {
           rowBgColor = "background-color:#99ff99";
-          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="editFabrics-' + row.value._id + '" href="/editfabrics?on=' + row.value.orderNumber + '">Edit Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete Fabrics</a></li>';
+          editFabrics = '<li><a  style="cursor: pointer;text-decoration: none;" id ="editFabrics-' + row.value._id + '" href="/editfabrics?on=' + row.value.orderNumber + '">Edit Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="deleteProduct-' + row.value._id + '" onclick="showDeleteOverlay(this);">Delete Fabrics</a></li><li><a  style="cursor: pointer;text-decoration: none;" id ="notRequiredProduct-' + row.value._id + '" onclick="showNotRequiredOverlay(this);">Not required</a></li>';
 
         }
         table = table + '<tr>' +
