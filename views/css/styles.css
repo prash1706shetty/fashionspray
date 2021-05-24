@@ -159,7 +159,7 @@ white-space: nowrap;
   padding: 0;
   display: inline-block;
   line-height: 35px;
-  text-align: left;
+  text-align: center;
   padding-left:20px;
   background-color:#0f62fe;
 }
@@ -195,7 +195,7 @@ white-space: nowrap;
 }
 
 .image-size {
-  width: 490px;height: 390px;
+  width: 450px;height: 390px;
 }
 
 

@@ -1,0 +1,97 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index, follow" />
+  <link rel="shortcut icon" href="https://www.ibm.com/favicon.ico" />
+  <title>Fashion Spray</title>
+  <!-- Initialize Northstar -->
+  <script>
+    digitalData = { page: { pageInfo: { ibm: {} } } };
+  </script>
+  <script src="https://1.www.s81c.com/common/stats/ida_stats.js"></script>
+  <link href="https://1.www.s81c.com/common/v18/css/www.css" rel="stylesheet" />
+  <link href="https://1.www.s81c.com/common/v19a/css/www.css" rel="stylesheet" />
+  <script src="https://1.www.s81c.com/common/v18/js/www.js"></script>
+  <script src="https://1.www.s81c.com/common/v19a/js/www.js"></script>
+  <link href="https://1.www.s81c.com/common/v18/css/forms.css" rel="stylesheet">
+  <script src="https://1.www.s81c.com/common/v18/js/forms.js"></script>
+  <link href="//1.www.s81c.com/common/v18/css/grid-fluid.css" rel="stylesheet" />
+  <link href="./css/styles.css" rel="stylesheet">
+  <script src="./js/login.js"></script>
+</head>
+
+<body class="bodyGradient ibm-type">
+  <div class="ibm-col-12-12">
+    <div class="ibm-col-12-6 ibm-padding-top-3">
+      <img src="/images/fsdigital.png" alt="fs-digital-image" class="image-size ibm-padding-top-2" />
+    </div>
+    <div class="ibm-col-12-6 ibm-padding-top-3">
+      <div class="ibm-padding-top-3"><img src="/images/fscycle.png" alt="fs-cycle-image"
+          class="login-image" /><span class="ibm-light text-size-color"> Fashion Spray </span><span
+          class="ibm-bold text-size-color">Order Processor</span>
+      </div>
+      <div class="ibm-left ibm-bold ibm-padding-top-3 welcome-text">Welcome to Fashion Spray</div>
+      <div class="ibm-left login-content-text ibm-padding-top-1">Content management and governance system that
+        allows user to</div>
+      <div class="ibm-left login-content-text">create, review and process order.</div>
+      <div id="signInButton" class=" ibm-col-12-3">
+      <div class="ibm-padding-top-3">
+        <button type="button" class=" ibm-btn-pri loginButton" style="background-color:#0f62fe;"
+          onclick="showLogin(this);">Sign in</button>
+         
+      </div>
+    </div>
+    <div id="registerButton" class=" ibm-col-12-3">
+      <div class="ibm-padding-top-3">
+        <button type="button" class=" ibm-btn-pri loginButton" style="background-color:#0f62fe;"
+          onclick="location.href='<%= loginUrl %>';">Register</button>
+     
+      </div>
+    </div>
+    <div id="signInMessage" class="ibm-padding-top-3 ibm-textcolor-green-60 ibm-plex-serif-bold-italic ibm-h4 display-none">
+      Sign in by entering correct username and password.
+    </div>
+
+      <div class="ibm-padding-top-1"><span class="ibm-textcolor-red-50 ibm-bold"><%= displayMessage %></span></div>
+    </div>
+  </div>
+  <div id="signInFields" class="ibm-col-12-12 display-none">
+    <div class="ibm-col-12-6">
+
+    </div>
+    <div class="ibm-col-12-6">
+
+   
+  <form method="POST" action="/logincheck" class="ibm-row-form">
+
+    <div for="email" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Email address
+      <span class="tooltiptext">Enter the email address you registered.</span>
+      <span class="ibm-required">*</span>
+    </div>
+    <div class="fieldPaddingTop">
+      <input type="email" class="textFieldWidth" id="email" name="email" maxlength="50"
+        placeholder="Enter email address" onfocus="clearRedColor(this)">
+    </div>
+    <div for="email" class="ibm-textcolor-green-60 ibm-padding-top-1 tooltip">Password
+      <span class="tooltiptext">Enter you password.</span>
+      <span class="ibm-required">*</span>
+    </div>
+    <div class="fieldPaddingTop">
+      <input type="password" class="textFieldWidth" id="password" name="password" maxlength="50"
+        placeholder="Enter your password" onfocus="clearRedColor(this)">
+    </div>
+
+    <div class="ibm-padding-top-1">
+      <button type="button" class=" ibm-btn-pri loginButton textFieldWidth ibm-bold" style="background-color:#0f62fe;"
+        onclick="location.href='<%= loginUrl %>';">Login</button>
+    </div>
+</form>
+</div>
+</div>
+
+
+</body>
+
+</html>

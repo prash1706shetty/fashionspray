@@ -9,6 +9,12 @@ router.use(bodyParser.urlencoded({ limit: 104857600, extended: true }));
 
 let reqPath = path.join(__dirname, '../');
 
+router.get('/login', function (req, res) {
+    const loginUrl = '/dashboard';
+    const displayMessage = '';
+    res.render(reqPath + "/views/" + "login.ejs",{loginUrl, displayMessage});
+});
+
 router.get('/expense', function (req, res) {
     res.sendFile(reqPath + "/views/" + "expense.html");
 });
@@ -164,6 +170,14 @@ router.get('/fs/getOrderByMonth', async function (req, res) {
 router.post('/fs/getYTTOrders', async function (req, res) {
     var orderData = await cloudant.getYTTOrders(req.body);
     res.send(orderData);
+});
+
+router.post('/logincheck', async function (req, res) {
+    var username = req.body.email;
+    var password = req.body.password;
+    console.log('username->'+username);
+    console.log('password->'+password);
+    res.sendFile(reqPath + "/views/" + "dashboard.html");
 });
 
 module.exports = router;
