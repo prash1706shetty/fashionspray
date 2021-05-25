@@ -17,8 +17,9 @@ function dbCloudantConnect() {
                 reject(err);
             } else {
                 let db = cloudant.use('order');
+                let orderScrudUsers = cloudant.use('order-scrud-users');
                 logger.info('Connect success! Connected to DB: order');
-                resolve({ db: db });
+                resolve({ db: db , orderScrudUsers:orderScrudUsers});
             }
         }));
     });

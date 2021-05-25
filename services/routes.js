@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var cloudant = require('../controllers/cloudantDao');
+const crypto = require('crypto');
 
 router.use(bodyParser.json({ limit: 104857600 }));
 router.use(bodyParser.urlencoded({ limit: 104857600, extended: true }));
@@ -12,7 +13,26 @@ let reqPath = path.join(__dirname, '../');
 router.get('/login', function (req, res) {
     const loginUrl = '/dashboard';
     const displayMessage = '';
-    res.render(reqPath + "/views/" + "login.ejs",{loginUrl, displayMessage});
+    res.render(reqPath + "/views/" + "login.ejs", { loginUrl, displayMessage });
+});
+
+router.post('/logincheck', async function (req, res) {
+    const sha256 = crypto.createHash('sha256');
+    const hash = sha256.update(req.body.password).digest('base64');
+    var userLoginStatus = await cloudant.validateUser(req.body);
+    const loginUrl = '/login';
+    var displayMessage = 'Please enter correct user name and password.';
+    if (userLoginStatus.statusCode === 200 && hash === userLoginStatus.data.password) {
+        displayMessage = "Login success";
+       // res.render(reqPath + "/views/" + "login.ejs", { loginUrl, displayMessage });
+        res.redirect('/dashboard');
+    } else if (userLoginStatus.statusCode === 200 && hash !== userLoginStatus.data.password) {
+        displayMessage = "The password that you've entered is incorrect.";
+        res.render(reqPath + "/views/" + "login.ejs", { loginUrl, displayMessage });
+    } else if (userLoginStatus.statusCode !== 200) {
+        displayMessage = "The email that you've entered is incorrect.";
+        res.render(reqPath + "/views/" + "login.ejs", { loginUrl, displayMessage });
+    }
 });
 
 router.get('/expense', function (req, res) {
@@ -175,8 +195,8 @@ router.post('/fs/getYTTOrders', async function (req, res) {
 router.post('/logincheck', async function (req, res) {
     var username = req.body.email;
     var password = req.body.password;
-    console.log('username->'+username);
-    console.log('password->'+password);
+    console.log('username->' + username);
+    console.log('password->' + password);
     res.sendFile(reqPath + "/views/" + "dashboard.html");
 });
 

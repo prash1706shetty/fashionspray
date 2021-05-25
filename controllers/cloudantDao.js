@@ -1,7 +1,7 @@
 var cloudant = require('../models/cloudant');
 const logger = require('../config/logger').logger;
 let db;
-let access_control_db;
+let orderScrudUsers;
 
 // Initialize the DB when this module is loaded
 (function getDbConnection() {
@@ -9,7 +9,7 @@ let access_control_db;
 	cloudant.dbCloudantConnect().then((database) => {
 		logger.info('Cloudant connection initialized.', 'lists-dao-cloudant.getDbConnection()');
 		db = database.db;
-		access_control_db = database.access_control_db;
+		orderScrudUsers = database.orderScrudUsers;
 	}).catch((err) => {
 		logger.error('Error while initializing DB: ' + err.message, 'lists-dao-cloudant.getDbConnection()');
 		throw err;
@@ -334,6 +334,27 @@ function getOrderById(doc) {
 	});
 }
 
+function validateUser(doc) {
+	return new Promise((resolve, reject) => {
+		orderScrudUsers.get(doc.email, (err, document) => {
+			if (err) {
+				if (err.message == 'missing') {
+					logger.warn(`Document id ${doc.email} does not exist.`, 'validateUser()');
+					resolve({ data: err.message, statusCode: 404 });
+				} else if (err.message == 'deleted') {
+					logger.warn(`Document id ${id} does not exist.`, 'findById()');
+					resolve({ data: JSON.stringify(err.message), statusCode: 404 });
+				} else {
+					logger.error('Error occurred: ' + err.message, 'findById()');
+					reject(err);
+				}
+			} else {
+				resolve({ data: document, statusCode: 200 });
+			}
+		});
+	});
+}
+
 module.exports.findById = findById;
 module.exports.deleteOrder = deleteOrder;
 module.exports.updateOrder = updateOrder;
@@ -352,3 +373,4 @@ module.exports.getOrdersForFabrics = getOrdersForFabrics;
 module.exports.addFabrics = addFabrics;
 module.exports.getFabrics = getFabrics;
 module.exports.deleteFabrics = deleteFabrics;
+module.exports.validateUser = validateUser;

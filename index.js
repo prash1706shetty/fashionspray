@@ -19,7 +19,6 @@ app.use(express.static(__dirname + '/views'));
 
 //Middleware to check cookie and to perform redirect 
 app.use(function (req, res, next) {
-
    next();
 });
 
