@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var http = require('http');
 var router = require('./services/routes');
 var bodyParser = require('body-parser');
+var cookie = require('./services/cookie');
 var app = express();
 
 const server = http.createServer(app);
@@ -19,7 +20,7 @@ app.use(express.static(__dirname + '/views'));
 
 //Middleware to check cookie and to perform redirect 
 app.use(function (req, res, next) {
-   next();
+   req.originalUrl.includes('/logincheck') ? next() : router.checkCookie(req, res, req.cookies['AuthToken'], next);
 });
 
 // To route the application api and ui request 

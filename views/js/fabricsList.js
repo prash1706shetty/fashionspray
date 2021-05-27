@@ -1,10 +1,15 @@
 var orderList = '';
+var cookieValue = readCookie();
 
 jQuery(document).ready(function ($) {
   jQuery.ajax({
     type: "GET",
     url: "/fs/getOrdersForFabrics",
     async: false,
+    headers: {
+      'Conten-Type':'application/json',
+      'Authorization': cookieValue
+    },
     success: function (result) {
       orderList = result.rows;
       var deliveryDate = '';
@@ -217,9 +222,10 @@ function deleteDemo(e) {
     jQuery.ajax({
       type: "POST",
       url: "/fs/deletefabrics",
-      data: JSON.stringify(doc),
+      data: doc,
       headers: {
-        'Content-Type': 'application/json'
+        'Conten-Type':'application/json',
+        'Authorization': cookieValue
       },
       async: false,
       success: function (result) {
@@ -256,9 +262,10 @@ function customerFabrics(e) {
     jQuery.ajax({
       type: "POST",
       url: "/fs/addFabrics",
-      data: JSON.stringify(doc),
+      data: doc,
       headers: {
-        'Content-Type': 'application/json'
+        'Conten-Type':'application/json',
+        'Authorization': cookieValue
       },
       async: false,
       success: function (result) {
@@ -296,9 +303,10 @@ function fsFabrics(e) {
     jQuery.ajax({
       type: "POST",
       url: "/fs/addFabrics",
-      data: JSON.stringify(doc),
+      data: doc,
       headers: {
-        'Content-Type': 'application/json'
+        'Conten-Type':'application/json',
+        'Authorization': cookieValue
       },
       async: false,
       success: function (result) {

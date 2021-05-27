@@ -1,5 +1,6 @@
 var addCount = 1;
 var orderNumber = '';
+var cookieValue = readCookie();
 
 jQuery(document).ready(function ($) {
     var searchParams = new URLSearchParams(window.location.search);
@@ -11,9 +12,11 @@ jQuery(document).ready(function ($) {
     jQuery.ajax({
         type: "POST",
         url: "/getOrder",
-        data: JSON.stringify(doc),
-        headers: {
-            'Content-Type': 'application/json'
+        data: doc,
+        headers: 
+        {
+          'Conten-Type':'application/json',
+          'Authorization': cookieValue
         },
         async: false,
         success: function (result) {
@@ -162,9 +165,11 @@ function saveOrder() {
         jQuery.ajax({
             type: "POST",
             url: "/fs/addFabrics",
-            data: JSON.stringify(doc),
-            headers: {
-                'Content-Type': 'application/json'
+            data: doc,
+            headers: 
+            {
+              'Conten-Type':'application/json',
+              'Authorization': cookieValue
             },
             async: false,
             success: function (result) {
@@ -192,7 +197,6 @@ function saveOrder() {
 }
 
 function clearRedColor(focusEvent) {
-    console.log("focusEvent.id->"+focusEvent.id);
     jQuery('#' + focusEvent.id).removeClass('redBorder');
 }
 

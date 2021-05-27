@@ -105,7 +105,7 @@ function updateOrder(doc) {
 
 function findById(id) {
 	return new Promise((resolve, reject) => {
-		db.get(id, { attachments: true }, (err, document) => {
+		db.get(id, (err, document) => {
 			if (err) {
 				if (err.message == 'missing') {
 					logger.warn(`Document id ${id} does not exist.`, 'findById()');

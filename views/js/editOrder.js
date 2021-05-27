@@ -1,5 +1,6 @@
 var formValidation = true;
 var createDate = '';
+var cookieValue = readCookie();
 
 jQuery(document).ready(function ($) {
 
@@ -12,9 +13,10 @@ jQuery(document).ready(function ($) {
   jQuery.ajax({
     type: "POST",
     url: "/getOrder",
-    data: JSON.stringify(doc),
+    data: doc,
     headers: {
-      'Content-Type': 'application/json'
+      'Conten-Type':'application/json',
+      'Authorization': cookieValue
     },
     async: false,
     success: function (result) {
@@ -735,9 +737,10 @@ function saveOrder() {
     jQuery.ajax({
       type: "POST",
       url: "/fs/updateorder",
-      data: JSON.stringify(data),
+      data: data,
       headers: {
-        'Content-Type': 'application/json'
+        'Conten-Type':'application/json',
+        'Authorization': cookieValue
       },
       async: false,
       success: function (result) {

@@ -1,9 +1,15 @@
-jQuery(document).ready(function ($) {
+var cookieValue = readCookie();
 
+jQuery(document).ready(function ($) {
   jQuery.ajax({
     type: "GET",
     url: "/fs/getDifferentOrderCounts",
     async: false,
+    headers: 
+    {
+      'Conten-Type':'application/json',
+      'Authorization': cookieValue
+    },
     success: function (result) {
       if (result.rows.length != 0) {
         var totalCountDelivered = result.rows[0].value.delivered;
@@ -23,7 +29,6 @@ jQuery(document).ready(function ($) {
       alert("There was some internal error while updating, Please try again after sometime")
     }
   });
-
 
   var todayDate = new Date().getDate();
   var todaymonth = new Date().getMonth() + 1;
@@ -54,13 +59,14 @@ jQuery(document).ready(function ($) {
   jQuery.ajax({
     type: "POST",
     url: "/fs/getYTTOrders",
-    data: JSON.stringify(doc),
-    headers: {
-      'Content-Type': 'application/json'
+    data: doc,
+    headers: 
+    {
+      'Conten-Type':'application/json',
+      'Authorization': cookieValue
     },
     async: false,
     success: function (result) {
-
       var yestOrderCount = 0;
       var yestDeliveryCount = 0;
       var yestDeliveredCount = 0;
@@ -110,6 +116,5 @@ jQuery(document).ready(function ($) {
       alert("There was some internal error while updating, Please try again after sometime")
     }
   });
-
 });
 

@@ -1,9 +1,14 @@
-jQuery(document).ready(function ($) {
+var cookieValue = readCookie();
 
+jQuery(document).ready(function ($) {
   jQuery.ajax({
     type: "GET",
     url: "/fs/getAllOrderData",
     async: false,
+    headers: {
+      'Conten-Type': 'application/json',
+      'Authorization': cookieValue
+    },
     success: function (result) {
 
       var kidsCount = 0;
@@ -100,6 +105,10 @@ jQuery(document).ready(function ($) {
     type: "GET",
     url: "/fs/getOrderByMonth",
     async: false,
+    headers: {
+      'Conten-Type':'application/json',
+      'Authorization': cookieValue
+    },
     success: function (result) {
       if (result.rows.length != 0) {
         var janCount = result.rows[0].value.jan;

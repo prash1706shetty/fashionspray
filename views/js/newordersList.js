@@ -1,10 +1,15 @@
 var orderList = '';
+var cookieValue = readCookie();
 
 jQuery(document).ready(function ($) {
   jQuery.ajax({
     type: "GET",
     url: "/fs/getNewOrders",
     async: false,
+    headers: {
+      'Conten-Type':'application/json',
+      'Authorization': cookieValue
+    },
     success: function (result) {
       orderList = result.rows;
       var deliveryDate = '';

@@ -41,8 +41,9 @@
     <div id="signInMessage" class="ibm-padding-top-2 ibm-textcolor-green-60 ibm-bold">
       Login by entering correct username and password.
     </div>
-    <div class="ibm-padding-top-1"></div>
-  <form method="POST" action="/logincheck" class="ibm-row-form">
+    <div class="ibm-padding-top-1"><span class="ibm-textcolor-red-50 ibm-bold"><%= displayMessage %></span></div>
+    <div class="ibm-padding-top-1">
+    <form method="POST" action="/logincheck" class="ibm-row-form">
 
         <div for="email" class="ibm-textcolor-green-60 tooltip">Email address
           <span class="tooltiptext">Enter the email address you registered.</span>

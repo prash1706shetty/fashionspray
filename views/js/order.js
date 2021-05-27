@@ -1,3 +1,4 @@
+var cookieValue = readCookie();
 var formValidation = true;
 
 jQuery(document).ready(function ($) {
@@ -103,6 +104,11 @@ jQuery(document).ready(function ($) {
     type: "GET",
     url: "/fs/getOrderCount",
     async: false,
+    headers: 
+    {
+      'Conten-Type':'application/json',
+      'Authorization': cookieValue
+    },
     success: function (result) {
       if (result.rows.length != 0) {
         var totalCount = result.rows[0].value + 1;
@@ -413,10 +419,12 @@ function saveOrder() {
     jQuery.ajax({
       type: "POST",
       url: "/fs/createDocument",
-      data: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      data: data,
+      headers: 
+    {
+      'Conten-Type':'application/json',
+      'Authorization': cookieValue
+    },
       async: false,
       success: function (result) {
         jQuery('#loadingIndicator').addClass('visibility-hidden');
