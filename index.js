@@ -20,7 +20,7 @@ app.use(express.static(__dirname + '/views'));
 
 //Middleware to check cookie and to perform redirect 
 app.use(function (req, res, next) {
-   req.originalUrl.includes('/logincheck') ? next() : router.checkCookie(req, res, req.cookies['AuthToken'], next);
+   req.originalUrl.includes('/logincheck') ? next() : router.checkCookie(req, res, req.cookies['fs_at'], next);
 });
 
 // To route the application api and ui request 

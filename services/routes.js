@@ -16,7 +16,7 @@ const generateAuthToken = () => {
 }
 
 async function checkCookie(req, res, cookieValue, next){
-    req.user =  authTokens[cookieValue];;
+    req.user =  authTokens[cookieValue];
     if(cookieValue == undefined){
         res.render(reqPath + "/views/" + "login.ejs");
     } else if (!req.user){
@@ -41,6 +41,12 @@ const requireAuth = (req, res, next) => {
 };
 
 router.post('/logincheck', async function (req, res) {
+
+    if(req.body.password == '' || req.body.email == '') {
+        displayMessage = "Please enter both email and password.";
+        res.render(reqPath + "/views/" + "loginFailure.ejs", { displayMessage });
+    } else {
+
     const sha256 = crypto.createHash('sha256');
     const hash = sha256.update(req.body.password).digest('base64');
     var userLoginStatus = await cloudant.validateUser(req.body);
@@ -49,7 +55,7 @@ router.post('/logincheck', async function (req, res) {
         displayMessage = "Login success";
         const authToken = generateAuthToken();
         authTokens[authToken] = userLoginStatus.data;
-        res.cookie('AuthToken', authToken);
+        res.cookie('fs_at', authToken, { maxAge: 7200000});
         res.redirect('/dashboard');
     } else if (userLoginStatus.statusCode === 200 && hash !== userLoginStatus.data.password) {
         displayMessage = "The password that you've entered is incorrect.";
@@ -58,6 +64,7 @@ router.post('/logincheck', async function (req, res) {
         displayMessage = "The email that you've entered is incorrect.";
         res.render(reqPath + "/views/" + "loginFailure.ejs", { displayMessage });
     }
+}
 });
 
 router.get('/expense', function (req, res) {

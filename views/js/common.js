@@ -1,4 +1,4 @@
-var cookieName = 'AuthToken';
+var cookieName = 'fs_at';
 
 function readCookie() {
     var nameEQ = cookieName + "=";

@@ -5,9 +5,9 @@ jQuery(document).ready(function ($) {
     type: "GET",
     url: "/fs/getDifferentOrderCounts",
     async: false,
-    headers: 
+    headers:
     {
-      'Conten-Type':'application/json',
+      'Conten-Type': 'application/json',
       'Authorization': cookieValue
     },
     success: function (result) {
@@ -60,9 +60,9 @@ jQuery(document).ready(function ($) {
     type: "POST",
     url: "/fs/getYTTOrders",
     data: doc,
-    headers: 
+    headers:
     {
-      'Conten-Type':'application/json',
+      'Conten-Type': 'application/json',
       'Authorization': cookieValue
     },
     async: false,
@@ -116,5 +116,37 @@ jQuery(document).ready(function ($) {
       alert("There was some internal error while updating, Please try again after sometime")
     }
   });
+
+  $(window).click(function (e) {
+    var inputId = $(e.target).closest('img').attr('id');
+    if (inputId == 'accountDetails') {
+      jQuery("#accountDropDown").addClass("display-block");
+    } else {
+      jQuery("#accountDropDown").removeClass("display-block");
+    }
+  });
+
 });
+
+function logOut(e) {
+  jQuery('#logOutOverlay').empty();
+  var rejectOverlay = `<p class="ibm-h2">Log out</p><p id="logOutConfirmMsg">Are you sure you want to log out?</p>` +
+    `<div class="ibm-fluid"><div class="ibm-col-12-12"><p class="ibm-btn-row"> <span id="deleteSpinner" class="ibm-spinner ibm-h2 ibm-fright" />` +
+    `<button class="ibm-btn-pri pg2-overlay-save ibm-btn-blue-50" style="float: right;" onclick="confirmLogOut(this);">Yes</button>` +
+    `<button id="cancelOverlayBtn" class="ibm-btn-sec ibm-btn-transparent ibm-btn-blue-50" style="float: right"; onclick='closeOverlay("logOutOverlay")'>Cancel</button></p>` +
+    `</div></div>`;
+  jQuery('#logOutOverlay').append(rejectOverlay);
+  IBMCore.common.widget.overlay.show('logOutOverlay');
+  jQuery("#deleteSpinner").css("display", "none");
+}
+
+function closeOverlay(name) {
+  IBMCore.common.widget.overlay.hide(name);
+}
+
+function confirmLogOut(e) {
+  jQuery.removeCookie('fs_at', { path: '/' });
+  window.location.replace("/dashboard");
+}
+
 

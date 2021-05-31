@@ -25,9 +25,21 @@
 <body id="ibm-com" class="ibm-type">
     <div id="ibm-top" class="ibm-landing-page">
         <div class="ibm-col-12-12 headerFirst">
-            <div style="padding-top:10px;padding-left:10px;">
-                <h2><span style="font-size:30px;font-weight: bold;">Fashion Spray</span></h2>
+
+            <div class="ibm-col-12-6" style="padding-top:10px;padding-left:10px;">
+                <h2><span style="font-size:25px;font-weight: bold;">Fashion Spray</span></h2>
             </div>
+      
+            <div class="ibm-col-12-6" style="padding-top:15px;padding-left:10px;">
+            <div class="dropdown" style="float:right;">
+                <img id="accountDetails" src="./images/downArrow.png" width="25" height="25" alt="" class="dropbtn"style="cursor: pointer;"/>
+                <div class="dropdown-content" id="accountDropDown">
+                    <a href="#">My Profile</a>
+                    <a onclick="logOut(this);" id="logOut" href="#">Log Out</a>
+                </div>
+            </div>
+             <span class="ibm-bold" style="float:right;">Welcome Prashanth Shetty</span>
+           </div>
 
         </div>
 
@@ -173,6 +185,12 @@
         </div>
 
     </div>
+
+    <div
+      class="ibm-common-overlay ibm-overlay-alt"
+      data-widget="overlay"
+      id="logOutOverlay"
+    ></div>
 
 </body>
 
