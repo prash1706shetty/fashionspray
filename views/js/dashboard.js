@@ -1,6 +1,25 @@
 var cookieValue = readCookie();
 
 jQuery(document).ready(function ($) {
+
+  jQuery.ajax({
+    type: "GET",
+    url: "/fs/user",
+    async: false,
+    headers:
+    {
+      'Conten-Type': 'application/json',
+      'Authorization': cookieValue
+    },
+    success: function (result) {
+   $("#firstName").text(result.firstName + " ");
+   $("#lastName").text(result.lastName);
+    },
+    error: function (e) {
+      alert("There was some internal error while getting user.")
+    }
+  });
+
   jQuery.ajax({
     type: "GET",
     url: "/fs/getDifferentOrderCounts",

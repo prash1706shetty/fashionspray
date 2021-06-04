@@ -134,7 +134,6 @@ function insertOrderData(data) {
 				resolve();
 			}
 		});
-
 	});
 }
 
@@ -334,12 +333,12 @@ function getOrderById(doc) {
 	});
 }
 
-function validateUser(doc) {
+function validateUser(email) {
 	return new Promise((resolve, reject) => {
-		orderScrudUsers.get(doc.email, (err, document) => {
+		orderScrudUsers.get(email, (err, document) => {
 			if (err) {
 				if (err.message == 'missing') {
-					logger.warn(`Document id ${doc.email} does not exist.`, 'validateUser()');
+					logger.warn(`Document id ${email} does not exist.`, 'validateUser()');
 					resolve({ data: err.message, statusCode: 404 });
 				} else if (err.message == 'deleted') {
 					logger.warn(`Document id ${id} does not exist.`, 'findById()');

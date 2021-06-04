@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var cloudant = require('../controllers/cloudantDao');
 const crypto = require('crypto');
-const authTokens = {};
+var authTokens = {};
 
 router.use(bodyParser.json({ limit: 104857600 }));
 router.use(bodyParser.urlencoded({ limit: 104857600, extended: true }));
@@ -15,56 +15,54 @@ const generateAuthToken = () => {
     return crypto.randomBytes(30).toString('hex');
 }
 
-async function checkCookie(req, res, cookieValue, next){
-    req.user =  authTokens[cookieValue];
-    if(cookieValue == undefined){
+async function checkCookie(req, res, cookieValue, next) {
+    req.user = authTokens[cookieValue];
+    if (cookieValue == undefined) {
         res.render(reqPath + "/views/" + "login.ejs");
-    } else if (!req.user){
+    } else if (!req.user) {
         var loginUrl = '/logincheck'
         var displayMessage = "Your authentication failed, please try to login again.";
-        res.render(reqPath + "/views/" + "loginFailure.ejs", { loginUrl, displayMessage }); 
-    } else{
+        res.render(reqPath + "/views/" + "loginFailure.ejs", { loginUrl, displayMessage });
+    } else {
         next();
     }
 }
 
 const requireAuth = (req, res, next) => {
     req.user = authTokens[req.headers.authorization];
-    
+
     if (req.user) {
         next();
     } else {
         var loginUrl = '/logincheck'
         var displayMessage = "Your authentication failed, please try to login again.";
-        res.render(reqPath + "/views/" + "loginFailure.ejs", { loginUrl, displayMessage }); 
+        res.render(reqPath + "/views/" + "loginFailure.ejs", { loginUrl, displayMessage });
     }
 };
 
 router.post('/logincheck', async function (req, res) {
 
-    if(req.body.password == '' || req.body.email == '') {
-        displayMessage = "Please enter both email and password.";
+    var displayMessage = "Please enter both email and password.";
+    if (req.body.password == '' || req.body.email == '') {
         res.render(reqPath + "/views/" + "loginFailure.ejs", { displayMessage });
     } else {
-
-    const sha256 = crypto.createHash('sha256');
-    const hash = sha256.update(req.body.password).digest('base64');
-    var userLoginStatus = await cloudant.validateUser(req.body);
-    var displayMessage = 'Please enter correct user name and password.';
-    if (userLoginStatus.statusCode === 200 && hash === userLoginStatus.data.password) {
-        displayMessage = "Login success";
-        const authToken = generateAuthToken();
-        authTokens[authToken] = userLoginStatus.data;
-        res.cookie('fs_at', authToken, { maxAge: 7200000});
-        res.redirect('/dashboard');
-    } else if (userLoginStatus.statusCode === 200 && hash !== userLoginStatus.data.password) {
-        displayMessage = "The password that you've entered is incorrect.";
-        res.render(reqPath + "/views/" + "loginFailure.ejs", { displayMessage });
-    } else if (userLoginStatus.statusCode !== 200) {
-        displayMessage = "The email that you've entered is incorrect.";
-        res.render(reqPath + "/views/" + "loginFailure.ejs", { displayMessage });
+        const sha256 = crypto.createHash('sha256');
+        const hash = sha256.update(req.body.password).digest('base64');
+        var userLoginStatus = await cloudant.validateUser(req.body.email);
+        if (userLoginStatus.statusCode === 200 && hash === userLoginStatus.data.password) {
+            const authToken = generateAuthToken();
+            authTokens = {};
+            authTokens[authToken] = userLoginStatus.data;
+            res.cookie('fs_at', authToken, { maxAge: 7200000 });
+            res.redirect('/dashboard');
+        } else if (userLoginStatus.statusCode === 200 && hash !== userLoginStatus.data.password) {
+            displayMessage = "The password that you've entered is incorrect.";
+            res.render(reqPath + "/views/" + "loginFailure.ejs", { displayMessage });
+        } else if (userLoginStatus.statusCode !== 200) {
+            displayMessage = "The email that you've entered is incorrect.";
+            res.render(reqPath + "/views/" + "loginFailure.ejs", { displayMessage });
+        }
     }
-}
 });
 
 router.get('/expense', function (req, res) {
@@ -132,6 +130,11 @@ router.post('/fs/createDocument', requireAuth, async function (req, res) {
     res.send('success');
 });
 
+router.get('/fs/user', requireAuth, async function (req, res) {
+    var user = authTokens[req.headers.authorization];
+    res.send({firstName:user.firstName, lastName:user.lastName});
+});
+
 router.get('/fs/getAllOrderData', requireAuth, async function (req, res) {
     var orderData = await cloudant.getAllOrderData();
     res.send(orderData);
@@ -152,7 +155,7 @@ router.get('/fs/getOrderCount', requireAuth, async function (req, res) {
     res.send(orderData);
 });
 
-router.post('/fs/deleteorder',requireAuth,  async function (req, res) {
+router.post('/fs/deleteorder', requireAuth, async function (req, res) {
     var orderData = await cloudant.deleteOrder(req.body);
     res.send(orderData);
 });
