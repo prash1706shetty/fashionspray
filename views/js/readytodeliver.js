@@ -17,7 +17,7 @@ jQuery(document).ready(function ($) {
       var monthNames = ["Jan", "Feb", "Mar", "Apr",
         "May", "Jun", "Jul", "Aug",
         "Sep", "Oct", "Nov", "Dec"];
-      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Mobile Number</th><th>Order Date</th><th>Delivery Date</th><th>Status</th></tr></thead><tbody>";
+      var table = "<table class='ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed ibm-grid ibm-altrows' data-info='true' data-ordering='true' data-paging='true' data-searching='true'  role='grid' style='width: 748px;' aria-describedby='table_info'  data-scrollaxis='x' data-widget='datatable' id='prodTable'><thead class='tableHead'><tr><th data-ordering='true'>Order Number</th><th >Customer Name</th><th>Mobile Number</th><th>Order Date</th><th>Delivery Date</th></tr></thead><tbody>";
       result.rows.forEach((row, index) => {
         deliveryDate = new Date(row.value.deliveryDate.year, row.value.deliveryDate.month - 1, row.value.deliveryDate.date);
         orderDate = new Date(row.value.orderDate.year, row.value.orderDate.month - 1, row.value.orderDate.date);
@@ -90,7 +90,6 @@ jQuery(document).ready(function ($) {
           '<td>' + row.value.mobileNumber + '</td>' +
           '<td>' + orderDateValue + '</td>' +
           '<td>' + deliveryDateValue + '</td>' +
-          '<td style=' + rowBgColor + '>' + orderStatusValue + '</td>' +
           '</tr>';
       });
 
