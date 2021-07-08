@@ -40,7 +40,7 @@ const requireAuth = (req, res, next) => {
     }
 };
 
-router.post('/logincheck', async function (req, res) {
+router.post('/logincheck', async function(req, res) {
 
     var displayMessage = "Please enter both email and password.";
     if (req.body.password == '' || req.body.email == '') {
@@ -65,152 +65,156 @@ router.post('/logincheck', async function (req, res) {
     }
 });
 
-router.get('/expense', function (req, res) {
+router.get('/yesterday', function(req, res) {
+    res.sendFile(reqPath + "/views/" + "yesterdayList.html");
+});
+
+router.get('/expense', function(req, res) {
     res.sendFile(reqPath + "/views/" + "expense.html");
 });
 
-router.get('/orderlistforfabrics', function (req, res) {
+router.get('/orderlistforfabrics', function(req, res) {
     res.sendFile(reqPath + "/views/" + "fabricsList.html");
 });
 
-router.get('/fabricspurchase', function (req, res) {
+router.get('/fabricspurchase', function(req, res) {
     res.sendFile(reqPath + "/views/" + "fabricsPurchase.html");
 });
 
-router.get('/allorders', function (req, res) {
+router.get('/allorders', function(req, res) {
     res.sendFile(reqPath + "/views/" + "orderList.html");
 });
 
-router.get('/add/', function (req, res) {
+router.get('/add/', function(req, res) {
     res.sendFile(reqPath + "/views/" + "newOrder.html");
 });
 
-router.get('/addfabrics', function (req, res) {
+router.get('/addfabrics', function(req, res) {
     res.sendFile(reqPath + "/views/" + "addFabrics.html");
 });
 
-router.get('/editfabrics', function (req, res) {
+router.get('/editfabrics', function(req, res) {
     res.sendFile(reqPath + "/views/" + "editFabrics.html");
 });
 
-router.get('/analysis/', function (req, res) {
+router.get('/analysis/', function(req, res) {
     res.sendFile(reqPath + "/views/" + "analysis.html");
 });
 
-router.get('/dashboard/', function (req, res) {
+router.get('/dashboard/', function(req, res) {
     res.sendFile(reqPath + "/views/" + "dashboard.html");
 });
 
-router.get('/editorder', function (req, res) {
+router.get('/editorder', function(req, res) {
     res.sendFile(reqPath + "/views/" + "editOrder.html");
 });
 
-router.get('/orderList/', function (req, res) {
+router.get('/orderList/', function(req, res) {
     res.sendFile(reqPath + "/views/" + "orderList.html");
 });
 
-router.get('/neworders', function (req, res) {
+router.get('/neworders', function(req, res) {
     res.sendFile(reqPath + "/views/" + "newOrdersList.html");
 });
 
-router.get('/onprocess', function (req, res) {
+router.get('/onprocess', function(req, res) {
     res.sendFile(reqPath + "/views/" + "onprocess.html");
 });
 
-router.get('/readytodeliver', function (req, res) {
+router.get('/readytodeliver', function(req, res) {
     res.sendFile(reqPath + "/views/" + "readytodeliver.html");
 });
 
-router.get('/delivered', function (req, res) {
+router.get('/delivered', function(req, res) {
     res.sendFile(reqPath + "/views/" + "delivered.html");
 });
 
-router.post('/fs/createDocument', requireAuth, async function (req, res) {
+router.post('/fs/createDocument', requireAuth, async function(req, res) {
     await cloudant.insertOrderData(req.body);
     res.send('success');
 });
 
-router.get('/fs/user', requireAuth, async function (req, res) {
+router.get('/fs/user', requireAuth, async function(req, res) {
     var user = authTokens[req.headers.authorization];
-    res.send({firstName:user.firstName, lastName:user.lastName});
+    res.send({ firstName: user.firstName, lastName: user.lastName });
 });
 
-router.get('/fs/getAllOrderData', requireAuth, async function (req, res) {
+router.get('/fs/getAllOrderData', requireAuth, async function(req, res) {
     var orderData = await cloudant.getAllOrderData();
     res.send(orderData);
 });
 
-router.get('/fs/getOrdersForFabrics', requireAuth, async function (req, res) {
+router.get('/fs/getOrdersForFabrics', requireAuth, async function(req, res) {
     var orderData = await cloudant.getOrdersForFabrics();
     res.send(orderData);
 });
 
-router.get('/fs/getFabrics', requireAuth, async function (req, res) {
+router.get('/fs/getFabrics', requireAuth, async function(req, res) {
     var orderData = await cloudant.getFabrics();
     res.send(orderData);
 });
 
-router.get('/fs/getOrderCount', requireAuth, async function (req, res) {
+router.get('/fs/getOrderCount', requireAuth, async function(req, res) {
     var orderData = await cloudant.getOrderCount();
     res.send(orderData);
 });
 
-router.post('/fs/deleteorder', requireAuth, async function (req, res) {
+router.post('/fs/deleteorder', requireAuth, async function(req, res) {
     var orderData = await cloudant.deleteOrder(req.body);
     res.send(orderData);
 });
 
-router.post('/fs/deletefabrics', requireAuth, async function (req, res) {
+router.post('/fs/deletefabrics', requireAuth, async function(req, res) {
     var orderData = await cloudant.deleteFabrics(req.body);
     res.send(orderData);
 });
 
-router.post('/fs/addFabrics', requireAuth, async function (req, res) {
+router.post('/fs/addFabrics', requireAuth, async function(req, res) {
     var orderData = await cloudant.addFabrics(req.body);
     res.send(orderData);
 });
 
-router.post('/fs/updateorder', requireAuth, async function (req, res) {
+router.post('/fs/updateorder', requireAuth, async function(req, res) {
     var orderData = await cloudant.updateOrder(req.body);
     res.send(orderData);
 });
 
-router.post('/getOrder', requireAuth, async function (req, res) {
+router.post('/getOrder', requireAuth, async function(req, res) {
     var orderData = await cloudant.getOrderById(req.body);
     res.send(orderData);
 });
 
-router.get('/fs/getNewOrders', requireAuth, async function (req, res) {
+router.get('/fs/getNewOrders', requireAuth, async function(req, res) {
     var orderData = await cloudant.getNewOrders();
     res.send(orderData);
 });
 
-router.get('/fs/getOnProcessOrders', requireAuth, async function (req, res) {
+router.get('/fs/getOnProcessOrders', requireAuth, async function(req, res) {
     var orderData = await cloudant.getOnProcessOrders();
     res.send(orderData);
 });
 
-router.get('/fs/getReadyOrders', requireAuth, async function (req, res) {
+router.get('/fs/getReadyOrders', requireAuth, async function(req, res) {
     var orderData = await cloudant.getReadyOrders();
     res.send(orderData);
 });
 
-router.get('/fs/getDeliveredOrders', requireAuth, async function (req, res) {
+router.get('/fs/getDeliveredOrders', requireAuth, async function(req, res) {
     var orderData = await cloudant.getDeliveredOrders();
     res.send(orderData);
 });
 
-router.get('/fs/getDifferentOrderCounts', requireAuth, async function (req, res) {
+router.get('/fs/getDifferentOrderCounts', requireAuth, async function(req, res) {
     var orderData = await cloudant.getDifferentOrderCounts();
     res.send(orderData);
 });
 
-router.get('/fs/getOrderByMonth', requireAuth, async function (req, res) {
+router.get('/fs/getOrderByMonth', requireAuth, async function(req, res) {
     var orderData = await cloudant.getOrderByMonth();
     res.send(orderData);
 });
 
-router.post('/fs/getYTTOrders', requireAuth, async function (req, res) {
+router.post('/fs/getYTTOrders', requireAuth, async function(req, res) {
     var orderData = await cloudant.getYTTOrders(req.body);
     res.send(orderData);
 });
