@@ -1,17 +1,16 @@
 var cloudant = require('../models/cloudant');
-const logger = require('../config/logger').logger;
 let db;
 let orderScrudUsers;
 
 // Initialize the DB when this module is loaded
 (function getDbConnection() {
-    logger.info('Initializing Cloudant connection...', 'lists-dao-cloudant.getDbConnection()');
+    console.log('Initializing Cloudant connection...');
     cloudant.dbCloudantConnect().then((database) => {
-        logger.info('Cloudant connection initialized.', 'lists-dao-cloudant.getDbConnection()');
+        console.log('Cloudant connection initialized.');
         db = database.db;
         orderScrudUsers = database.orderScrudUsers;
     }).catch((err) => {
-        logger.error('Error while initializing DB: ' + err.message, 'lists-dao-cloudant.getDbConnection()');
+        console.log('Error while initializing DB: ' + err.message);
         throw err;
     });
 })();
@@ -23,14 +22,14 @@ function deleteOrder(doc) {
             list.orderStatus = doc.status;
             db.insert(list, (err, response) => {
                 if (err) {
-                    logger.error('Error occurred: ' + err.message, 'update()');
+                    console.log('Error occurred: ' + err.message);
                     reject(err);
                 } else {
                     resolve({ data: { updatedId: response.id, updatedRevId: response.rev }, statusCode: 200 });
                 }
             });
         }).catch((err) => {
-            logger.error('Error occurred: ' + err.message, 'update()');
+            console.log('Error occurred: ' + err.message);
             reject(err);
         });
     });
@@ -43,14 +42,14 @@ function deleteFabrics(doc) {
             delete list.fabrics;
             db.insert(list, (err, response) => {
                 if (err) {
-                    logger.error('Error occurred: ' + err.message, 'update()');
+                    console.log('Error occurred: ' + err.message);
                     reject(err);
                 } else {
                     resolve({ data: { updatedId: response.id, updatedRevId: response.rev }, statusCode: 200 });
                 }
             });
         }).catch((err) => {
-            logger.error('Error occurred: ' + err.message, 'update()');
+            console.log('Error occurred: ' + err.message);
             reject(err);
         });
     });
@@ -64,14 +63,14 @@ function addFabrics(doc) {
             list.fabrics = doc.fabrics;
             db.insert(list, (err, response) => {
                 if (err) {
-                    logger.error('Error occurred: ' + err.message, 'update()');
+                    console.log('Error occurred: ' + err.message);
                     reject(err);
                 } else {
                     resolve({ data: { updatedId: response.id, updatedRevId: response.rev }, statusCode: 200 });
                 }
             });
         }).catch((err) => {
-            logger.error('Error occurred: ' + err.message, 'update()');
+            console.log('Error occurred: ' + err.message);
             reject(err);
         });
     });
@@ -90,14 +89,14 @@ function updateOrder(doc) {
             // Update the document in Cloudant
             db.insert(doc, (err, response) => {
                 if (err) {
-                    logger.error('Error occurred: ' + err.message, 'update()');
+                    console.log('Error occurred: ' + err.message);
                     reject(err);
                 } else {
                     resolve({ data: { updatedId: response.id, updatedRevId: response.rev }, statusCode: 200 });
                 }
             });
         }).catch((err) => {
-            logger.error('Error occurred: ' + err.message, 'update()');
+            console.log('Error occurred: ' + err.message);
             reject(err);
         });
     });
@@ -108,13 +107,13 @@ function findById(id) {
         db.get(id, (err, document) => {
             if (err) {
                 if (err.message == 'missing') {
-                    logger.warn(`Document id ${id} does not exist.`, 'findById()');
+                    console.log(`Document id ${id} does not exist.`);
                     resolve({ data: JSON.stringify(err.message), statusCode: 404 });
                 } else if (err.message == 'deleted') {
-                    logger.warn(`Document id ${id} does not exist.`, 'findById()');
+                    console.log(`Document id ${id} does not exist.`);
                     resolve({ data: JSON.stringify(err.message), statusCode: 404 });
                 } else {
-                    logger.error('Error occurred: ' + err.message, 'findById()');
+                    console.log('Error occurred: ' + err.message);
                     reject(err);
                 }
             } else {
@@ -128,7 +127,7 @@ function insertOrderData(data) {
     return new Promise((resolve, reject) => {
         db.insert(data, (err, response) => {
             if (err) {
-                logger.error('Error occurred: ' + err.message, 'update()');
+                console.log('Error occurred: ' + err.message);
                 reject(err);
             } else {
                 resolve();
@@ -329,13 +328,13 @@ function getOrderById(doc) {
         db.get(doc.docId, (err, document) => {
             if (err) {
                 if (err.message == 'missing') {
-                    logger.warn(`Document id ${id} does not exist.`, 'findById()');
+                    console.log(`Document id ${id} does not exist.`);
                     resolve({ data: JSON.stringify(err.message), statusCode: 404 });
                 } else if (err.message == 'deleted') {
-                    logger.warn(`Document id ${id} does not exist.`, 'findById()');
+                    console.log(`Document id ${id} does not exist.`);
                     resolve({ data: JSON.stringify(err.message), statusCode: 404 });
                 } else {
-                    logger.error('Error occurred: ' + err.message, 'findById()');
+                    console.log('Error occurred: ' + err.message);
                     reject(err);
                 }
             } else {
@@ -350,13 +349,13 @@ function validateUser(email) {
         orderScrudUsers.get(email, (err, document) => {
             if (err) {
                 if (err.message == 'missing') {
-                    logger.warn(`Document id ${email} does not exist.`, 'validateUser()');
+                    console.log(`Document id ${email} does not exist.`);
                     resolve({ data: err.message, statusCode: 404 });
                 } else if (err.message == 'deleted') {
-                    logger.warn(`Document id ${id} does not exist.`, 'findById()');
+                    console.log(`Document id ${id} does not exist.`);
                     resolve({ data: JSON.stringify(err.message), statusCode: 404 });
                 } else {
-                    logger.error('Error occurred: ' + err.message, 'findById()');
+                    console.log('Error occurred: ' + err.message);
                     reject(err);
                 }
             } else {
