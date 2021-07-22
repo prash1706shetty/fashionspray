@@ -197,39 +197,142 @@ jQuery(document).ready(function($) {
         }
     });
 
+    jQuery.ajax({
+        type: "GET",
+        url: "/fs/getOrderByWomen",
+        async: false,
+        headers: {
+            "Conten-Type": "application/json",
+            Authorization: cookieValue
+        },
+        success: function(result) {
+            if (result.rows.length != 0) {
+                new Chart(document.getElementById("womenDress-bar-chart"), {
+                    type: 'horizontalBar',
+                    data: {
+                        labels: [
+                            "Blouse",
+                            "Blouse and Embroidery",
+                            "Blouse and Saree",
+                            "Blouse Saree and Embroidery",
+                            "Crop top",
+                            "Long skirt",
+                            "Crop top & long skirt",
+                            "Gown",
+                            "Kurtha",
+                            "Lehanga",
+                            "Salwar and kameez",
+                            "Saree",
+                            "Western"
+                        ],
+                        datasets: [{
+                            label: "Total order",
+                            backgroundColor: [
+                                "#3e95cd",
+                                "#8e5ea2",
+                                "#3cba9f",
+                                "#e8c3b9",
+                                "#3e95cd",
+                                "#8e5ea2",
+                                "#3cba9f",
+                                "#3e95cd",
+                                "#8e5ea2",
+                                "#3cba9f",
+                                "#e8c3b9",
+                                "#3e95cd",
+                                "#3cba9f"
+                            ],
+                            data: [
+                                result.rows[0].value.blouse,
+                                result.rows[0].value.blouseEmbroidery,
+                                result.rows[0].value.blouseSaree,
+                                result.rows[0].value.blouseSareeEmbroidery,
+                                result.rows[0].value.cropTop,
+                                result.rows[0].value.longSkirt,
+                                result.rows[0].value.ctls,
+                                result.rows[0].value.gown,
+                                result.rows[0].value.kurtha,
+                                result.rows[0].value.lehanga,
+                                result.rows[0].value.salwarKameez,
+                                result.rows[0].value.saree,
+                                result.rows[0].value.western
+                            ]
+                        }]
+                    },
+                    options: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Dress type by Women'
+                        }
+                    }
+                });
+            }
+        },
+        error: function(e) {
+            alert(
+                "There was some internal error while updating, Please try again after sometime"
+            );
+        }
+    });
+
+
     $("#usecases li").on("click", function() {
         var id = $(this).attr("id");
 
         if (id == "monthlyOrder") {
             $("#genderChart").addClass("display-none");
             $("#weeklyChart").addClass("display-none");
+            $("#womenDressChart").addClass("display-none");
             $("#monthlyChart").removeClass("display-none");
             $("#monthlyOrderAnchor").css("color", "blue");
             $("#orderByGenderAnchor").css("color", "");
             $("#weeklyOrderAnchor").css("color", "");
+            $("#womensOrderAnchor").css("color", "");
             $("#monthlyOrderAnchor").attr("aria-selected", true);
             $("#orderByGenderAnchor").attr("aria-selected", false);
             $("#weeklyOrderAnchor").attr("aria-selected", false);
+            $("#womensOrderAnchor").attr("aria-selected", false);
         } else if (id == "orderByGender") {
             $("#monthlyChart").addClass("display-none");
             $("#weeklyChart").addClass("display-none");
+            $("#womenDressChart").addClass("display-none");
             $("#genderChart").removeClass("display-none");
             $("#orderByGenderAnchor").css("color", "blue");
             $("#monthlyOrderAnchor").css("color", "");
             $("#weeklyOrderAnchor").css("color", "");
+            $("#womensOrderAnchor").css("color", "");
             $("#monthlyOrderAnchor").attr("aria-selected", false);
             $("#weeklyOrderAnchor").attr("aria-selected", false);
             $("#orderByGenderAnchor").attr("aria-selected", true);
-        } else {
+            $("#womensOrderAnchor").attr("aria-selected", false);
+        } else if (id == "weeklyOrder") {
             $("#monthlyChart").addClass("display-none");
             $("#genderChart").addClass("display-none");
+            $("#womenDressChart").addClass("display-none");
             $("#weeklyChart").removeClass("display-none");
             $("#weeklyOrderAnchor").css("color", "blue");
             $("#monthlyOrderAnchor").css("color", "");
             $("#orderByGenderAnchor").css("color", "");
+            $("#womensOrderAnchor").css("color", "");
             $("#monthlyOrderAnchor").attr("aria-selected", false);
             $("#orderByGenderAnchor").attr("aria-selected", false);
             $("#weeklyOrderAnchor").attr("aria-selected", true);
+            $("#womensOrderAnchor").attr("aria-selected", false);
+        } else {
+            $("#monthlyChart").addClass("display-none");
+            $("#genderChart").addClass("display-none");
+            $("#weeklyChart").addClass("display-none");
+            $("#womenDressChart").removeClass("display-none");
+            $("#weeklyOrderAnchor").css("color", "");
+            $("#womensOrderAnchor").css("color", "blue");
+            $("#monthlyOrderAnchor").css("color", "");
+            $("#orderByGenderAnchor").css("color", "");
+            $("#monthlyOrderAnchor").attr("aria-selected", false);
+            $("#orderByGenderAnchor").attr("aria-selected", false);
+            $("#weeklyOrderAnchor").attr("aria-selected", false);
+            $("#womensOrderAnchor").attr("aria-selected", true);
+
         }
     });
 });

@@ -214,6 +214,11 @@ router.get('/fs/getOrderByMonth', requireAuth, async function(req, res) {
     res.send(orderData);
 });
 
+router.get('/fs/getOrderByWomen', requireAuth, async function(req, res) {
+    var orderData = await cloudant.getOrderByWomen();
+    res.send(orderData);
+});
+
 router.post('/fs/getYTTOrders', requireAuth, async function(req, res) {
     var orderData = await cloudant.getYTTOrders(req.body);
     res.send(orderData);
