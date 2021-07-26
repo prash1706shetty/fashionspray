@@ -159,6 +159,11 @@ router.get('/fs/getOrderCount', requireAuth, async function(req, res) {
     res.send(orderData);
 });
 
+router.get('/logoutUser', requireAuth, async function(req, res) {
+    res.cookie("fs_at", "", { maxAge: 0 });
+    res.send('logout_success');
+});
+
 router.post('/fs/deleteorder', requireAuth, async function(req, res) {
     var orderData = await cloudant.deleteOrder(req.body);
     res.send(orderData);

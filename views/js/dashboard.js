@@ -161,6 +161,19 @@ function closeOverlay(name) {
 }
 
 function confirmLogOut(e) {
-    jQuery.removeCookie('fs_at', { path: '/' });
-    window.location.replace("/dashboard");
+    jQuery.ajax({
+        type: "GET",
+        url: "/logoutUser",
+        async: false,
+        headers: {
+            'Conten-Type': 'application/json',
+            'Authorization': cookieValue
+        },
+        success: function(result) {
+            window.location.replace("/dashboard");
+        },
+        error: function(e) {
+            alert("There was some internal error while logout user.")
+        }
+    });
 }
